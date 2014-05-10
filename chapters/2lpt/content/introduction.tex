@@ -1,0 +1,45 @@
+\section{Introduction}
+\label{sec:introduction}
+
+%\textcolor{red}{Expand outline to actual text...}
+%
+%\begin{enumerate}
+%	\item Halos at high $z$
+%		\begin{enumerate}
+%			\item Initial collapse and formation
+%			\item Evolution through accretion and mergers
+%			\item Mass growth
+%			\item Concentration
+%			\item The dark ages
+%		\end{enumerate}
+%	\item History
+%		\begin{enumerate}
+%			\item Prada, et al. 2012 paper for concentration
+%			\item Holley-Bockelmann, et al. 2012 paper for importance of simulation initialization
+%		\end{enumerate}
+%	\item Simulation initialization
+%		\begin{enumerate}
+%			\item Evolve initial conditions to reasonable starting redshift
+%			\item \za
+%			\item \lpt
+%			\item Earlier collapse of density peaks with \lpt
+%			\item Starting redshift requirements based on box size and initialization technique
+%			\item Expectations about more rapid evolution with \lpt
+%			\item Differences mostly washed away by $z = 0$
+%		\end{enumerate}
+%\end{enumerate}
+
+
+Dark matter halo evolution in the early universe during the pre--reionization Dark Ages plays a pivotal role in shaping the properties of these halos both early in their evolution and at later redshift.  During these early times, small overdensities in the relatively smooth background of dark matter begin the collapse leading to virialized halos.  In cosmological N-body simulations, these initial overdensities are often on the order of numerical noise, and difficult to simulate directly.  Displacement field techniques are often used to nudge particles from their initial positions to an approximation of where they should be at a more reasonable starting redshift.  However, bulk halo properties at later redshift can be sensitive to deviatins in this initial displacement.  In this paper, we explore dark matter halo populations in simulations with two different initialization techniques and compare the effect of initialization on halo properties as a function of redshift during the Dark Ages.
+
+At high redshift, in the so-called Dark Ages before reionization, dark matter (DM) halos undergo a significant amount of growth.  This growth, whether due to mergers or accretion, plays a pivotal role in shaping a halo's properties.  During this time of early growth, smaller variations in a halo's growth history can lead to large bulk property changes.  A number of studies explore halo growth at lower redshift\cn, but fewer consider the high redshift regime \cn.
+
+Cosmological simulations that follow the initial collapse of dark matter density peaks into virialized halos often neglect to consider the nuances of initialization method.  While differences in ensemble halo properties between simulation initialization methods, such as the halo mass function, are mostly washed away by $z=0$\cn, trends at earlier redshifts are less studied.
+
+Starting a simulation directly from the redshift of the initial conditions provided by surface of last scattering data proves impractical, as initial density peaks at this time are on the order of numerical noise of the simulation.  Starting at a later redshift saves computation time as well as avoiding the errors introduced by simulating noise.  The usual procedure is to apply a displacement field to the initial particle positions and evolve them semi-analytically to the starting redshift of the numerical simulation.
+
+In this paper, we compare the Zel'dovich approximation with 2nd-order Lagrangian Perturbation Theory for initial particle displacement.  The Zel'dovich approximation (\za, hereafter) is a linear displacement field, while 2nd-order Linear Perturbation Theory (\lpt, hereafter) adds a second-order correction term to the expansion.  \lpt\ allows for a later starting redshift compared with an equivalent \za--initialized simulation.  However, many \za\ simulations do not take this into account, starting from too late of an initial redshift\cn.
+
+It is thought that \lpt\ allows initial DM overdensities to get a ``head start'' compared with \za, allowing earlier structure formation, more rapid evolution, and larger possible high--mass halos for a given redshift.  We explore this possibility by comparing halo properties in (otherwise identical) simulations initialized with \za\ and \lpt.
+
+We discuss the simulations in \S\ref{sec:simulations}, halo finding and analysis methods in \S\ref{sec:analysis}, results in \S\ref{sec:results}, implications and future work in \S\ref{sec:discussion}, and finally summarize and conclude in \S\ref{sec:conclusion}.

@@ -1,0 +1,263 @@
+\listfiles
+\documentclass[12pt]{report}
+
+\usepackage[intoc]{nomencl}
+
+\textwidth=6in \oddsidemargin=0.5in \topmargin=-0.5in
+\textheight=9in  % 9in must include page numbers
+\textfloatsep = 0.4in \addtocontents{toc}{\vspace{0.4in} \hfill
+Page\endgraf} \addtocontents{lof}{\vspace{0.2in} \hspace{0.13in} \
+Figure\hfill Page\endgraf} \addtocontents{lot}{\vspace{0.2in}
+\hspace{0.13in} \ Table\hfill Page\endgraf}
+
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{mathptmx}
+\usepackage[table, svgnames]{xcolor}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{amssymb, amsmath}
+%\usepackage{subfig}
+\usepackage{subfigure}
+\usepackage{epsfig}
+%\usepackage{times}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{makeidx}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[subfigure, titles]{tocloft}
+\usepackage{acronym}
+\usepackage{datetime}
+\usepackage{color}
+\usepackage{grffile}
+
+\renewcommand{\nomname}{LIST OF ABBREVIATIONS}
+\makenomenclature
+
+\graphicspath{{chapters/introduction/figures/}{chapters/computation/figures/}{chapters/smbhs/figures/}{chapters/2lpt/figures/}}
+%\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.PNG, .eps, .tiff}
+
+\urlstyle{same}
+
+\usepackage{makecell}
+\usepackage{titletoc}
+\usepackage{sfchap}
+\usepackage{sfsection}
+\usepackage[authoryear]{natbib}
+%\usepackage{natbib}
+%\usepackage{apacite}
+\usepackage{appendix}
+%\usepackage{tocbibind}
+%
+\usepackage[nottoc]{tocbibind}
+\setcounter{secnumdepth}{7}
+\setcounter{tocdepth}{7}
+
+\usepackage{hyperref}
+\hypersetup{
+	pdftitle={Early Growth in a Perturbed Universe},
+	pdfauthor={Daniel Sissom},
+	bookmarksnumbered, %Determined if chapter numbers are included in the bookmark list
+	pdfstartview={FitH},
+	pdfborder={0 0 0},
+	plainpages=false
+}%
+\usepackage[all]{hypcap}
+
+% Stats table label
+\newcommand{\statslabel}[2]{\multirowcell{#1}[-1.6mm][c]{#2}}
+
+% Below heading rule.
+\newcommand{\otoprule}{\midrule[\heavyrulewidth]}
+
+% Prevent double spaced equations
+\newenvironment{tightequation}{\singlespace\begin{equation}}{\end{equation}}
+
+% Extra junk to pretty up the table of contents
+\setlength{\cftsecnumwidth}{2.8em}
+\setlength{\cftsubsecnumwidth}{3.7em}
+\setlength{\cftsubsubsecnumwidth}{4.6em}
+\setlength{\cftparanumwidth}{5.5em}
+\setlength{\cftsubparanumwidth}{6.5em}
+\setlength{\cfttabnumwidth}{3.5em}
+\setlength{\cftfignumwidth}{3.5em} 
+
+\renewcommand{\contentsname}{TABLE OF CONTENTS}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\bibname}{ \texorpdfstring{{BIBLIOGRAPHY\vspace{10mm}}}{BIBLIOGRAPHY}   }
+%
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\MakeUppercase{%
+      \chaptername}\ \thechapter.%
+    \ #1}{}}
+    
+\interfootnotelinepenalty=10000 %prevents the splitting of long footnotes across multiple pages. Use with caution. 
+
+\newcommand{\Msun}{{\rm M_\odot}}
+\newcommand{\Mvir}{{\rm M_{vir}}}
+\newcommand{\Rvir}{{\rm R_{vir}}}
+\newcommand{\Rs}{{\rm R_{s}}}
+\newcommand{\dd}{{\rm {d}}}
+\newcommand{\lpt}{\textsc{2lpt}}
+\newcommand{\za}{\textsc{za}}
+\newcommand{\gadget}{\textsc{Gadget}}
+\newcommand{\gadgettwo}{\textsc{Gadget-2}}
+\newcommand{\rockstar}{\textsc{Rockstar}}
+\newcommand{\crossmatch}{\textsc{CrossMatch}}
+\newcommand{\cn}{\textsuperscript{\textcolor{red}{[\textit{citation needed}]}}}
+
+\input{style/journal-defs}
+%\newcommand{\apj}{ApJ}
+%\newcommand{\apjs}{ApJS}
+%\newcommand{\apjl}{ApJL}
+%\newcommand{\aap}{A{\&}A}
+%\newcommand{\aaps}{A{\&}AS}
+%\newcommand{\mnras}{MNRAS}
+%\newcommand{\aj}{AJ}
+%\newcommand{\araa}{ARAA}
+%\newcommand{\pasp}{PASP}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Prevent the warning: pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+%%	This setting will make a difference to the output because the page number is suppressed for the title page
+\pagenumbering{alph}
+
+\begin{titlepage}
+\thispagestyle{empty}\enlargethispage{\the\footskip}%
+\begin{center}
+	%{\setstretch{1.66} Early Growth in a Perturbed Universe:  Dark Matter Halo Properties in 2LPT and ZA Simulations\par }%
+	Early Growth in a Perturbed Universe:  Dark Matter Halo Properties in \lpt\ and \za\ Simulations\par
+	\vskip.5in
+	By
+	\vskip .3in
+	{Daniel J. Sissom}
+	\vskip .4in
+	
+	\begin{doublespace}
+	Dissertation\\
+		Submitted to the Faculty of the \\
+		Graduate School of Vanderbilt University \\
+		in partial fulfillment of the requirements \\
+		for the degree of \\ [.25in]
+	\end{doublespace}
+	
+	\MakeUppercase{Doctor of Philosophy} \\[.1in]
+	in \\[.1in]
+	\MakeUppercase{Physics} \\[.25in]
+	\begin{doublespace}
+		%\monthname,\space\number\year \\[.45in]
+		August, 2014 \\
+		Nashville, TN
+	\end{doublespace}
+	\vskip .5in
+\end{center}
+%%%Uncomment for Signatures%%%
+Approved: \hskip 3.4in Date:\\[1.2em]
+\rule{4.0in}{.5pt} \hskip 0.1in \rule{1.5in}{.5pt} \\Jocelyn K. Holley-Bockelmann, Ph.D.\\[.15in]
+\rule{4.0in}{.5pt} \hskip 0.1in \rule{1.5in}{.5pt} \\Andreas A. Berlind, Ph.D.\\[.15in]
+\rule{4.0in}{.5pt} \hskip 0.1in \rule{1.5in}{.5pt} \\David A. Weintraub, Ph.D.\\[.15in]
+\rule{4.0in}{.5pt} \hskip 0.1in \rule{1.5in}{.5pt} \\Shane M. Hutson, Ph.D.\\[.15in]
+\rule{4.0in}{.5pt} \hskip 0.1in \rule{1.5in}{.5pt} \\Robert J. Scherrer, Ph.D.
+%%%%%%%%%%%%%%
+%%%%%%Uncomment  for Approved Names%%%%%%
+%\begin{center}
+%\begin{doublespace}
+%Approved:\\
+%Jocelyn K. Holley-Bockelmann, Ph.D.\\
+%Andreas A. Berlind, Ph.D.\\
+%David A. Weintraub, Ph.D.\\
+%Shane M. Hutson, Ph.D.\\
+%Robert J. Scherrer, Ph.D
+%\end{doublespace}
+%\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\doublespacing
+\pagenumbering{roman} \setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{ACKNOWLEDGMENTS}
+\addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}
+\vspace{7mm}
+
+This is where you thank the people that made your work possible: grant awarding agencies, advisers, your committee, mom and dad, whatever.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\singlespacing
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+\setlength{\parskip}{1\baselineskip}
+\listoftables
+\newpage
+\listoffigures
+\newpage
+\printnomenclature
+\newpage
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\normalsize
+\doublespacing
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%===============================================================================
+%===============================================================================
+
+\chapter{Introduction}
+
+\input{chapters/introduction/content/introduction}
+\input{chapters/introduction/content/simulations}
+\input{chapters/introduction/content/initialization}
+\input{chapters/introduction/content/properties}
+
+
+\chapter{Computational Methods}
+
+\input{chapters/computation/content/introduction}
+\input{chapters/computation/content/simulations}
+\input{chapters/computation/content/halos}
+\input{chapters/computation/content/matching}
+
+
+\chapter{Supermassive Black Holes and Their Hosts}
+
+\input{chapters/smbhs/content/introduction}
+\input{chapters/smbhs/content/galaxy_evolution}
+\input{chapters/smbhs/content/smbh_growth}
+\input{chapters/smbhs/content/conclusion}
+
+
+\chapter{Dark Matter Halo Properties in \lpt\ and \za\ Simulations}
+
+\input{chapters/2lpt/content/introduction}
+\input{chapters/2lpt/content/simulations}
+\input{chapters/2lpt/content/analysis}
+\input{chapters/2lpt/content/results}
+\input{chapters/2lpt/content/discussion}
+\input{chapters/2lpt/content/conclusion}
+
+
+\chapter{Conclusion}
+
+\input{chapters/conclusion/content/conclusion}
+
+
+\singlespacing
+%\bibliographystyle{apalike}
+\bibliographystyle{apj}
+\bibliography{apj-jour,references}
+
+\end{document}
+
