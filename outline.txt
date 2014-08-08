@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	Dissertation Outline
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	I. Introduction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		A. The Early Universe
+			1. CMB Epoch
+				a. Recombination
+				b. CMB
+				c. WMAP
+				d. BAO
+			2. DM Halo Formation
+				a. Collapse
+				b. Accretion
+				c. Mergers
+				d. Large-Scale Structure
+			3. Halo Properties
+				a. Measurements
+				b. Mass
+				c. Density
+				d. Concentration
+				e. Spin
+				f. Environment
+			4. Baryonic Processes
+				a. Gas
+				b. Pop-III Stars
+				c. Supernovae
+				d. IGM
+				e. SMBHs
+				f. AGN
+				g. Reionization
+
+		B. Computational Theory
+			1. Simulation Initialization
+				a. Initial Conditions and the Surface of Last Scattering
+				b. The Zel'dovich Approximation
+				c. Second-order Lagrangian Perturbation Theory
+			2. Nbody Simulations
+				a. Early Simulations
+				b. Gravity
+				c. Orbit Integration
+				d. Trees
+				e. Meshes
+			3. Halo Definitions
+				a. Spherical Overdensity
+				b. Friends-of-Friends
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	II. Numerical Methods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		A. The ACCRE Compute Cluster
+
+		B. Initialization Code
+			1. Sampling the Power Spectrum
+			2. Particle Displacement with ZA
+			3. Particle Displacement with 2LPT
+		
+		C. Gadget2
+
+		D. Rockstar
+
+		E. CrossMatch
+
+		F. Analysis, Plotting, and Automation
+			1. Python and Used Packages
+				a. NumPy
+				b. Matplotlib
+				c. SciPy
+				d. StatsModels
+			2. Non-linear Least Squares Fitting
+			3. Halo Properties and the BGC2 Format
+				a. Rockstar Output and Post-processing
+				b. The BGC2 Binary File Format
+				c. Spherical Overdensity Halo Particles
+			4. Density Profiles
+				a. Binning
+				b. Fitting
+				c. Mass Profiles
+				d. Characterization of Uncertainty
+				e. Halo Properties
+			5. Crossmatched Halo Catalogue
+				a. Aggregation
+				b. Filtering
+			6. Halo Comparison
+				a. Match Verification
+				b. Morphology
+				c. Density Profiles
+			7. Differential Histograms
+				a. Binning
+				b. Fitting
+				c. Mass Quartiles
+			8. Redshift
+				a. Mean and Standard Deviation
+				b. Skew and Kurtosis
+			9. 2-D Histograms
+				a. Binning
+				b. Fitting
+
+		G. Automation with Bash
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	IV. Exploring Dark Matter Halo Populations in 2LPT and ZA Simulations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		A. Introduction
+
+		B. Numerical Methods
+
+		C. Results
+			1. Individual Halo Pairs
+			2. Difference Distributions of Halo Properties
+			3. Trends with Redshift
+			4. Trends with Halo Mass
+
+		D. Discussion
+
+		E. Conclusion
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	III. Supermassive Black Holes and Their Hosts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		A. Introduction
+			1. Galaxy Properties
+				a. Color
+				b. Morphology
+			2. Supermassive Black Hole Properties
+			3. Correlations
+				a. The M-Sigma Relation
+				b. The Fundamental Plane
+				c. The Green Valley
+
+		B. Galaxy Evolution
+			1. Dark Matter Halos
+			2. Galaxy Mergers
+
+		C. Supermassive Black Hole Growth
+			1. Binary Mergers
+				a. Dynamical Friction and Inspiral
+				b. The Final Parsec Problem
+				c. Gravitational Waves and Recoil Kicks
+			2. Accretion
+				a. Bondi-Hoyle-Lyttleton Accretion
+				b. Disk Accretion and Active Galactic Nuclei
+
+		D. Conclusion
+			1. Correlations
+			2. Open Questions
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	V. Conclusion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
