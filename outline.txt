@@ -57,6 +57,12 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		A. The ACCRE Compute Cluster
+			1. Compute Nodes
+				a. x86_64 Nodes
+				b. GPU Nodes
+			2. Network
+			3. Filesystem
+			4. Scheduling
 
 		B. Initialization Code
 			1. Sampling the Power Spectrum
@@ -93,13 +99,14 @@
 				a. Match Verification
 				b. Morphology
 				c. Density Profiles
-			7. Differential Histograms
+			7. Difference Histograms
 				a. Binning
 				b. Fitting
 				c. Mass Quartiles
 			8. Redshift
 				a. Mean and Standard Deviation
-				b. Skew and Kurtosis
+				b. Skew
+				c. Kurtosis
 			9. 2-D Histograms
 				a. Binning
 				b. Fitting
