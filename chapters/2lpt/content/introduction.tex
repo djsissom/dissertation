@@ -1,45 +1,85 @@
 \section{Introduction}
 \label{sec:introduction}
 
-%\textcolor{red}{Expand outline to actual text...}
-%
-%\begin{enumerate}
-%	\item Halos at high $z$
-%		\begin{enumerate}
-%			\item Initial collapse and formation
-%			\item Evolution through accretion and mergers
-%			\item Mass growth
-%			\item Concentration
-%			\item The dark ages
-%		\end{enumerate}
-%	\item History
-%		\begin{enumerate}
-%			\item Prada, et al. 2012 paper for concentration
-%			\item Holley-Bockelmann, et al. 2012 paper for importance of simulation initialization
-%		\end{enumerate}
-%	\item Simulation initialization
-%		\begin{enumerate}
-%			\item Evolve initial conditions to reasonable starting redshift
-%			\item \za
-%			\item \lpt
-%			\item Earlier collapse of density peaks with \lpt
-%			\item Starting redshift requirements based on box size and initialization technique
-%			\item Expectations about more rapid evolution with \lpt
-%			\item Differences mostly washed away by $z = 0$
-%		\end{enumerate}
-%\end{enumerate}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Structure formation in the pre-reionization epoch
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%\mrk{Structure formation in the pre-reionization epoch.  The first stars, BHs, and galaxies, the IGM temp and metallicity, the X-ray background, dark matter.  All hinge on the structure in place in the pre-reionization epoch.}  
+
+The pre-reionization epoch is a time of significant evolution of early structure in the universe.  Rare density peaks in the otherwise smooth dark matter (DM) sea lead to the collapse and formation of the first dark matter halos.  The non-linear gravitational dynamics of halo formation lead to a diverse array of halo structure that continues to evolve internally and interact with the surrounding medium.  This growth, whether due to mergers or accretion, plays a pivotal role in shaping a halo's properties.
+
+These early-forming dark matter halos provide an incubator for the baryonic processes that transform the surrounding space and allow galaxies to form.  Initial gas accretion can lead to the formation of the first Pop-III stars \citep{1986MNRAS.221...53C, 1997ApJ...474....1T}, which, upon their death, can collapse into the seeds for supermassive black holes (SMBHs) \citep{2001ApJ...551L..27M, 2003ApJ...582..559V, 2003MNRAS.340..647I, 2009ApJ...696.1798T, 2009ApJ...701L.133A, 2012ApJ...754...34J, 2011MNRAS.414.1127M} or enrich the surrounding medium with metals through supernovae \citep{2003ApJ...591..288H}.  Early supernovae enrich the surrounding medium with newly-formed metals as further star formation populates the first galaxies.  The combined radiation from these early sources plays a key role in re-ionizing the universe by around $z = 6$.  Additionally, halo mergers can drastically increase the temperature of halo gas through shock heating, increasing X-ray luminosity \citep{2009MNRAS.397..190S}, and contribute to the unbinding of gas to form the warm-hot intergalactic medium \citep{2010MNRAS.405L..31S}.
+
+%During this time, smaller variations in a halo's growth history can lead to large bulk property changes.  A number of studies explore halo growth at lower redshift \citep{2006MNRAS.373..369C}, but fewer consider the high redshift regime.  \mrk{Expand on earlier work.}  <- ***** reword and put somewhere else *****
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Current knowledge of high z mass, concentration, and density
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While a number of parameters are required to fully characterize a DM halo, a first-order description can be obtained from it's mass and density profile.  There are a number of ways to define a halo's mass.  This becomes significant for mass-sensitive studies, such as the halo mass function \citep{1974ApJ...187..425P, 2007MNRAS.374....2R, 2006ApJ...642L..85H, 2007ApJ...671.1160L}, the number density of halos as a function of mass and a key probe of cosmology.  For a review, see, e.g., \citet{2001A&A...367...27W} and references therein.  Additionally, see \citet{2005RvMP...77..207V} and references therein for a more observation-focused discussion.
+
+From a simulation standpoint, the two most common ways to obtain halo mass are to define either spherical overdensity halos or friends-of-friends (FOF) halos.  The spherical overdensity method identifies regions above a certain density threshold, either with respect to the critical density $\rho_{c} = 3 H^{2} / 8 \pi G$ or the background density $\rho_{b} = \Omega_{m} \rho_{c}$, where $\Omega_{m}$ is the matter density of the universe.  The mass is then the mass enclosed in a sphere of some radius with mean density $\Delta \rho_{c}$, where $\Delta$ commonly ranges from $\sim 100$ to $\sim 500$.  Alternatively, the FOF method finds particle neighbors and neighbors of neighbors defined to be within some separation distance \citep{1984MNRAS.206..529E, 1985ApJ...292..371D}.  Halo mass, then, is simply the sum of the masses of the constituent particles.
+
+Halo concentration $c \equiv R_{\mathrm{vir}} / r_{s}$ provides a useful measure of halo structure.  Here, $R_{\mathrm{vir}}$ is the halo's virial radius, and $r_{s}$ is the break radius between the inner $\sim r^{-1}$ and outer $\sim r^{-3}$ density profiles.  A number of studies use cosmological simulations to explore concentration and its dependence on halo mass, environment, and cosmology \citep{1997ApJ...490..493N, 2001MNRAS.321..559B, 2001ApJ...554..114E, 2007MNRAS.381.1450N, 2008MNRAS.387..536G, 2008MNRAS.391.1940M, 2011MNRAS.411..584M, 2011ApJ...740..102K}, merger and mass accretion histories \citep{2002ApJ...568...52W, 2003MNRAS.339...12Z, 2009ApJ...707..354Z}, and rms fluctuation amplitude of the linear density field $\sigma(M, z)$ \citep{2012MNRAS.423.3018P}.
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Simulation initialization
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Simulating early structure formation is difficult.  The subtle $\mathcal{O}(10^{-5})$ density perturbations in place at the CMB epoch are vulnerable to numerical noise and intractable to simulate directly.  Instead, a displacement field is applied to the particles to evolve them semi-analytically, nudging them from their initial positions to an approximation of where they should be at a more reasonable starting redshift for the numerical simulation.  Starting at a later redshift saves computation time as well as avoiding the errors introduced by simulating noise.
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 2LPT and ZA
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Zel'dovich approximation \citep{1970A&A.....5...84Z, 1983MNRAS.204..891K, 1985ApJS...57..241E} and 2nd-order Lagrangian Perturbation Theory \citep{1994MNRAS.267..811B, 1994A&A...288..349B, 1995A&A...296..575B, 1998MNRAS.299.1097S, 2005ApJ...634..728S, 2006MNRAS.373..369C, 2010MNRAS.403.1859J} are the two canonical frameworks for initial particle displacement.  The Zel'dovich approximation (\za, hereafter) is a linear displacement field, while 2nd-order Linear Perturbation Theory (\lpt, hereafter) adds a second-order correction term to the expansion.
+
+Following \citet{2010MNRAS.403.1859J}, we briefly outline the second-order Lagrangian perturbation theory and compare it to the Zel'dovich approximation.  In \lpt, a displacement field $\boldsymbol{\Psi}(\boldsymbol{q})$ is applied to the initial positions $\boldsymbol{q}$ to yield the Eulerian final comoving positions
+\begin{equation} \label{eq:displacement}
+	\boldsymbol{x} = \boldsymbol{q} + \boldsymbol{\Psi}.
+\end{equation}
+The displacement field is given in terms of two potentials $\phi^{(1)}$ and $\phi^{(2)}$ by
+\begin{equation} \label{eq:potentials}
+	\boldsymbol{x} = \boldsymbol{q} - D_{1} \boldsymbol{\nabla}_{q} \phi^{(1)} + D_{2} \boldsymbol{\nabla}_{q} \phi^{(2)}
+\end{equation}
+with linear growth factor $D_{1}$ and second-order growth factor $D_{2} \approx -3 D_{1}^{2} / 7$.  The subscripts $\boldsymbol{q}$ refer to partial derivatives with respect to the Lagrangian coordinates $\boldsymbol{q}$.  Likewise, the comoving velocities are given, to second order, by
+\begin{equation} \label{eq:velocity}
+	\boldsymbol{v} =  - D_{1} f_{1} H \boldsymbol{\nabla}_{q} \phi^{(1)} + D_{2} f_{2} H \boldsymbol{\nabla}_{q} \phi^{(2)}
+\end{equation}
+with Hubble constant $H$ and $f_{i} = \diff\, \mathrm{ln}\, D_{i} / \diff\, \mathrm{ln}\, a$, with expansion factor $a$.  The relations $f_{1} \approx \Omega^{5/9}$ and $f_{2} \approx 2 \Omega^{6/11}$, with matter density $\Omega$, apply for flat models with a non-zero cosmological constant \citep{1995A&A...296..575B}.  The $f_{1}$, $f_{2}$, and $D_{2}$ approximations here are very accurate for most actual $\Lambda$CDM initial conditions, as $\Omega$ is close to unity at these high redshifts.  We may derive $\phi^{(1)}$ and $\phi^{(2)}$ by solving a pair of Poisson equations
+\begin{equation} \label{eq:poisson1}
+	\nabla_{q}^{(1)}(\boldsymbol{q}) = \delta^{(1)}(\boldsymbol{q})
+\end{equation}
+with linear overdensity $\delta^{(1)}(\boldsymbol{q})$, and
+\begin{equation} \label{eq:poisson2}
+	\nabla_{q}^{(2)}(\boldsymbol{q}) = \delta^{(2)}(\boldsymbol{q}).
+\end{equation}
+The second order overdensity $\delta^{(2)}(\boldsymbol{q}$) is related to the linear overdensity field by
+\begin{equation} \label{eq:second-order_overdensity}
+	\delta^{(2)}(\boldsymbol{q}) = \sum_{i > j} \left\{ \phi_{,ii}^{(1)}(\boldsymbol{q}) \phi_{,jj}^{(1)}(\boldsymbol{q}) - \left[ \phi_{,ij}^{(1)}(\boldsymbol{q}) \right]^{2} \right\}
+\end{equation}
+where $\phi_{,ij} \equiv \partial^{2} \phi / \partial q_{i} \partial q_{j}$.  For initial conditions from the Zel'dovich approximation, or first-order Lagrangian initial conditions, the $\phi^{(2)}$ terms of equations (\ref{eq:potentials}) and (\ref{eq:velocity}) are ignored.
 
 
-Dark matter halo evolution in the early universe during the pre--reionization Dark Ages plays a pivotal role in shaping the properties of these halos both early in their evolution and at later redshift.  During these early times, small overdensities in the relatively smooth background of dark matter begin the collapse leading to virialized halos.  In cosmological N-body simulations, these initial overdensities are often on the order of numerical noise, and difficult to simulate directly.  Displacement field techniques are often used to nudge particles from their initial positions to an approximation of where they should be at a more reasonable starting redshift.  However, bulk halo properties at later redshift can be sensitive to deviatins in this initial displacement.  In this paper, we explore dark matter halo populations in simulations with two different initialization techniques and compare the effect of initialization on halo properties as a function of redshift during the Dark Ages.
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Transients
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At high redshift, in the so-called Dark Ages before reionization, dark matter (DM) halos undergo a significant amount of growth.  This growth, whether due to mergers or accretion, plays a pivotal role in shaping a halo's properties.  During this time of early growth, smaller variations in a halo's growth history can lead to large bulk property changes.  A number of studies explore halo growth at lower redshift\cn, but fewer consider the high redshift regime \cn.
+Cosmological simulations that follow the initial collapse of dark matter density peaks into virialized halos often neglect to consider the nuances of initialization method.  Non-linear decaying modes, or transients, will be damped as $1 / a$ in \za.  In \lpt, however, transients are damped more quickly as $1 / a^{2}$.  It should be expected, then, that structure in \lpt\ will be accurate after few $e$-folding times than in \za\ \citep{1998MNRAS.299.1097S, 2006MNRAS.373..369C, 2010MNRAS.403.1859J}.  The practical result is that high-$\sigma$ DM density peaks at high redshift are suppressed in \za\ compared with \lpt\ for a given starting redshift.
 
-Cosmological simulations that follow the initial collapse of dark matter density peaks into virialized halos often neglect to consider the nuances of initialization method.  While differences in ensemble halo properties between simulation initialization methods, such as the halo mass function, are mostly washed away by $z=0$\cn, trends at earlier redshifts are less studied.
+One facet often overlooked is appropriate starting redshift determined by box size and resolution \citep{2007ApJ...671.1160L}.  Initialization with \lpt\ allows for a later starting redshift compared with an equivalent \za-initialized simulation.  However, many \za\ simulations do not take this into account, starting from too late of an initial redshift \citep{2006MNRAS.373..369C, 2010MNRAS.403.1859J}.  In order to characterize an appropriate starting redshift, the relation between the initial rms particle displacement and mean particle separation must be considered.  The initial rms displacement $\Delta_{\mathrm{rms}}$ is given by
+\begin{equation}
+	\Delta_{\mathrm{rms}}^{2} = \frac{4 \pi}{3} \int_{k_{f}}^{k_{\mathrm{Ny}}} P(k, z_{\mathrm{start}}) \dd k,
+\end{equation}
+where $k_{f} = 2 \pi / L_{\mathrm{box}}$ is the fundamental mode, $L_{\mathrm{box}}$ is the simulation box size, $k_{\mathrm{Ny}} = \frac{1}{2} N k_{f}$ is the Nyquist frequency of an $N^{3}$ simulation, and $P(k, z_{\mathrm{start}})$ is the power spectrum at starting redshift $z_{\mathrm{start}}$.  In order to avoid the ``orbit crossings'' that reduce the accuracy of the initial conditions, $\Delta_{\mathrm{rms}}$ must be some factor smaller than the mean particle separation $\Delta_{p} = L_{\mathrm{box}} / N$ \citep{2012ApJ...761L...8H}.  For example, making orbit crossing a $\sim 10 \sigma$ event imposes $\Delta_{\mathrm{rms}} / \Delta_{p} = 0.1$.  However, for small-volume, high-resolution simulations, this quickly leads to impractical starting redshifts.  Continuing our example, satisfying $\Delta_{\mathrm{rms}} / \Delta_{p} \sim 0.1$ for a $10 h^{-1}$ Mpc, $512^{3}$ simulation suggests $z_{\mathrm{start}} \approx 799$.  Starting at such a high redshift places such a simulation well into the regime of introducing errors from numerical noise caused by roundoff errors dominating the smooth potential.  A more relaxed requirement of $\Delta_{\mathrm{rms}} / \Delta_{p} = 0.25$ yields $z_{\mathrm{start}} = 300$, which we adopt for this work.
 
-Starting a simulation directly from the redshift of the initial conditions provided by surface of last scattering data proves impractical, as initial density peaks at this time are on the order of numerical noise of the simulation.  Starting at a later redshift saves computation time as well as avoiding the errors introduced by simulating noise.  The usual procedure is to apply a displacement field to the initial particle positions and evolve them semi-analytically to the starting redshift of the numerical simulation.
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% In this paper...
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this paper, we compare the Zel'dovich approximation with 2nd-order Lagrangian Perturbation Theory for initial particle displacement.  The Zel'dovich approximation (\za, hereafter) is a linear displacement field, while 2nd-order Linear Perturbation Theory (\lpt, hereafter) adds a second-order correction term to the expansion.  \lpt\ allows for a later starting redshift compared with an equivalent \za--initialized simulation.  However, many \za\ simulations do not take this into account, starting from too late of an initial redshift\cn.
+While differences in ensemble halo properties, such as the halo mass function, between simulation initialization methods are mostly washed away by $z=0$ \citep{1998MNRAS.299.1097S}, trends at earlier redshifts are less studied \citep{2007ApJ...671.1160L}.  In this paper, we explore the effects of \za\ and \lpt\ on the evolution of halo populations at high redshift.  It is thought that \lpt\ allows initial DM overdensities to get a ``head start'' compared with \za, allowing earlier structure formation, more rapid evolution, and larger possible high-mass halos for a given redshift.  We explore this possibility by comparing halo properties in (otherwise identical) simulations initialized with \za\ and \lpt.
 
-It is thought that \lpt\ allows initial DM overdensities to get a ``head start'' compared with \za, allowing earlier structure formation, more rapid evolution, and larger possible high--mass halos for a given redshift.  We explore this possibility by comparing halo properties in (otherwise identical) simulations initialized with \za\ and \lpt.
+We discuss the simulations, halo finding, and analysis methods in Section~\ref{sec:methods}, results in Section~\ref{sec:results}, implications, caveats, and future work in Section~\ref{sec:discussion}, and finally summarize our results and conclude in Section~\ref{sec:conclusion}.
 
-We discuss the simulations in \S\ref{sec:simulations}, halo finding and analysis methods in \S\ref{sec:analysis}, results in \S\ref{sec:results}, implications and future work in \S\ref{sec:discussion}, and finally summarize and conclude in \S\ref{sec:conclusion}.
