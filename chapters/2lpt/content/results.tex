@@ -1,16 +1,35 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Results
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Results}
 \label{sec:results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 With our catalog of matched dark matter halos, we are able to directly compare differences in halo properties arising from initialization with \lpt\ vs \za.  We consider halos on a pair--by--pair basis as well as the entire sample as a whole.  Overall, we find \lpt\ halos to have undergone more growth at a given redshift than their \za\ counterparts.
 
 
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \subsection{Individual halo pairs}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 We compare morphologies, density profiles, and various other halo properties for halo pairs on an individual halo--by--halo basis by eye for several of the most massive halos.  Morphologies appear fairly similar for most halos, indicating good halo matches between simulations.  However, some pairs display a differences in central morphology, in which one halo will have more than one density peak, or in the case of both halos having multiple density peaks, one halo having a larger separation between peaks than the other.  We interpret these cases to be examples of differences in merger epochs, in which case one halo may still be undergoing a major merger, while it's companion is in a more relaxed post-merger state.  We give an example of one such pair at $z = 6$ in Figure~\ref{fig:halo-pair}.  The top two rows show density projections of the central nuclear region for a large \lpt\ and matching \za\ halo (first and second rows, respectively).  We find  the \za\ halo to contain two distinct density peaks with a separation of $\sim 10$ kpc, while the \lpt\ halo displays only a single core.  On the third and fourth rows, we plot the density profiles of the same two halos (\lpt\ and \za, respectively).  Here, with nearly identical virial radii, it is readily seen that the smaller $R_{\mathrm{s}}$ for the \lpt\ halo produces a larger concentration value than is derived for the \za\ halo.
 
 
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \subsection{Difference distributions of halo properties}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 \begin{figure*}[t]
 	\centering
@@ -77,6 +96,14 @@ As we use the symmetrical generalized normal distribution as our fit function, t
 
 We find no no overall preference for more concentrated \lpt\ or \za\ halos.  In contrast to the $\Delta M_{\mathrm{vir}}$ histograms , $\Delta c$ shows very little deviation from symmetry about zero.  Throughout the simulation, we find the distributions to have a mean close to zero and negligible skew.  The widths of the distributions are much wider than those for $\Delta M_{\mathrm{vir}}$.  As with mass, concentration histograms are sharply peaked with heavy tails.
 
+
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Trends with redshift}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 \begin{figure*}[t]
 	\centering
 	\begin{subfigure}{}
@@ -97,9 +124,6 @@ We find no no overall preference for more concentrated \lpt\ or \za\ halos.  In 
 	\caption[Statistics as functions of redshift for generalized normal fits]{\footnotesize Mean, standard deviation, and RMS (\textit{left column}) and skew and excess kurtosis (\textit{right column}) as functions of redshift for $\Delta M_{\mathrm{vir}}$ (\textit{top row}) and $\Delta c$ (\textit{bottom row}).  In the left column, $\mu$ is plotted as blue points, and $\mu \pm \sigma$ is plotted as the black dashed line, and RMS values are plotted as a green dotted line.  The red dashed line is a linear fit to the mean.  We find a significant trend for $\mu$ for $\Delta M_{\mathrm{vir}}$ to be more positive at higher redshift and gradually shift toward zero as the simulation progresses.  The mean for $\Delta c$, however, remains at or very near zero for most of the simulation.  The $\Delta M_{\mathrm{vir}}$ and $\Delta c$ distributions narrow over time, with a slight decrease in $\sigma$.  In the right column, we plot skew (blue line) and excess kurtosis (red line).  Skew is positive for much of the simulation for $\Delta M_{\mathrm{vir}}$, but is much smaller for $\Delta c$.  Kurtosis is large (much more peaked than Gaussian) for both $\Delta M_{\mathrm{vir}}$ and $\Delta c$ throughout much of the simulation, and especially at later redshift.}
 	\label{fig:fit_trends}
 \end{figure*}
-
-
-\subsection{Trends with redshift}
 
 In Figure~\ref{fig:fit_trends}, we more quantitatively assess the time progression of our various trends hinted at in Figure~\ref{fig:diff-hist_Mvir}.  Here, we plot the mean, root mean square (RMS), standard deviation, skew, and kurtosis for $\Delta M_{\mathrm{vir}}$ and $\Delta c$ as functions of redshift.  Uncertainty in the mean is estimated directly by the least squares fitting routine.
 
@@ -153,7 +177,12 @@ The large excess kurtosis indicates a sharper peak and heavier tails than a Gaus
 The skew at high redshift for $\Delta M_{\mathrm{vir}}$ may give another hint at the non-linear halo formation process.  Runaway halo growth causes more massive halos to favor faster mass accretion and growth.  The positively skewed distributions show a picture of \lpt\ halo growth in which initial differences in mass are amplified the most readily in the earliest forming and most massive halos, again indicating the extra kick-start to halo growth provided by \lpt\ initialization.  While the slight decrease in skew with redshift may be counter-intuitive to this notion, it is likely that rising noise floor of the large amounts of newly formed halos begin to mask the signal from the smaller number of large halos displaying this effect.
 
 
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \subsection{Trends with halo mass}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 \begin{figure*}[t]
 	\centering
@@ -189,4 +218,7 @@ We consider $\Delta M_{\mathrm{vir}}$ and $\Delta c$ as a function of average ha
 We find that $\Delta M_{vir}$ tends to increase with increasing $M_{\mathrm{vir,avg}}$, a trend that is, again, most pronounced at high redshift.  \lpt\ halos are consistently more massive than their \za\ counterparts, with the difference increasing with average halo mass.  While less massive halo pairs have a larger spread in the difference in \lpt\ and \za\ mass, more massive halo pairs are more consistently heavier in \lpt\ than in \za.  The slope of the fit line trends towards zero as we progress in redshift, with little average mass dependence by $z = 6$.
 
 We find a small trend for more massive halo pairs to be more concentrated in \za, but this trend is weaker than for $\Delta M_{\mathrm{vir}}$.  This negative slope can be expected, as halo concentartion is expected to decrease with increasing mass \citep{2001MNRAS.321..559B}, and we find high mass halos to be more massive in \lpt\ than in \za.  The data have a larger variance than $\Delta M_{\mathrm{vir}}$, and fits have and overall shallower slope.  Mass dependence all but disappears by $z = 6$.  To reconcile these trends with the symmetrical concentration distributions of Figure~\ref{fig:diff-hist_Mvir}, we note that the trends in mass may be hidden by integration across the entire mass range and still result in overall $\Delta c$ distributions symmetric about zero.
+
+
+
 

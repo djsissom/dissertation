@@ -102,6 +102,7 @@ Figure\hfill Page\endgraf} \addtocontents{lot}{\vspace{0.2in}
 \newcommand{\Mvir}{{\rm M_{vir}}}
 \newcommand{\Rvir}{{\rm R_{vir}}}
 \newcommand{\Rs}{{\rm R_{s}}}
+\newcommand{\diff}{{\rm {d}}}
 \newcommand{\dd}{{\rm {d}}}
 \newcommand{\lpt}{\textsc{2lpt}}
 \newcommand{\za}{\textsc{za}}
@@ -109,8 +110,12 @@ Figure\hfill Page\endgraf} \addtocontents{lot}{\vspace{0.2in}
 \newcommand{\gadgettwo}{\textsc{Gadget-2}}
 \newcommand{\rockstar}{\textsc{Rockstar}}
 \newcommand{\crossmatch}{\textsc{CrossMatch}}
-\newcommand{\cn}{\textsuperscript{\textcolor{red}{[\textit{citation needed}]}}}
 \newcommand{\nbody}{{N-body}}
+\newcommand{\mrk}[1]{\textcolor{red}{#1}}
+\newcommand{\cn}{\textsuperscript{\textcolor{red}{[\textit{citation needed}]}}}
+
+\let\OldDigamma\digamma
+\renewcommand{\digamma}{{\psi_{0}}}
 
 \input{style/journal-defs}
 %\newcommand{\apj}{ApJ}
