@@ -371,6 +371,54 @@ Text goes here.
 
 Text goes here.
 
+The standard deviation of a function $f(x_{1},x_{2},\dots,x_{n})$ is, in general, given by
+\begin{equation} \label{eq:general_stdev}
+	s_{f} = \sqrt{\sum_{x} \left( \frac{\partial f}{\partial x} \right)^{2} s_{x}^{2}}
+\end{equation}
+with summation over all independent variables $x$.  The generalized normal distribution
+\begin{equation} \label{eq:generalized_normal}
+	f(x) = \frac{\beta}{2 \alpha \Gamma(1/\beta)} e^{-(|x - \mu| / \alpha)^{\beta}}
+\end{equation}
+with mean $\mu$, scale parameter $\alpha$, and shape parameter $\beta$, has excess kurtosis
+\begin{equation} \label{eq:kurtosis}
+	\gamma_{2} = \frac{\Gamma(5/\beta) \Gamma(1/\beta)}{\Gamma(3/\beta)^{2}} - 3.
+\end{equation}
+The gamma function
+\begin{equation} \label{eq:gamma_function}
+	\Gamma(x) = \int_{0}^{\infty} t^{x-1} e^{-t} \dd t
+\end{equation}
+has the first derivative
+\begin{equation} \label{eq:gamma_prime}
+	\Gamma'(x) = \Gamma(x) \psi_{0}(x)
+\end{equation}
+where the digamma function $\digamma$ is the derivative of the logarithm of the gamma function and is given by
+\begin{equation} \label{eq:digamma}
+	\digamma(x) = \int_{0}^{\infty} \left( \frac{e^{-t}}{t} - \frac{e^{-xt}}{1 - e^{-t}} \right) \dd t
+\end{equation}
+if the real part of $x$ is positive.
+
+We now apply \eqref{eq:general_stdev} to \eqref{eq:kurtosis} to find the standard deviation of the excess kurtosis:
+\begin{align} \label{eq:kurt_err_partial1}
+	s_{\gamma_{2}} &= \sqrt{ \left( \frac{\diff \gamma_{2}}{\diff \beta} \right)^{2} s_{\beta}^{2} } \\
+		&= s_{\beta} \frac{\diff \gamma_{2}}{\diff \beta} \\
+		&= s_{\beta} \frac{\diff}{\diff \beta} \left[ \frac{\Gamma(5/\beta) \Gamma(1/\beta)}{\Gamma(3/\beta)^{2}} - 3 \right].
+\end{align}
+Making the substitution $x = 1 / \beta$ and $\diff x = - 1 / \beta^{2} \dd \beta$, taking the derivative, and doing a bit of algebra, we have:
+\begin{align} \label{eq:kurt_err_partial2}
+	s_{\gamma_{2}} &= s_{\beta} \frac{\diff \gamma_{2}}{\diff x} \frac{\diff x}{\diff \beta} \\
+		&= s_{\beta} \left( -\frac{1}{\beta^{2}} \right) \frac{\diff}{\diff x} \left[ \frac{\Gamma(5x) \Gamma(x)}{\Gamma(3x)} - 3 \right] \\
+		&= -s_{\beta} x^{2} \left\{ \frac{\Gamma(3x)^{2} \frac{\diff}{\diff x} [\Gamma(5x) \Gamma(x)] - \Gamma(5x) \Gamma(x) \frac{\diff}{\diff x} [\Gamma(3x)^{2}]}{\Gamma(3x)^{4}} \right\} \\
+		&= -s_{\beta} \frac{x^{2}}{\Gamma(3x)^{4}} \left\{ \Gamma(3x)^{2} [5\Gamma(5x) \digamma(5x) \Gamma(x) + \Gamma(5x) \Gamma(x) \digamma(x)] - \Gamma(5x) \Gamma(x) [6\Gamma(3x)^{2} \digamma(3x)] \right\} \\
+		&= s_{\beta} \frac{x^{2}}{\Gamma(3x)^{4}} \left\{ 6\Gamma(5x) \Gamma(3x)^{2} \Gamma(x) \digamma(3x) - \Gamma(5x) \Gamma(3x)^{2} \Gamma(x) [5\digamma(5x) + \digamma(x)] \right\} \\
+		&= s_{\beta} \frac{x^{2}}{\Gamma(3x)^{4}} \left\{ \Gamma(5x) \Gamma(3x)^{2} \Gamma(x) [6\digamma(3x) - 5\digamma(5x) - \digamma(x)] \right\} \\
+		&= s_{\beta} x^{2} \frac{\Gamma(5x) \Gamma(x)}{\Gamma(3x)^{2}} [6\digamma(3x) - 5\digamma(5x) - \digamma(x)].
+\end{align}
+Substituting back in for $x$ and recognizing an occurance of $\gamma_{2}$, we have the result
+\begin{equation} \label{eq:kurt_err}
+	s_{\gamma_{2}} = s_{\beta} \frac{1}{\beta^{2}} \left( \gamma_{2} + 3 \right) \left[ 6 \digamma(3/\beta) - 5 \digamma(5/\beta) - \digamma(1/\beta) \right]
+\end{equation}
+with which we can find the uncertainty in the kurtosis given the value and uncertainty of the shape parameter $\beta$.
+
 
 
 

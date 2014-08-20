@@ -18,7 +18,9 @@ TEXFILE	= dissertation.tex
 
 CONTENT = $(wildcard chapters/*/content/*.tex)
 
-FIGS = $(wildcard chapters/*/figures/*)
+FIGS1 = $(wildcard chapters/*/figures/*)
+
+FIGS2 = $(wildcard chapters/*/figures/*/*)
 
 TABLES = $(wildcard chapters/*/tables/*)
 
@@ -33,7 +35,7 @@ pdf:	$(TEXFILE:.tex=.pdf)
 dvi:	$(TEXFILE:.tex=.dvi)
 
 #%.pdf: %.tex $(CONTENT) $(BIB) $(FIGS) $(TABLES) $(STYLE)
-%.dvi: %.tex $(CONTENT) $(BIB) $(FIGS) $(TABLES) $(STYLE)
+%.dvi: %.tex $(CONTENT) $(BIB) $(FIGS1) $(FIGS2) $(TABLES) $(STYLE)
 	( \
 	latex $<; \
 	bibtex $(<:.tex=); \
