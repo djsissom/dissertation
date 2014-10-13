@@ -43,6 +43,8 @@ Figure\hfill Page\endgraf} \addtocontents{lot}{\vspace{0.2in}
 
 \urlstyle{same}
 
+\input{style/listings_settings.tex} % put settings for code listings in this file
+
 \usepackage{makecell}
 \usepackage{titletoc}
 \usepackage{sfchap}
@@ -271,6 +273,16 @@ This is where you thank the people that made your work possible: grant awarding 
 %\bibliographystyle{apalike}
 \bibliographystyle{apj}
 \bibliography{apj-jour,references}
+
+
+\begin{appendices}
+
+	\chapter{Density Profile Python Code}
+	\label{app:density_profile}
+	\lstinputlisting[language=Python]{chapters/appendices/content/density_profile.py}
+
+\end{appendices}
+
 
 \end{document}
 
