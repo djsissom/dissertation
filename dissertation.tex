@@ -281,20 +281,50 @@ This is where you thank the people that made your work possible: grant awarding 
 	%\label{app:crossmatch}
 	%\lstinputlisting[language=C]{chapters/appendices/content/crossmatch/main.c}
 
-	\chapter{BGC2 Python Code}
+	\chapter{BGC2 Import Code (Python)}
 	\label{app:bgc2}
 	\lstinputlisting[language=Python]{chapters/appendices/content/bgc2/bgc2.py}
 
-	\chapter{Density Profile Python Code}
+	\chapter{Density Profile Code (Python)}
 	\label{app:density_profile}
 	\lstinputlisting[language=Python]{chapters/appendices/content/density_profile/density_profile.py}
 
-	\chapter{Halo Matching Code}
+	\chapter{Database Generation Code}
+	\label{app:database_generation}
+	\section{Halo Match (Python)}
 	\label{app:match_halos}
-	\section{Python Code}
 	\lstinputlisting[language=Python]{chapters/appendices/content/match_halos/match.py}
-	\section{Submission Script}
+	\section{PBS Submission Script (Bash)}
+	\label{app:run_match}
 	\lstinputlisting[language=Bash]{chapters/appendices/content/match_halos/run_match.pbs}
+
+	\chapter{Halo Comparison Code}
+	\label{app:halo_comparison}
+	\section{Particle Comparison (Python)}
+	\label{app:particle_comparison}
+	\lstinputlisting[language=Python]{chapters/appendices/content/compare_halos/compare_particles.py}
+	\section{Density Comparison (Python)}
+	\label{app:density_comparison}
+	\lstinputlisting[language=Python]{chapters/appendices/content/compare_halos/compare_density.py}
+
+	\chapter{Concentration Comparison Code (Python)}
+	\label{app:concentration_comparison}
+	\lstinputlisting[language=Python]{chapters/appendices/content/compare_concentration/compare.py}
+
+	\chapter{Differential Histogram Code}
+	\label{app:diff_hist}
+	\section{Histogram Generation and Fitting (Python)}
+	\label{app:hist}
+	\lstinputlisting[language=Python]{chapters/appendices/content/diff_hist/hist.py}
+	\section{PBS Submission Script (Bash)}
+	\label{app:run_diff_hist}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/diff_hist/run_diff_hist.pbs}
+	\section{PBS Submission Script - Individual Boxes (Bash)}
+	\label{app:run_diff_hist_individual_boxes}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/diff_hist/run_diff_hist_individual_boxes.pbs}
+	\section{Statistics Collection Script (Bash)}
+	\label{app:collect_stats}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/diff_hist/collect_stats.sh}
 
 \end{appendices}
 
