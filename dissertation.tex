@@ -277,9 +277,26 @@ This is where you thank the people that made your work possible: grant awarding 
 
 \begin{appendices}
 
-	%\chapter{CrossMatch Modifications}
-	%\label{app:crossmatch}
-	%\lstinputlisting[language=C]{chapters/appendices/content/crossmatch/main.c}
+	\chapter{\rockstar\ Configuration and Execution}
+	\label{app:rockstar}
+	\section{Single Node Configuration File (Text)}
+	\label{app:onenode}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/rockstar/onenode.cfg}
+	\section{PBS Submission Script (Bash)}
+	\label{app:run_rockstar}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/rockstar/run_rockstar.pbs}
+	\section{Post-Processing Script (Bash)}
+	\label{app:postprocess}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/rockstar/postprocess.sh}
+
+	\chapter{\crossmatch\ Modifications and Configuration}
+	\label{app:crossmatch}
+	\section{\lpt\ First Configuration File (Text)}
+	\label{app:crossmatch_2lpt_config}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/crossmatch/rockstar_2lpt.param}
+	\section{\za\ First Configuration File (Text)}
+	\label{app:crossmatch_za_config}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/crossmatch/rockstar_za.param}
 
 	\chapter{BGC2 Import Code (Python)}
 	\label{app:bgc2}
@@ -345,6 +362,33 @@ This is where you thank the people that made your work possible: grant awarding 
 	\chapter{Alternate Differential Distribution Redshift Trends Code (Python)}
 	\label{app:alt_redshift_trends}
 	\lstinputlisting[language=Python]{chapters/appendices/content/alt_redshift_trends/fits.py}
+
+	\chapter{Miscellaneous Scripts}
+	\label{app:misc_scripts}
+	\section{Directory Structure Setup (Bash)}
+	\label{app:setup}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/setup.sh}
+	\section{\crossmatch\ Setup (Bash)}
+	\label{app:crossmatch_setup}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/setup_crossmatch.sh}
+	\section{Individual Snapshot \rockstar\ Run Script (Bash)}
+	\label{app:begin_run}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/begin_run.sh}
+	\section{All Snapshots \rockstar\ \lpt\ PBS Submission Script (Bash)}
+	\label{app:run_2lpt}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/run_2lpt.pbs}
+	\section{All Snapshots \rockstar\ \za\ PBS Submission Script (Bash)}
+	\label{app:run_za}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/run_za.pbs}
+	\section{All Snapshots \rockstar\ Post-Process Script (Bash)}
+	\label{app:postprocess_all}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/postprocess.sh}
+	\section{All Snapshots \crossmatch\ PBS Submission Script (Bash)}
+	\label{app:run_crossmatch}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/run_crossmatch.pbs}
+	\section{All Snapshots Density Profile PBS Submission Script (Bash)}
+	\label{app:run_denisty_profile}
+	\lstinputlisting[language=Bash]{chapters/appendices/content/misc_scripts/run_density_profile.pbs}
 
 \end{appendices}
 

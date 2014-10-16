@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#PBS -M djsissom@gmail.com
+#PBS -m bae
+#PBS -l nodes=124:ppn=1
+#PBS -l pmem=4000mb
+#PBS -l mem=496000mb
+#PBS -l walltime=1:00:00
+#PBS -o out_density_profile.log
+#PBS -j oe
+
+echo $PBS_NODEFILE
+cd $PBS_O_WORKDIR
+
+for snapdir in {2lpt,za}/snap*/halos; do
+  # Change to working directory
+  echo Working on $snapdir...
+  cd $PBS_O_WORKDIR/$snapdir
+
+  {
+    mpiexec -verbose -n 1 density_profile halos_0.*.bgc2 > density_profile_out.log 2>&1
+    echo "Finished $snapdir"
+  } &
+
+done
+
+wait
+# - end of script

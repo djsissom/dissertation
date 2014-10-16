@@ -1,0 +1,29 @@
+#!/bin/sh
+#PBS -M djsissom@gmail.com
+#PBS -m bae
+#PBS -l nodes=1:ppn=10
+#PBS -l pmem=3000mb
+#PBS -l mem=30000mb
+#PBS -l walltime=0:30:00
+#PBS -o out.log
+#PBS -j oe
+
+# Change to working directory
+echo $PBS_NODEFILE
+cd $PBS_O_WORKDIR
+
+# Start the server
+rockstar -c onenode.cfg &> server.out &
+
+# Wait for auto-rockstar.cfg to be created
+perl -e 'sleep 1 while (!(-e "halos/auto-rockstar.cfg"))'
+mv halos/auto-rockstar.cfg .
+
+# Execute the reader processes
+mpiexec -verbose -n 1 rockstar -c auto-rockstar.cfg >> clients.out 2>&1 &
+sleep 20
+
+# Execute the analysis processes
+mpiexec -verbose -n 8 rockstar -c auto-rockstar.cfg >> clients.out 2>&1
+
+# - end of script

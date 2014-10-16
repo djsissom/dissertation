@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#PBS -M djsissom@gmail.com
+#PBS -m bae
+#PBS -l nodes=62:ppn=1
+#PBS -l pmem=3000mb
+#PBS -l mem=186000mb
+#PBS -l walltime=1:00:00
+#PBS -o out_crossmatch.log
+#PBS -j oe
+
+echo $PBS_NODEFILE
+cd $PBS_O_WORKDIR
+
+for snapdir in crossmatch/*; do
+  # Change to working directory
+  echo Working on $snapdir...
+  cd $PBS_O_WORKDIR/$snapdir
+
+  {
+	  mpiexec -verbose -n 1 crossmatch rockstar_2lpt.param > out_2lpt_first.log 2>&1
+	  mpiexec -verbose -n 1 crossmatch rockstar_za.param   > out.za_first.log   2>&1
+	  echo "Finished $snapdir"
+  } &
+
+done
+
+wait
+# - end of script
