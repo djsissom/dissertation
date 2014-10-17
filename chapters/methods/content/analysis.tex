@@ -24,7 +24,9 @@ As a high-level overview, we gather snapshots from previously run \lpt\ and \za\
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Halos are identified and measured with the \rockstar\ halo finder (see Section~\ref{sec:rockstar} for implementation details).  
+Halos are identified and measured with the \rockstar\ halo finder (see Section~\ref{sec:rockstar} for implementation details).
+
+Text goes here.
 
 
 
@@ -55,7 +57,7 @@ Text goes here.
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+While \rockstar's output includes measurements for halo virial and scale radii, and thus concentration, we independently fit NFW density profiles to halos and measure concentration as a verification of \rockstar's fitting.  The full density profile python code is presented in Appendix~\ref{app:density_profile}.
 
 
 
@@ -65,7 +67,9 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+For each halo, a list of constituent spherical overdensity particles is obtained from the post-processed BGC2 catalog from \rockstar's output.  For our purposes here, the relevant parameters are particle mass and position.  We also use the values for each halo's center position and virial radius as found by \rockstar.
+
+Density profiles are then constructed by binning the particle positions in logarithmic radial bins from the resolution limit of the simulation to the halo virial radius and multiplying by particle mass.  Before being passed to the fitting routine, density profiles are normalized to unity for both virial radius and maximum density. 
 
 
 
@@ -75,20 +79,28 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
-% Model functions
-% Initial guesses
-% Fit coefficients
+Halos are fit using the CurveFit routine from the SciPy Optimize library.  It uses the Levenberg-Marquardt algorithm\cn\ for non-linear least squares fitting.
 
+CurveFit is called by providing a model function, independent variable, measured dependent variable, and optionally weights for the dependent variable and initial guesses for fit coefficients.  Here, our fit function is the NFW dark matter density profile (see Equation~\ref{eq:nfw_profile}).  The free parameters to be fit are the scale radius $R_{s}$ and the characteristic density $\rho_{0}$.
 
+As the least squares algorithm is sensitive to local minima, care must be taken in choosing initial guesses for the fit coefficients.  Additionally, large dynamic range in the fit parameters tended to produce poor results.  We explored a number of solutions to improve solution stability, including fitting in logarithmic space and randomizing the initial guesses and picking the best solution.  We found the best results were achieved by normalizing the data to unity for both radius and density, and choosing initial guesses within an order of magnitude for a typical halo, namely, normalized $R_{s} = 0.1$ and normalized $\rho_{0} = 1.0$.
 
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Mass Profiles}
-\label{subsubsec:analysis--profile_fitting--mass_profiles}
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Some halos with irregular profiles presented the problem of the fitting algorithm choosing an unphysical scale radius larger than the virial radius of the halo.  In order to heavily penalize this option from being chosen by the fitting algorithm, the dependent variable returned by the model function must differ from the input measured dependent variable as much as possible.  However, we discovered that the transition must also be smooth, as a disjointed jump such as, say, returning a very large number for every value if $R_{s} > R_{\mathrm{vir}}$ would cause the algorithm to fail.  We achieve this smooth transition penalty by adding the term $(R_{s} - 1) e^{r}$ to the density returned by the model function if the fitting algorithm tries to guess a value of $R_{s}$ larger than $R_{\mathrm{vir}}$.  However, while this did force halos to have definable concentrations, these halos often ended up with best fit scale radii equal to or just slightly less than the virial radii.
 
+As we fit halos over a large range in redshift, we found low particle count halos to have noisy density profiles that were inherently more difficult to properly fit.  Throughout our analysis, we use a lower bound of 100 particles to define a halo.  At high redshift, even the largest halos are just beginning to cross this threshold.  With such few particles spread across the number of bins necessary to properly define a density profile, we are left with only a handful of particles per bin.  In Figure~\ref{fig:fitting--density_profiles}, we compare one of the largest halos at $z = 14$ with one of the largest halos at the end of the simulation at $z = 6$.
 
-Text goes here.
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/2lpt_040_density_profile_0.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/2lpt_061_density_profile_0.eps}
+	\end{subfigure}
+	\caption[Density profiles for two large halos at $z = 14$ and $z = 6$.]{\footnotesize Density profiles for two large halos at $z = 14$ and $z = 6$.  Both halos are from the Box 1 \lpt\ simulation, and are the largest halos at their respective redshifts.  \mrk{(Get rid of density projections.)}}
+	\label{fig:fitting--density_profiles}
+\end{figure}
 
 
 
@@ -98,17 +110,36 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+An initial motivation for finding our own concentration parameters independent from \rockstar\ is that \rockstar\ does not provide information about the quality of its density profile fits.  We assign Poisson errors to the density in each bin such that $\sigma_{\rho} = \rho \sqrt{N} / N$, where $\rho$ is the density and $N$ is the number of particles in each bin.  These uncertainties are then provided as weights to the CurveFit routine.  Upon finding a best fit, the routine provides the fit parameters and an estimation of the uncertainty in those parameters via a covariance matrix, which we use to uncertainty in the concentration.  Additionally, we find the $\chi^{2}$ for the overall fit, which we use as an indicator of whether to accept or reject the fit for a given halo.
 
 
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Halo Properties}
-\label{subsubsec:analysis--profile_fitting--halo_properties}
+\subsubsection{Mass Profiles}
+\label{subsubsec:analysis--profile_fitting--mass_profiles}
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+Text goes here.  Mass profiles tested to avoid binning issues and the stats stuff Manodeep learned at the conference.  Bad fitting results, so abandoned.  Figure~\ref{fig:mass_profile}.
+
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/2lpt_061_mass_profile_0.eps}
+	\end{subfigure}
+	\caption[Mass profiles a large halo at $z = 6$.]{\footnotesize Mass profiles for a large halo at $z = 6$.  \mrk{(Get rid of density projections.)}}
+	\label{fig:mass_profile}
+\end{figure}
+
+
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\subsubsection{Concentration Comparison to \rockstar}
+\label{subsubsec:analysis--profile_fitting--rockstar_comparison}
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Overall, we do not find good agreement with \rockstar.  Using a script (see Appendix~\ref{app:concentration_comparison}) to compare the concentrations derived from our fits with those from \rockstar.  At $z = 6$, we find that only 26\% of halos fit by our method have concentrations within 20\% of concentrations as measured by \rockstar.  We have slightly more agreement with high mass halos, with 37\% agreement if we only consider the most massive 10\% of halos.  Additionally, we do not find good fits for every halo.  If the distribution of particles would produce too few bins or the fitting routine exceeded a maximum number of iterations to find a stable solution, the halo is not fit.  We also exclude halos with fits returned with very large $\chi^{2}$ values.  Because of the discrepancies in our results and the fact that we do not find acceptable fits for every halo, we use the more complete \rockstar\ data for the final concentration measurements used in the remainder of our analysis.
 
 
 
