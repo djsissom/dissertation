@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#PBS -M djsissom@gmail.com
+#PBS -m bae
+#PBS -l nodes=27:ppn=1
+#PBS -l pmem=20000mb
+#PBS -l mem=54000mb
+#PBS -l walltime=0:30:00
+#PBS -o out.log
+#PBS -j oe
+
+#nodes=186:ppn=1
+#pmem=20000mb
+#mem=372000mb
+
+minsnap=53
+maxsnap=61
+
+minbox=1
+maxbox=3
+
+# Change to working directory
+echo $PBS_NODEFILE
+cd $PBS_O_WORKDIR
+
+for ((i=$minbox; i<=$maxbox; i++)); do
+
+  for ((snap=$minsnap; snap<=$maxsnap; snap++)); do
+
+    if [ $snap -lt 10 ]; then
+      j=00$snap
+    elif [ $snap -lt 100 ]; then
+      j=0$snap
+    fi
+
+    base_dir=~/projects/simulations/rockstar/box${i}
+    crossmatch_dir=${base_dir}/crossmatch/snap${j}
+    first_file=${crossmatch_dir}/crossmatch_2lpt_first_000.txt
+    second_file=${crossmatch_dir}/crossmatch_za_first_000.txt
+	outfile=${crossmatch_dir}/crossmatch_000.txt
+    logfile=${crossmatch_dir}/best_crossmatch.log
+
+    echo "Starting box${i} snap${j}..."
+
+    {
+      mpiexec -verbose -n 1 ./best_crossmatch.py ${first_file} ${second_file} ${outfile} > ${logfile} 2>&1
+      echo "Finished box${i} snap${j}"
+    } &
+
+  done
+
+done
+
+wait
+
+# - end of script
+
+
+
+
