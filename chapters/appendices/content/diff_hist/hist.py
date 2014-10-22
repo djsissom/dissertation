@@ -691,7 +691,8 @@ ne_vals = []
 
 
 # global filters
-glob_lt_cols = [] glob_lt_vals = []
+glob_lt_cols = []
+glob_lt_vals = []
 
 glob_gt_cols = [4, 5]
 glob_gt_vals = [100, 100]
