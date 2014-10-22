@@ -19,14 +19,12 @@ As a high-level overview, we gather snapshots from previously run \lpt\ and \za\
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Halo Properties}
+\subsection{Halo Properties with \rockstar}
 \label{subsec:analysis--halo_properties}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Halos are identified and measured with the \rockstar\ halo finder (see Section~\ref{sec:rockstar} for implementation details).
-
-Text goes here.
+Halos are identified and measured with the \rockstar\ halo finder, which is discussed in detail in Section~\ref{sec:rockstar}.  Here, we discuss the setup necessary to run \rockstar, as well as its output files, post-processing steps, and particle list extraction.
 
 
 
@@ -57,7 +55,7 @@ Text goes here.
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-While \rockstar's output includes measurements for halo virial and scale radii, and thus concentration, we independently fit NFW density profiles to halos and measure concentration as a verification of \rockstar's fitting.  The full density profile python code is presented in Appendix~\ref{app:density_profile}.
+While \rockstar's output includes measurements for halo virial and scale radii, and thus concentration, we independently fit NFW density profiles to halos and measure concentration as a verification of \rockstar's fitting.  The full density profile python code is presented in Appendix~\ref{app:density_profile}.  This section is included for completeness only, as we find that only a small fraction of halos are well fit by our method, and we instead rely on concentration measurements directly from \rockstar\ for subsequent analysis.
 
 
 
