@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Numercial Methods}
-\label{sec:2lpt--methods}
+\label{sec:methods}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -19,7 +19,7 @@
 
 We use the Nbody tree/SPH code \gadgettwo\ \citep{2001NewA....6...79S, 2005MNRAS.364.1105S} to evolve six dark matter--only cosmological volumes from $z_{start} = 300$ to $z = 6$ in a $\rm \Lambda CDM$ universe.  Each simulation is initialized using WMAP-5 \citep{2009ApJS..180..330K} parameters.  For each of the three simulation pairs, we directly compare \lpt\ and \za\ by identically sampling the CMB transfer function and displacing the initial particle positions to the same starting redshift using \lpt\ and \za.  The three sets of simulations differ only by the initial phase sampling random seed.  Each volume contains $512^{3}$ particles in a 10 $h^{-1}$ Mpc box.  Full simulation details are discussed in \citet{2012ApJ...761L...8H}.
 
-One facet often overlooked when setting up an \nbody\ simulation is an appropriate starting redshift, determined by box size and resolution \citep{2007ApJ...671.1160L}.  Initialization with \lpt\ allows for a later starting redshift compared with an equivalent \za-initialized simulation.  However, many \za\ simulations do not take this into account, starting from too late of an initial redshift \citep{2006MNRAS.373..369C, 2010MNRAS.403.1859J}.  In order to characterize an appropriate starting redshift, the relation between the initial rms particle displacement and mean particle separation must be considered.  The initial rms displacement $\Delta_{\mathrm{rms}}$ is given by
+One facet often overlooked when setting up an \nbody\ simulation is an appropriate starting redshift, determined by box size and resolution \citep{2007ApJ...671.1160L}.  As \lpt\ more accurately displaces initial particle positions and velocities, initialization with \lpt\ allows for a later starting redshift compared with an equivalent \za-initialized simulation.  However, many \za\ simulations do not take this into account, starting from too late an initial redshift and not allowing enough e-foldings to adequately dampen away numerical transients. \citep{2006MNRAS.373..369C, 2010MNRAS.403.1859J}.  In order to characterize an appropriate starting redshift, the relation between the initial RMS particle displacement and mean particle separation must be considered.  The initial RMS displacement $\Delta_{\mathrm{rms}}$ is given by
 \begin{equation}
 	\Delta_{\mathrm{rms}}^{2} = \frac{4 \pi}{3} \int_{k_{f}}^{k_{\mathrm{Ny}}} P(k, z_{\mathrm{start}}) \dd k,
 \end{equation}
@@ -43,7 +43,7 @@ For each of our six simulations, we use the 6-D phase space halo finder code \ro
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-We identify matching halos based on the highest fraction of matching particles contained in each at any given timestep.  We remove subhalo matches (i.e. a halo must not be contained within another halo) and halo pairs with fewer than 100 particles in either \lpt\ or \za.  We are left with approximately 60,000 total halo pairs for our three boxes at $z = 6$.  With halo catalogues matched between simulations, we can compare properties of individual corresponding halos.  To mitigate the effects of cosmic variance on our small volumes, we ``stack'' the three simulation boxes for each initialization method, and combine the halos from each into one larger sample in our analysis.
+We identify matching halos based on the highest fraction of matching particles contained in each at any given timestep.  We remove halo pairs where either one or both halos are considered subhalos (i.e. a halo must not be contained within another halo) and pairs with fewer than 100 particles in either \lpt\ or \za.  We are left with approximately 60,000 total halo pairs for our three boxes at $z = 6$.  With halo catalogs matched between simulations, we can compare properties of individual corresponding halos.  To mitigate the effects of cosmic variance on our small volumes, we ``stack'' the three simulation boxes for each initialization method, and combine the halos from each into one larger sample in our analysis.
 
 
 
@@ -107,7 +107,7 @@ where the digamma function $\digamma$ is the derivative of the logarithm of the 
 \begin{equation} \label{eq:digamma}
     \digamma(x) = \int_{0}^{\infty} \left( \frac{e^{-t}}{t} - \frac{e^{-xt}}{1 - e^{-t}} \right) \dd t
 \end{equation}
-if the real part of $x$ is positive.  Now, taking the derivative of $\gamma_{2}$ and doing a bit of algebra gives us
+if the real part of $x$ is positive.  Now, taking the derivative of $\gamma_{2}$ and doing a bit of algebra yields
 \begin{equation} \label{eq:kurt_err}
     s_{\gamma_{2}} = s_{\beta} \frac{1}{\beta^{2}} \left( \gamma_{2} + 3 \right) \left[ 6 \digamma(3/\beta) - 5 \digamma(5/\beta) - \digamma(1/\beta) \right],
 \end{equation}

@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
-\label{sec:2lpt--results}
+\label{sec:results}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,7 +27,7 @@ We compare large scale morphologies, density profiles, and various other halo pr
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Difference distributions of halo properties}
+\subsection{Differences in ensemble halo properties}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -68,13 +68,13 @@ The higher-order moments of the $\Delta M_{\mathrm{vir}}$ distribution are of in
 
 We find the distributions to be much closer to a Laplace distribution than a Gaussian, with shape parameter consistently sitting at or very close to $\beta = 1$.  Compared to a Gaussian distribution, the larger excess kurtosis implies a narrower central peak and heavier outlying tails.  Our fit constrains $\beta \geq 1$, so the kurtosis of the data itself could potentially be higher than the fit implies.
 
-We find no no overall preference for more concentrated \lpt\ or \za\ halos.  In contrast to the $\Delta M_{\mathrm{vir}}$ histograms , $\Delta c$ shows very little deviation from symmetry about zero.  Throughout the simulation, we find the distributions to have a mean close to zero and negligible skew.  The widths of the distributions are much wider than those for $\Delta M_{\mathrm{vir}}$, with an order of magnitude difference by $z = 6$.  As with mass, concentration histograms are sharply peaked with heavy tails, implying a tendency for halo pairs to move towards the extremes of either very similar or very discrepant concentrations.
+We find no overall preference for more concentrated \lpt\ or \za\ halos.  In contrast to the $\Delta M_{\mathrm{vir}}$ histograms, $\Delta c$ shows very little deviation from symmetry about zero.  Throughout the simulation, we find the distributions to have a mean close to zero and negligible skew.  The widths of the distributions are much larger than those for $\Delta M_{\mathrm{vir}}$, with an order of magnitude difference by $z = 6$.  As with mass, concentration histograms are sharply peaked with heavy tails, implying a tendency for halo pairs to move towards the extremes of either very similar or very discrepant concentrations.
 
 
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Trends with redshift}
+\subsection{Time evolution of mass and concentration}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -106,12 +106,12 @@ The mean for $\Delta M_{\mathrm{vir}}$ is positive and highest at high redshift,
 \begin{table}[t]
 	\centering
 	\caption{Coefficients for linear least squares fits from Figure~\ref{fig:fit_trends}.}
-	\begin{tabular}{ l  r  r }
+	\begin{tabular}{ c  r  r }
 		\toprule
-		& \multicolumn{1}{c}{$\Delta M_{\mathrm{vir}}$} & \multicolumn{1}{c}{$\Delta c$} \\
+		                           &  \multicolumn{1}{c}{$A$}             &  \multicolumn{1}{c}{$B$} \\
 		\cmidrule(l){2-3}
-		A &  $(7.88 \pm 0.17) \times 10^{-3}$ &  $(3.62 \pm 0.95) \times 10^{-3}$ \\
-		B & $(-3.07 \pm 0.14) \times 10^{-2}$ & $(-2.34 \pm 0.84) \times 10^{-2}$ \\
+		$\Delta M_{\mathrm{vir}}$  &  $(7.88 \pm 0.17) \times 10^{-3}$  &  $(-3.07 \pm 0.14) \times 10^{-2}$ \\
+		$\Delta c$                 &  $(3.62 \pm 0.95) \times 10^{-3}$  &  $(-2.34 \pm 0.84) \times 10^{-2}$ \\
 		\bottomrule
 	\end{tabular}
 	\label{tab:coeffs}
@@ -119,21 +119,21 @@ The mean for $\Delta M_{\mathrm{vir}}$ is positive and highest at high redshift,
 
 We find least square linear fits for both mean $\Delta M_{\mathrm{vir}}$ vs $z$ and mean $\Delta c$ vs $z$.  Coefficients for slope $A$ and y-intercept $B$ for the fit equation $\mu = A z + B$ are given in Table~\ref{tab:coeffs} for both cases.  We find a significant trend for $\Delta M_{\mathrm{vir}}$, with a slope $\sim 46 \sigma$ from zero.  Conversely, the slope for $\Delta c$ is much smaller and, considering the larger spread of the underlying distributions, can be considered negligible.  For $\Delta M_{\mathrm{vir}}$, the y-intercept coefficient $B$ likely has little meaning in terms of the actual behavior at $z = 0$, as we expect the trend to level out at later redshift.
 
-We do note, however, that the mean can be deceiving as an indicator of total difference between halo populations, especially when it is close to zero as with concentration.  It should be noted that while the mean can indicate a lack of average difference between the whole sample of \lpt\ and \za\ halos, there can still be very large discrepancies between many individually paired halos.  We visualize this by plotting the RMS of $\Delta M_{\mathrm{vir}}$ and $\Delta c$, which is plotted as a green dotted line.  Unlike the mean, standard deviation,and kurtosis, which are measured from fits to the histograms, RMS is measured directly from the data and is not dependent on fitting.  The large RMS values are indicative of how much overall difference can arise between \lpt\ and \za\ halos, even though the differences may average to zero when considering the entire population.  The RMS for both $\Delta M_{\mathrm{vir}}$ and $\Delta c$ starts highest at high redshift---$0.19$ for $\Delta M_{\mathrm{vir}}$ and $0.57$ for $\Delta c$ at $z = 15$---and steadily decreases throughout the simulation, reaching minimums of $0.11$ for $\Delta M_{\mathrm{vir}}$ and $0.45$ for $\Delta c$ by $z = 6$.
+We do note, however, that the mean can be deceiving as an indicator of total difference between halo populations, especially when it is close to zero as with concentration.  It should be noted that while the mean can indicate a lack of average difference between the whole sample of \lpt\ and \za\ halos, there can still be very large discrepancies between many individually paired halos.  We visualize this by plotting the RMS of $\Delta M_{\mathrm{vir}}$ and $\Delta c$, which is plotted as a green dotted line.  Unlike the mean, standard deviation, and kurtosis, which are measured from fits to the histograms, RMS is measured directly from the data and is not dependent on fitting.  The large RMS values are indicative of how much overall difference can arise between \lpt\ and \za\ halos, even though the differences may average to zero when considering the entire population.  The RMS for both $\Delta M_{\mathrm{vir}}$ and $\Delta c$ starts highest at high redshift---$0.19$ for $\Delta M_{\mathrm{vir}}$ and $0.57$ for $\Delta c$ at $z = 15$---and steadily decreases throughout the simulation, reaching minimums of $0.11$ for $\Delta M_{\mathrm{vir}}$ and $0.45$ for $\Delta c$ by $z = 6$.
 
 Additionally, it is of interest to consider the percentage of halo pairs that are ``wrong'' at some given time, regardless of whether the quantity is higher in \lpt\ or \za.  For example, if we count halos outside a slit of $\epsilon = 10\%$ around $\Delta q = 0$, we find that by $z = 6$, 14.6\% of halo pairs still have substantially mismatched masses, and 74.3\% have mismatched concentrations.  It is evident that a substantial percentage of halo pairs can have markedly different growth histories, even when there is little or no offset in the ensemble halo population average.
 
 Kurtosis is consistently large for both mass and concentration, with a slight increasing trend throughout the simulation for concentration.  It reaches maximum values of $17.5 \pm 2.4$ at redshift 10 for $\Delta M_{\mathrm{vir}}$ and $15.4 \pm 1.0$ at the end of the simulation at redshift 6 for $\Delta c$.  Skew is positive for much of the simulation for mass, but is much smaller for concentration.  We find average skews of $0.39 \pm 0.29$ for $\Delta M_{\mathrm{vir}}$ and $0.045 \pm 0.028$ for $\Delta c$.  These higher moment deviations from Gaussianity hint at the non-linear dynamics at play in halo formation.
 
-The narrow peak and heavy tails of the distribution may indicate a fair amount of sensitivity to initial differences in halo properties, in that halo pairs that start out within a certain range of the mean are more likely move closer to the mean, while pairs that are initially discrepant will diverge even further in their characteristics.  This is indicative of the non-linear gravitational influence present during halo evolution, and is further supported by a kurtosis that increases with time.
+The narrow peak and heavy tails of the distribution may indicate a fair amount of sensitivity to initial differences in halo properties, in that halo pairs that start out within a certain range of the mean are more likely to move closer to the mean, while pairs that are initially discrepant will diverge even further in their characteristics.  This is indicative of the non-linear gravitational influence present during halo evolution, and is further supported by a kurtosis that increases with time.
 
-The skew at high redshift for $\Delta M_{\mathrm{vir}}$ may give another hint at the non-linear halo formation process.  Runaway halo growth causes more massive halos to favor faster mass accretion and growth.  The positively skewed distributions show a picture of \lpt\ halo growth in which initial differences in mass are amplified the most readily in the earliest forming and most massive halos, again indicating the extra kick-start to halo growth provided by \lpt\ initialization.  While the slight decrease in skew with redshift may be counter-intuitive to this notion, it is likely that the large number of newly formed halos begin to mask the signal from the smaller number of large halos displaying this effect.
+The skew at high redshift for $\Delta M_{\mathrm{vir}}$ may give another hint at the non-linear halo formation process.  Runaway halo growth causes more massive halos to even favor faster mass accretion and growth.  The positively skewed distributions show a picture of \lpt\ halo growth in which initial differences in mass are amplified most readily in the earliest forming and most massive halos, again indicating the extra kick-start to halo growth provided by \lpt\ initialization.  While the slight decrease in skew with redshift may be counter-intuitive to this notion, it is likely that the large number of newly formed halos begin to mask the signal from the smaller number of large halos displaying this effect.
 
 
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Trends with halo mass}
+\subsection{Dependence of mass and concentration differences on halo mass}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -162,21 +162,50 @@ The skew at high redshift for $\Delta M_{\mathrm{vir}}$ may give another hint at
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{dc-v-Mavg_snap061.eps}
 	\end{subfigure}
-	\caption[$\Delta M_{\mathrm{vir}}$ and $\Delta c$ as a function of $M_{\mathrm{vir,avg}}$]{\footnotesize $\Delta M_{\mathrm{vir}}$ (left column) and $\Delta c$ (right column) as functions of $M_{\mathrm{vir,avg}}$.  Halos are counted in 2-D rectangular bins and smoothed with a Gaussian kernel with a logarithmic color scale.  The red line is the least-squares best fit to the data.  The blue dashed line at zero is provided to guide the eye.  The three rows again correspond to snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$.  We again see the overall offset for positive $\Delta M_{\mathrm{vir}}$ as before, and additionally find that more massive halo pairs are more likely to have even larger $\Delta M_{\mathrm{vir}}$, especially at high redshift.  Fit equations for the left column panels are $\Delta M_{\mathrm{vir}} = 5.6 \times 10^{-2} M_{\mathrm{vir,avg}} - 0.33$, $\Delta M_{\mathrm{vir}} = 1.7 \times 10^{-2} M_{\mathrm{vir,avg}} - 7.3 \times 10^{-2}$, and $\Delta M_{\mathrm{vir}} = 6.4 \times 10^{-3} M_{\mathrm{vir,avg}} - 2.5 \times 10^{-2}$, respectively.  Concentration show a small but opposite trend for more massive halos to be more concentrated in \za\ than in \lpt.  The right column panels have fit equations $\Delta c = -5.3 \times 10^{-2} M_{\mathrm{vir,avg}} + 0.46$, $\Delta c = -4.5 \times 10^{-2} M_{\mathrm{vir,avg}} + 0.46$, and $\Delta c = -9.3 \times 10^{-3} M_{\mathrm{vir,avg}} + 8.9 \times 10^{-2}$, respectively.}
+	\caption[$\Delta M_{\mathrm{vir}}$ and $\Delta c$ as a function of $M_{\mathrm{vir,avg}}$]{\footnotesize $\Delta M_{\mathrm{vir}}$ (left column) and $\Delta c$ (right column) as functions of $M_{\mathrm{vir,avg}}$.  For the 2-D color histogram, halos are counted in rectangular bins and smoothed with a Gaussian kernel with a logarithmic color scale.  The halos are also divided into logarithmically-spaced bins in average virial mass, and the mean for each bin is plotted as a black point.  The black dotted lines are the standard deviation around the mean.  The magenta line is the linear least-squares best fit to the bin means.  The light grey dashed line at $\Delta q = 0$ is provided to guide the eye.  The three rows again correspond to snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$.  We again see the overall offset for positive $\Delta M_{\mathrm{vir}}$ as before, and additionally find a small tendency for more massive halo pairs to be more likely to have even larger $\Delta M_{\mathrm{vir}}$.  Fit equations for the left column panels are $\Delta M_{\mathrm{vir}} = -(0.5 \pm 1.5) \times 10^{-2} \log(M_{\mathrm{vir,avg}}) + (0.15 \pm 0.12)$, $\Delta M_{\mathrm{vir}} = (1.03 \pm 0.46) \times 10^{-2} \log(M_{\mathrm{vir,avg}}) - (2.6 \pm 3.8) \times 10^{-2}$, and $\Delta M_{\mathrm{vir}} = (3.49 \pm 0.99) \times 10^{-3} \log(M_{\mathrm{vir,avg}}) - (6.8 \pm 8.3) \times 10^{-3}$, respectively.  Concentration show an opposite trend for more massive halos to be less concentrated in \lpt\ than in \za.  The right column panels have fit equations $\Delta c = -(0.256 \pm 0.093) \log(M_{\mathrm{vir,avg}}) + (2.07 \pm 0.76)$, $\Delta c = -(7.0 \pm 1.2) \times 10^{-2} \log(M_{\mathrm{vir,avg}}) + (0.595 \pm 0.099)$, and $\Delta c = -(1.10 \pm 0.31) \times 10^{-2} \log(M_{\mathrm{vir,avg}}) + (0.103 \pm 0.026)$, respectively.}
 	\label{fig:delta-v-Mavg}
 \end{figure*}
 
-We consider $\Delta M_{\mathrm{vir}}$ and $\Delta c$ as a function of average halo mass $M_{\mathrm{vir,avg}} = (M_{\mathrm{vir},\lpt} + M_{\mathrm{vir},\za}) / 2$ in Figure~\ref{fig:delta-v-Mavg}.  The data is binned on a 2-D grid with a logarithmic color map for three representative timesteps.  A linear fit to the data is overplotted in red, and a dotted blue line is provided at $\Delta M_{\mathrm{vir}} = 0$ and $\Delta c = 0$ to guide the eye.
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{slopes_dM-v-Mavg.eps}
+	\end{subfigure}
+	~
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{slopes_dc-v-Mavg.eps}
+	\end{subfigure}
+	\caption[Slopes of the $\Delta q$ vs.\ $M_{\mathrm{vir,avg}}$ fit functions.]{\footnotesize Slopes of the $\Delta q$ vs.\ $M_{\mathrm{vir,avg}}$ fit functions.  The left and right panels correspond to the $\Delta M_{\mathrm{vir}}$ and $\Delta c$ plots in the left and right columns, respectively, of Figure~\ref{fig:delta-v-Mavg}.  Linear least-squares fits to the data are overplotted as red dashed lines.  Overall, we find a trend of positive and increasing slope with redshift for $\Delta M_{\mathrm{vir}}$ and negative and decreasing slope with redshift for $\Delta c$.  We find fit equations of $\mathrm{Slope} = (9.4 \pm 2.4) \times 10^{-4} z - (1.8 \pm 1.8) \times 10^{-3}$ for $\Delta M_{\mathrm{vir}}$ and $\mathrm{Slope} = -(7.3 \pm 1.9) \times 10^{-3} z + (3.7 \pm 1.4) \times 10^{-2}$ for $\Delta c$.  Snapshots at very high redshift, $z \gtrsim 14$ for $\Delta M_{\mathrm{vir}}$ and $z \gtrsim 13$ for $\Delta c$, begin to deviate from these trends.  However, it is uncertain if this deviation is significant due to the low number statistics of our sample at such high $z$.}
+	\label{fig:slopes_delta-v-Mavg}
+\end{figure*}
 
-We find that $\Delta M_{\mathrm{vir}}$ tends to increase with increasing $M_{\mathrm{vir,avg}}$, a trend that is, again, most pronounced at high redshift.  \lpt\ halos are consistently more massive than their \za\ counterparts, with the difference increasing with average halo mass.  While less massive halo pairs have a larger spread in the difference in \lpt\ and \za\ mass, more massive halo pairs are consistently heavier in \lpt\ than in \za.  At redshift 15, the least squares fit to the data produces the fit equation $\Delta M_{\mathrm{vir}} = 5.6 \times 10^{-2} M_{\mathrm{vir,avg}} - 0.33$.   The slope of the fit line trends towards zero as we progress in redshift, with little average mass dependence and a fit of $\Delta M_{\mathrm{vir}} = 6.4 \times 10^{-3} M_{\mathrm{vir,avg}} - 2.5 \times 10^{-2}$ by $z = 6$.
+We consider $\Delta M_{\mathrm{vir}}$ and $\Delta c$ as a function of average halo mass $M_{\mathrm{vir,avg}} = (M_{\mathrm{vir},\lpt} + M_{\mathrm{vir},\za}) / 2$ for three representative timesteps in Figure~\ref{fig:delta-v-Mavg}.  The data are binned in average virial mass, for which means and standard deviations are provided as the black points and black dotted lines, respectively.  The error bars on the black points represent the uncertainty in the mean and are the standard deviation divided by the number of halos in that bin.  We additionally bin the data in rectangular bins on a 2-D grid with a logarithmic color map in order to provide a more natural representation of the distribution of the data.  Linear fits to the bin means are overplotted in magenta.
 
-We find a small trend for more massive halo pairs to be more concentrated in \za, but this trend is weaker than for $\Delta M_{\mathrm{vir}}$.  The fit equations for $z = 15$ and $z = 6$ are $\Delta c = -5.3 \times 10^{-2} M_{\mathrm{vir,avg}} - 0.45$ and $\Delta c = -9.3 \times 10^{-3} M_{\mathrm{vir,avg}} - 8.9 \times 10^{-2}$, respectively.  The negative slope might be expected, as halo concentration is expected to decrease with increasing mass, at least at later redshift \citep{2007MNRAS.381.1450N}, and we find high mass halos to be more massive in \lpt\ than in \za.  However, the dependence of concentration on mass and redshift at high redshift is more complicated \citep{2011ApJ...740..102K, 2012MNRAS.423.3018P}.  The data have a larger variance than $\Delta M_{\mathrm{vir}}$, and fits have and overall shallower slope.  Mass dependence all but disappears by $z = 6$.  To reconcile these trends with the symmetrical concentration distributions of Figure~\ref{fig:diff-hist}, we note that the trends in mass may be hidden by integration across the entire mass range and still result in overall $\Delta c$ distributions symmetric about zero.
+We find that $\Delta M_{\mathrm{vir}}$ tends to increase with increasing $M_{\mathrm{vir,avg}}$ for most snapshots.  \lpt\ halos are consistently more massive than their \za\ counterparts, and, aside from the highest redshift snapshots, this difference increases with average halo mass.  While less massive halo pairs have a larger spread in the difference in \lpt\ and \za\ mass, more massive halo pairs are consistently heavier in \lpt\ than in \za.  At redshift 15, the transition snapshot between negative and positive slopes, the least squares fit to the data produces the fit equation $\Delta M_{\mathrm{vir}} = -(0.5 \pm 1.5) \times 10^{-2} \log(M_{\mathrm{vir,avg}}) + (0.15 \pm 0.12)$.   The slope of the fit lines then become positive and trends back towards zero as we progress in redshift, with a fit of $\Delta M_{\mathrm{vir}} = (3.49 \pm 0.99) \times 10^{-3} \log(M_{\mathrm{vir,avg}}) - (6.8 \pm 8.3) \times 10^{-3}$ by $z = 6$.
+
+We additionally find a trend for more massive halo pairs to be more concentrated in \za.  This trend is somewhat stronger than for $\Delta M_{\mathrm{vir}}$, but again, high $z$ snapshots differ from the trend.  The fit equations for $z = 15$ and $z = 6$ are $\Delta c = -(0.256 \pm 0.093) \log(M_{\mathrm{vir,avg}}) + (2.07 \pm 0.76)$ and $\Delta c = -(1.10 \pm 0.31) \times 10^{-2} \log(M_{\mathrm{vir,avg}}) + (0.103 \pm 0.026)$, respectively.  The negative slope for most of the redshift range might be expected, as halo concentration is expected to decrease with increasing mass, at least at later redshift \citep{2007MNRAS.381.1450N}, and we find high mass halos to be more massive in \lpt\ than in \za\ for all but the highest redshift snapshots.  However, the dependence of concentration on mass and redshift at high redshift is more complicated \citep{2011ApJ...740..102K, 2012MNRAS.423.3018P}.  The data have a larger variance than $\Delta M_{\mathrm{vir}}$ by a factor of $\sim 2$.  Again, mass dependence is smallest by $z = 6$.  To reconcile these trends with the symmetrical concentration distributions of Figure~\ref{fig:diff-hist}, we note that the trends in mass may be hidden by integration across the entire mass range and still result in overall $\Delta c$ distributions symmetric about zero.
+
+\begin{table}[t]
+	\centering
+	\caption{Coefficients for linear least squares fits from Figure~\ref{fig:slopes_delta-v-Mavg}.}
+	\begin{tabular}{ c  r  r }
+		\toprule
+		                           &  \multicolumn{1}{c}{$A$}            &  \multicolumn{1}{c}{$B$} \\
+		\cmidrule(l){2-3}
+		$\Delta M_{\mathrm{vir}}$  &   $(9.4 \pm 2.4) \times 10^{-4}$  &  $(-1.8 \pm 1.8) \times 10^{-3}$ \\
+		$\Delta c$                 &  $(-7.3 \pm 1.9) \times 10^{-3}$  &   $(3.7 \pm 1.4) \times 10^{-2}$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:coeffs_slopes}
+\end{table}
+
+The slopes of the fits to the $\Delta q$ vs.$M_{\mathrm{vir,avg}}$ data are plotted in Figure~\ref{fig:slopes_delta-v-Mavg}.  Linear least-squares fits are overplotted as red dashed lines.  We find a trend for there to be more $\Delta q$ dependence on $M_{\mathrm{vir,avg}}$ with increasing redshift, except for the highest $z$ snapshots, which seem to reverse the trend.  Coefficients $A$ and $B$ for the fit equation $\mathrm{Slope} = A z + B$ are listed in Table~\ref{tab:coeffs_slopes}.  The data are well-fit by the best fit line for most of the redshift range, except for $z \gtrsim 14$ for $\Delta M_{\mathrm{vir}}$ and $z \gtrsim 13$ for $\Delta c$, which begin to deviate from the trend.  This may simply be due to the fluctuations inherent when dealing with the low number of matched halos available in our sample at these very high redshifts.
 
 
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Alternate fractional difference distributions}
+\subsection{Fractional differences in halo populations}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -201,15 +230,15 @@ We find a small trend for more massive halo pairs to be more concentrated in \za
 	\label{fig:frac_err_trends}
 \end{figure*}
 
-In Figure~\ref{fig:frac_err_trends}, we plot, as functions of redshift, statistics derived from the alternate fractional difference distributions $\Delta' M_{\mathrm{vir}}$ and $\Delta' c$ (see Equation~\ref{eq:delta_prime_q}).  In the left column, we plot the $\Delta' q$ of the peak of the distribution along with the $\Delta' q$ where various percentages of the halo pairs fall at or above $\Delta' q$.
+As our distributions of $\Delta q$ rely on the average quantity $q_{\mathrm{avg}} = (q_{\lpt} + q_{\za}) / 2$ for normalization, it can be difficult to extract certain statistics, such as the fraction of halo pairs differing by a certain amount between \lpt\ and \za\ simulations.  To address this, for this section, we redefine our difference distributions to instead use $q_{\za}$ as the normalization factor (see Equation~\ref{eq:delta_prime_q}).  In Figure~\ref{fig:frac_err_trends}, we plot, as functions of redshift, statistics derived from these alternate fractional difference distributions $\Delta' M_{\mathrm{vir}}$ and $\Delta' c$.  In the left column, we plot the $\Delta' q$ of the peak of the distribution along with the $\Delta' q$ where various percentages of the halo pairs fall at or above $\Delta' q$.
 
-As the $\Delta' q$ value of peak of the distribution is the location of the mode, it represents the most typical halo pair.  While concentration differences remain close to zero throughout the simulation, mass difference peak moves from a $\Delta' M_{\mathrm{vir}}$ of $8.7 \times 10^{-2}$ at $z = 15$ to $2.9 \times 10^{-2}$ at $z = 6$.  The 1\% of halo pairs with the largest excess \lpt\ mass are at least 1.97 times \za\ mass at $z = 15$ and 1.45 times \za\ mass at $z = 6$.  For concentration, the 1\% most \lpt\ concentrated halo pairs differ by at least a factor of 6.00 at $z = 15$ and 3.73 at $z = 6$.
+As the $\Delta' q$ value of peak of the distribution is the location of the mode, it represents the most typical halo pair.  While concentration differences remain close to zero throughout the simulation, mass difference peak moves from a $\Delta' M_{\mathrm{vir}}$ of $9 \times 10^{-2}$ at $z = 15$ to $3 \times 10^{-2}$ at $z = 6$.  The 1\% of halo pairs with the largest excess \lpt\ mass have \lpt\ mass at least twice \za\ mass at $z = 15$ and 1.5 times \za\ mass at $z = 6$.  For concentration, the 1\% most \lpt\ concentrated halo pairs differ by at least a factor of 6 at $z = 15$ and 4 at $z = 6$.
 
-In the right column of Figure~\ref{fig:frac_err_trends}, we plot the fraction of halos $f_{h}$ that fall outside various $\Delta' q$ values.  The solid lines represent halo pairs that have $\Delta' q$ greater than or equal to the listed values, i.e., the fraction of halo pairs where the \lpt\ halo has a virial mass or concentration that is at least 1.1, 1.5, 2.0, or 5.0 times that of it's corresponding \za\ halo.  The dashed lines additionally count halos with $\Delta' q$ at or below the corresponding equivalent displacement (see Equation~\ref{eq:equivalent_q_prime}) and represent the fraction of halo pairs where one halo has a virial mass or concentration at least 1.1, 1.5, 2.0, or 5.0 times that of it's companion, regardless of whether the \lpt\ or \za\ value is higher.
+In the right column of Figure~\ref{fig:frac_err_trends}, we plot the fraction of halos $f_{h}$ that fall outside various $\Delta' q$ values.  The solid lines represent halo pairs that have $\Delta' q$ greater than or equal to the listed values, i.e., the fraction of halo pairs where the \lpt\ halo has a virial mass or concentration that is at least 1.1, 1.5, 2.0, or 5.0 times that of its corresponding \za\ halo.  The dashed lines additionally count halos with $\Delta' q$ at or below the corresponding equivalent displacement (see Equation~\ref{eq:equivalent_q_prime}) and represent the fraction of halo pairs where one halo has a virial mass or concentration at least 1.1, 1.5, 2.0, or 5.0 times that of its companion, regardless of whether the \lpt\ or \za\ value is higher.
 
-We find that 50\% of halo pairs are at least 10\% more massive in \lpt\ at $z = 15$.  By $z = 6$, this has fallen to 10\%.  Furthermore, 0.81\% are at least twice as massive in \lpt\ at $z = 15$, and by $z = 6$, this has only reduced to 0.26\%.  Halos in \lpt\ are at least twice as concentrated as their \za\ counterparts for at least 12\% of the halo population at $z = 15$ and at least 7.8\% of the population by $z = 6$.  Halo pairs that are at least 5 times as concentrated in \lpt\ make up 1.3\% at $z = 15$ and 0.26\% at $z = 6$.
+We find that half of halo pairs are at least 10\% more massive in \lpt\ at $z = 15$.  By $z = 6$, this has fallen to 10\%.  Furthermore, 1\% are at least twice as massive in \lpt\ at $z = 15$, and by $z = 6$, this has only reduced to 0.3\%.  Halos in \lpt\ are at least twice as concentrated as their \za\ counterparts for at least 12\% of the halo population at $z = 15$ and at least 8\% by $z = 6$.  Halo pairs that are at least 5 times as concentrated in \lpt\ make up 1.3\% of the sample at $z = 15$ and 0.3\% at $z = 6$.
 
-When we additionally consider halo pairs that are less than or equal to the equivalent displacement, i.e. pairs where either the \lpt\ or \za\ halos has the higher mass or concentration, we include an even larger percentage of the population.  We find 54\% of the halo pairs differ in mass by at least 10\% at $z = 15$, with 16\% differing by $z = 6$.  Halos that are at least twice as massive in either \lpt\ or \za\ account for 1.1\% at $z = 15$ and 0.46\% at $z = 6$.  Halos that are at least twice as concentrated in either \lpt\ or \za\ account for 25\% at $z = 15$ and 15\% at $z = 6$.
+If we consider only the difference in properties between paired halos, regardless of whether the \lpt\ or \za\ halo has the higher mass or concentration, we include an even larger percentage of the population.   This equates to additionally considering halo pairs that are less than or equal to the equivalent displacement as defined in Equation~\ref{eq:equivalent_q_prime}.  We find 54\% of the halo pairs differ in mass by at least 10\% at $z = 15$, with 16\% differing by $z = 6$.  Halos that are at least twice as massive in either \lpt\ or \za\ account for 1.1\% at $z = 15$ and 0.5\% at $z = 6$.  Halos that are at least twice as concentrated in either \lpt\ or \za\ account for 25\% at $z = 15$ and 15\% at $z = 6$.
 
 
 
