@@ -141,30 +141,29 @@ DM halos almost universally display a characteristic shape in their density prof
 \end{equation}
 where $\rho_{0}$ is the characteristic density and $R_{s}$ is the scale radius where the inner $\sim r^{-1}$ profile transitions to the outer $\sim r^{-3}$ profile.
 
-\mrk{(Add Einasto profile paragraph.)}
-Alternatively, the density profile may be modeled with the Einasto \citep{1989A&A...223...89E} profile:
-\begin{equation} \label{eq:einasto_profile}
-	\rho(r) \propto \exp \left( -Ar^{\alpha} \right).
-\end{equation}
+%\mrk{(Add Einasto profile paragraph.)}
+%Alternatively, the density profile may be modeled with the Einasto \citep{1989A&A...223...89E} profile:
+%\begin{equation} \label{eq:einasto_profile}
+%	\rho(r) \propto \exp \left( -Ar^{\alpha} \right).
+%\end{equation}
 
 Halo concentration $c$ provides a single-parameter quantization of the density profile.  For the NFW profile, concentration is defined as $c \equiv R_{\mathrm{vir}} / R_{s}$, where $R_{\mathrm{vir}}$ is the halo virial radius.  Generally, at low redshift, low mass halos are more dense than high mass halos \citep{1997ApJ...490..493N}, and concentration decreases with redshift and increases in dense environments \citep{2001MNRAS.321..559B}.  \citet{2007MNRAS.381.1450N} additionally find that concentration decreases with halo mass.  Various additional studies have explored concentration's dependence on characteristics of the power spectrum \citep{2001ApJ...554..114E}, cosmological model \citep{2008MNRAS.391.1940M}, redshift \citep{2008MNRAS.387..536G, 2011MNRAS.411..584M}, and halo merger and mass accretion histories \citep{2002ApJ...568...52W, 2003MNRAS.339...12Z, 2009ApJ...707..354Z}.  For halos at high redshift, \citet{2011ApJ...740..102K} find that concentration reverses and increases with mass for high mass halos, while \citet{2012MNRAS.423.3018P} find that concentration's dependence on mass and redshift is more complicated and is better described through $\sigma(M,z)$, the rms fluctuation amplitude of the linear density field.
 
-Concentration may be estimated from a halo's virial mass $\Mvir$ and maximum circular velocity $\Vcirc$.  \cn\ show that this relation can be found from
+Concentration may be estimated from a halo's virial mass $\Mvir$ and maximum circular velocity $\Vcirc$.  Following \citet{2011ApJ...740..102K}, we outline this relationship for $z = 0$ and as a function of redshift.  The relation between the virial mass and maximum circular velocity may be given as \citep{2001ApJ...554..903K}:
 \begin{equation}
 	\Vcirc = \left[ G \frac{f(x_{\max})}{f(c)} \frac{c}{x_{\max}} \hat{\rho}^{1/3} \right]^{1/2} \Mvir^{1/3},
 \end{equation}
 \begin{equation}
-	\hat{\rho} = \frac{\Mvir}{\Rvir^{3}} = \frac{4 \pi}{3} \Delta_{vir} \rho_{c} \Omega_{\mathrm{M}},
+	\hat{\rho} = \frac{\Mvir}{\Rvir^{3}} = \frac{4 \pi}{3} \Delta_{\mathrm{vir}} \rho_{c} \Omega_{\mathrm{M}},
 \end{equation}
 \begin{equation}
 	f(x) = \ln(1 + x) - \frac{x}{1 + x},
 \end{equation}
-where $x = r / R_{s}$ and $x_{\max} = 2.15$.
-
-At $z = 0$,
+where $x = r / R_{s}$, $x_{\max} = 2.15$, $\Delta_{\mathrm{vir}}$ is the overdensity limit that defines the virial radius, $\rho_{c}$ is the critical density, and $\Omega_{\mathrm{M}}$ is the matter contribution to the average density of the universe.  At $z = 0$, $\Delta_{\mathrm{vir}} = 360$ and $\Omega_{\mathrm{M}} = 0.27$, which yields
 \begin{equation}
 	\Vcirc(\Mvir) = \frac{6.72 \times 10^{-3} \Mvir^{1/3} \sqrt{c}}{\sqrt{\ln(1 + c) - c / (1 + c)}}
 \end{equation}
+for $\Mvir$ in units of $h^{-1} \Msun$ and $\Vcirc$ in units of km s$^{-1}$.  \citet{2011ApJ...740..102K} find that at $z = 0$, this yields the approximation
 \begin{equation}
 	c(\Mvir) = 9.60 \left( \frac{\Mvir}{10^{12} h^{-1} \Msun} \right)^{-0.075}
 \end{equation}
@@ -172,29 +171,29 @@ for distinct halos and
 \begin{equation}
 	c(M_{\mathrm{sub}}) = 12 \left( \frac{M_{\mathrm{sub}}}{10^{12} h^{-1} \Msun} \right)^{-0.12}
 \end{equation}
-for subhalos.
-\begin{equation}
-	c(\Mvir,z) = c_{0}(z) \left( \frac{\Mvir}{10^{12} h^{-1} \Msun} \right)^{-0.075} \times \left[ 1 + \left( \frac{\Mvir}{M_{0}(z)} \right)^{0.26} \right]
+for subhalos.  Figure~\ref{fig:concentration--klypin_concentration_upturn} plots concentration as a function of virial mass from $z = 0$ to $z = 5$.  The dotted lines are given by
+\begin{equation} \label{eq:concentration_mass_upturn}
+	c(\Mvir,z) = c_{0}(z) \left( \frac{\Mvir}{10^{12} h^{-1} \Msun} \right)^{-0.075} \times \left[ 1 + \left( \frac{\Mvir}{M_{0}(z)} \right)^{0.26} \right],
 \end{equation}
-where $c_{0}(z)$ and $M_{0}(z)$ are free parameters.
+where $c_{0}(z)$ and $M_{0}(z)$ are free parameters for each $z$.  Concentration displays a decreasing trend with mass at low redshift.  At higher redshift, however, concentration flattens out and reverses its trend, increasing with mass for the most massive halos.
 
-The black lines of Figure~\ref{fig:concentration--klypin_concentration_z_dependence} are given by
-\begin{equation}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{early_universe/klypin_2011_concentration_upturn.eps}
+	\caption[Concentration upturn for high mass halos at high $z$]{\footnotesize Concentration as a function of virial mass for distinct halos from $z = 0$ to $z = 5$.  Symbols and solid curves are numerical results, while the dashed curves are analytical fits (Equation~\ref{eq:concentration_mass_upturn}).  Concentration decreases with increasing mass except for high-mass halos at high redshift, for which the concentration flattens and increases with mass.  \citep{2011ApJ...740..102K}}
+	\label{fig:concentration--klypin_concentration_upturn}
+\end{figure}
+
+Figure~\ref{fig:concentration--klypin_concentration_z_dependence} plots concentration as a function of redshift for two representative halo masses.  For a given fixed halo mass, concentration decreases with redshift for low redshift, then increases again with redshift at high redshift.  The black curves are given by
+\begin{equation} \label{eq:concentration_redshift_upturn}
 	c(\Mvir, z) = c(\Mvir, 0) [\delta^{4/3}(z) + \kappa(\delta^{-1}(z) - 1)],
 \end{equation}
 where $\delta(z)$ is the linear growth factor of fluctuations normalized to $\delta(0) = 1$ and $\kappa$ is a free parameter.  For the masses shown in the figure, $\kappa = 0.084$ for $M = 3 \times 10^{11} h^{-1} \Msun$ and $\kappa = 0.135$ for $M = 3 \times 10^{12} h^{-1} \Msun$.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=\linewidth]{early_universe/klypin_2011_concentration_upturn.eps}
-	\caption[Caption]{\footnotesize Caption.}
-	\label{fig:concentration--klypin_concentration_upturn}
-\end{figure}
-
-\begin{figure}[ht]
-	\centering
 	\includegraphics[width=\linewidth]{early_universe/klypin_2011_concentration_z_dependence.eps}
-	\caption[Caption]{\footnotesize Caption.}
+	\caption[Evolution of concentration with redshift for two halo masses]{\footnotesize Concentration as a function of redshift for two representative halo masses.  Black dots are simulation results.  The dashed blue curves show the power law $c \propto (1 + z)^{-1}$ and the dot-dashed red curves are $c \propto \delta$.  The solid black curves are given by Equation~\ref{eq:concentration_redshift_upturn}.  Concentration initially decreases with redshift, but reverses and increases with redshift for high redshift.  Concentration for both masses reaches a minimum of $c_{\min} \approx 4-4.5$. \citep{2011ApJ...740..102K}}
 	\label{fig:concentration--klypin_concentration_z_dependence}
 \end{figure}
 
