@@ -197,17 +197,67 @@ where $\delta(z)$ is the linear growth factor of fluctuations normalized to $\de
 	\label{fig:concentration--klypin_concentration_z_dependence}
 \end{figure}
 
+Using the same method of determining concentration from halo virial mass and maximum circular velocity, \citet{2012MNRAS.423.3018P} find that the complex mass and redshift dependence of concentration found by \citet{2011ApJ...740..102K} may be simplified to a universal U-shaped profile when viewed as a function of the linear rms fluctuation of the density field $\sigma(M,z)$.  Figure~\ref{fig:concentration--prada_c_sigma} plots $c$ as a function of $\log \sigma^{-1}$ for redshifts from $z = 0$ to $z = 6$ for halos from the Bolshoi \citep{2011ApJ...740..102K} and MultiDark \citep{2012MNRAS.423.3018P} simulations.  If we define
+\begin{equation}
+	x \equiv \left( \frac{\Omega_{M,0}}{\Omega_{\Lambda,0}} \right)^{1/3} a,
+\end{equation}
+\begin{equation}
+	a \equiv (1 + z)^{-1}
+\end{equation}
+where $\Omega_{M,0}$ and $\Omega_{\Lambda,0}$ are the matter and cosmological constant contributions to the density of the universe at $z = 0$, then the overplotted curve is given by
+\begin{equation} \label{eq:prada_universal_sigma}
+	c(M,z) = B_{0}(x)C(\sigma'),
+\end{equation}
+\begin{equation}
+	\sigma' = B_{1}(x) \sigma(M,x),
+\end{equation}
+\begin{equation} \label{eq:prada_universal_sigma_scaled}
+	C(\sigma') = A \left[ \left( \frac{\sigma'}{b} \right)^{c} + 1 \right] \exp\left( \frac{d}{\sigma'^{2}} \right),
+\end{equation}
+where $A = 2.881$, $b = 1.257$, $c = 1.022$, and $d = 0.060$.  The rms density fluctuation may be approximated as
+\begin{equation}
+	\sigma(M,x) = D(x) \frac{16.9 y^{0.41}}{1 + 1.102 y^{0.20} + 6.22 y^{0.333}},
+\end{equation}
+where
+\begin{equation}
+	y \equiv \left[ \frac{M}{10^{12}\ h^{-1}\ \Msun} \right]^{-1},
+\end{equation}
+\begin{equation}
+	D(x) = \frac{5}{2} \left( \frac{\Omega_{M,0}}{\Omega_{\Lambda,0}} \right)^{1/3} \frac{\sqrt{1 + x^{3}}}{x^{3/2}} \int_{0}^{x} \frac{x^{3/2} \dd x}{(1 + x^{3})^{3/2}}.
+\end{equation}
+The functions $B_{0}(x)$ and $B_{1}(x)$ are defined such that they equal unity at $z = 0$ for WMAP5 parameters:
+\begin{equation}
+	B_{0}(x) = \frac{c_{\min}(x)}{c_{\min}(1.393)},
+\end{equation}
+\begin{equation}
+	B_{1}(x) = \frac{\sigma^{-1}_{\min}(x)}{\sigma^{-1}_{\min}(1.393)},
+\end{equation}
+where
+\begin{equation}
+	c_{\min}(x) = c_{0} + (c_{1} - c_{0}) \left[ \frac{1}{\pi} \arctan[\alpha(x - x_{0})] + \frac{1}{2} \right],
+\end{equation}
+\begin{equation}
+	\sigma^{-1}_{\min}(x) = \sigma^{-1}_{0} + (\sigma^{-1}_{1} - \sigma^{-1}_{0}) \left[ \frac{1}{\pi} \arctan[\beta(x - x_{1})] + \frac{1}{2} \right],
+\end{equation}
+\begin{equation}
+	c_{0} = 3.618,\ c_{1} = 5.033,\ \alpha = 6.948,\ x_{0} = 0.424,
+\end{equation}
+\begin{equation}
+	\sigma^{-1}_{0} = 1.047,\ \sigma^{-1}_{1} = 1.646,\ \beta = 7.386,\ x_{1} = 0.526.
+\end{equation}
+The resulting curve closely follows the data at all redshifts from $z = 0$ to $z = 6$, with a minimum concentration of $\sim 5$ at a well-defined scale of $\sigma \sim 0.71$.  The relation may also be seen as a function of mass without rescaling to $z = 0$ by plotting Equations~\ref{eq:prada_universal_sigma}-\ref{eq:prada_universal_sigma_scaled}, as shown in Figure~\ref{fig:concentration--prada_c_M}.
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/prada_2012-c-sigma.eps}
-	\caption[Caption]{\footnotesize Caption.}
+	\caption[Halo concentration $c$ as a function of $\log \sigma^{-1}$]{\footnotesize Halo concentration $c$ as a function of $\log \sigma^{-1}$ for halos in the Bolshoi and MultiDark simulations.  The results are rescaled to $z = 0$.  The solid curve $C(\sigma')$ is given by Equation~\ref{eq:prada_universal_sigma_scaled}.  A universal minimum concentration of $\sim 5$ is seen at $\sigma \sim 0.71$.  \citep{2012MNRAS.423.3018P}}
 	\label{fig:concentration--prada_c_sigma}
 \end{figure}
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/prada_2012-c-M.eps}
-	\caption[Caption]{\footnotesize Caption.}
+	\caption[Halo concentration $c$ as a function of halo mass]{\footnotesize Halo concentration $c$ as a function of halo mass at various redshifts for halos in the Bolshoi (open circles) and MultiDark (filled circles) simulations.  The overplotted curves are given by Equations~\ref{eq:prada_universal_sigma}-\ref{eq:prada_universal_sigma_scaled}.  The analytical approximations fit the data within a few percent.  \citep{2012MNRAS.423.3018P}}
 	\label{fig:concentration--prada_c_M}
 \end{figure}
 
