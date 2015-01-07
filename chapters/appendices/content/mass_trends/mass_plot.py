@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from scipy import interpolate
 from scipy.ndimage.filters import gaussian_filter
+from scipy.optimize import curve_fit
 #from ipdb import set_trace
 
 
@@ -62,9 +63,11 @@ def main():
 	dm = 2.0 * (m1 - m2) / (m1 + m2)
 
 	for x_col, xlabel in zip(x_cols, xlabels):
-		make_plot(dm, x_col, halos, header, xlabel, use_log=False)
+		make_plot(halos[:, x_col], dm, x_col, header[x_col], xlabel, ylabel_m, plot_base_m, stats_file_m, y_lim_m, use_log=False)
+		make_plot(halos[:, x_col], dc, x_col, header[x_col], xlabel, ylabel_c, plot_base_c, stats_file_c, y_lim_c, use_log=False)
 	for x_col, xlabel in zip(x_log_cols, xlabels_log):
-		make_plot(dm, x_col, halos, header, xlabel, use_log=True)
+		make_plot(halos[:, x_col], dm, x_col, header[x_col], xlabel, ylabel_m, plot_base_m, stats_file_m, y_lim_m, use_log=True)
+		make_plot(halos[:, x_col], dc, x_col, header[x_col], xlabel, ylabel_c, plot_base_c, stats_file_c, y_lim_c, use_log=True)
 	
 	print 'Finished all plots.'
 
@@ -100,32 +103,31 @@ def read_files(files, header_line = None, comment_char = '#'):
 		return header, data
 
 
-def make_plot(y, x_col, halos, header, xlabel, use_log):
-	x = halos[:, x_col]
-	col_header = header[x_col]
-	
+def make_plot(x, y, x_col, header, xlabel, ylabel, plot_base, stats_file, y_lim, use_log):
 	print 'generating plot...'
 	fig = plt.figure(figsize=(9.0,6.0))
 	ax = fig.add_subplot(1,1,1)
-	ax = draw_hist2d(ax, x, y)
-	ax = draw_data_fit(ax, x, y, x.min(), x.max(), use_log=use_log)
+	ax = draw_hist2d(ax, x, y, y_lim)
+	if fit_to_data:
+		ax = draw_data_fit(ax, x, y, x.min(), x.max(), use_log=use_log)
 	if fit_to_binned_data:
-		ax, mid_bins, mean, stdev = draw_bin_avgs(ax, x, y, use_log=use_log)
-		ax = draw_bin_fit(ax, mid_bins, mean, stdev, x.min(), x.max(), use_log=use_log)
+		mid_bins, mean, stdev, n = get_bin_avgs(x, y, use_log=use_log)
+		ax = draw_bin_fit(ax, mid_bins, mean, stdev/np.sqrt(n), x.min(), x.max(), stats_file, use_log=use_log)
+		ax = draw_bin_avgs(ax, mid_bins, mean, stdev, n, use_log=use_log)
 
 	ax.set_xlim([x.min(), x.max()])
 	#ax.set_yscale("log")
-	ax.set_xlabel(xlabel, fontsize="xx-large")
-	ax.set_ylabel(ylabel, fontsize="xx-large")
+	ax.set_xlabel(xlabel, fontsize="x-large")
+	ax.set_ylabel(ylabel, fontsize="x-large")
 	
 	fig.tight_layout()
-	col_header = col_header.replace("/", "over")
-	plot_name = "%s%s%0.3d%s%s%s" % (plot_base, '(', x_col, ')_', col_header, plot_ext)
+	header = header.replace("/", "over")
+	plot_name = "%s%s%0.3d%s%s%s" % (plot_base, '(', x_col, ')_', header, plot_ext)
 	plt.savefig(plot_name, bbox_inches='tight')
 	print 'finished plot ' + plot_name
 
 
-def draw_hist2d(ax, x, y):
+def draw_hist2d(ax, x, y, y_lim):
 	if use_log:
 		xbins = np.logspace(np.log10(x.min()), np.log10(x.max()), num=nbins+1)
 	else:
@@ -135,14 +137,14 @@ def draw_hist2d(ax, x, y):
 
 	if use_log:
 		ax.set_xscale("log")
-		im = my_hist2d(ax, x, y, bins=[xbins, ybins])
+		im = my_hist2d(ax, x, y, bins=[xbins, ybins], zorder=-50)
 	else:
-		im = ax.hist2d(x, y, bins=[xbins, ybins], cmap=colormap)
+		im = ax.hist2d(x, y, bins=[xbins, ybins], cmap=colormap, zorder=-50)
 
 	if y_lim > 0.0:
 		ax.set_ylim([-y_lim, y_lim])
 
-	line = ax.plot([x.min(), x.max()], [0.0, 0.0], 'b--')
+	line = ax.plot([x.min(), x.max()], [0.0, 0.0], color='0.65', linestyle='--', linewidth=1, zorder=-20)
 	return ax
 
 
@@ -166,13 +168,13 @@ def my_hist2d(ax, x, y, bins=10, range=None, normed=False, weights=None,
 	
 	h = gaussian_filter(h, len(h) / 75.0)
 	
-	pc = ax.imshow(h[:,::-1].T, cmap=colormap, extent=[x.min(), x.max(), y.min(), y.max()], interpolation='gaussian')
+	pc = ax.imshow(h[:,::-1].T, cmap=colormap, extent=[x.min(), x.max(), y.min(), y.max()], interpolation='gaussian', **kwargs)
 	ax.set_xlim(xedges[0], xedges[-1])
 	ax.set_ylim(yedges[0], yedges[-1])
 	return h, xedges, yedges, pc
 
 
-def draw_bin_avgs(ax, x, y, use_log):
+def get_bin_avgs(x, y, use_log):
 	if use_log:
 		fit_bins = np.logspace(np.log10(x.min()), np.log10(x.max()), num=nfit_bins+1)
 	else:
@@ -182,6 +184,7 @@ def draw_bin_avgs(ax, x, y, use_log):
 
 	mean = np.array([])
 	stdev = np.array([])
+	n = np.array([])
 	for xmin, xmax in zip(fit_bins[:-1], fit_bins[1:]):
 		mask = np.logical_and(x > xmin, x <= xmax)
 		if mask.sum() > 0:
@@ -189,38 +192,50 @@ def draw_bin_avgs(ax, x, y, use_log):
 			#stdev_el = y[mask].std() / np.sqrt(len(y))
 			stdev_el = y[mask].std()
 			#stdev_el = stdev / np.sqrt(len(y[mask]))
+			n_el = len(y[mask])
 		else:
 			mean_el = 0.0
 			stdev_el = -1.0
+			n_el = 0
 		mean = np.append(mean, mean_el)
 		stdev = np.append(stdev, stdev_el)
+		n = np.append(n, n_el)
 	
-	mask = (stdev != -1.0)
+	mask = (n > 0)
 	mean = mean[mask]
 	stdev = stdev[mask]
+	n = n[mask]
 	mid_bins = mid_bins[mask]
 
-	ax.errorbar(mid_bins, mean, yerr=stdev, fmt='o')
-
-	return ax, mid_bins, mean, stdev
+	return mid_bins, mean, stdev, n
 
 
+def draw_bin_avgs(ax, mid_bins, mean, stdev, n, use_log):
+	ax.errorbar(mid_bins, mean, yerr=stdev/np.sqrt(n), fmt='o', color='black', linewidth=2)
+	
+	if draw_stdev_lines:
+		ax.plot(mid_bins, mean + stdev, color='black', linestyle=':', linewidth=3, zorder=-15)
+		ax.plot(mid_bins, mean - stdev, color='black', linestyle=':', linewidth=3, zorder=-15)
+	return ax
 
-def draw_bin_fit(ax, mid_bins, mean, stdev, x_min, x_max, use_log):
+
+def draw_bin_fit(ax, mid_bins, mean, stdev, x_min, x_max, stats_file, use_log):
+	stdev[stdev == 0.0] = 0.1
 	#fit data
 	if use_log:
-	#	coefs = np.polyfit(np.log10(x), y, 1)
-	#	coefs, stats = np.polynomial.polynomial.polyfit(np.log10(mid_bins), mean, 1, w=1.0/stdev, full=True)
-		coefs, res, rank, singvals, rcond = np.polyfit(np.log10(mid_bins), mean, 1, full=True)
+		#coefs, res, rank, singvals, rcond = np.polyfit(np.log10(mid_bins), mean, 1, full=True)
+		coefs, pcov = curve_fit(linear, np.log10(mid_bins), mean, sigma=stdev, p0=[0.0, 0.0])
 	else:
-	#	coefs = np.polyfit(x, y, 1)
-	#	coefs, stats = np.polynomial.polynomial.polyfit(mid_bins, mean, 1, w=1.0/stdev, full=True)
-		coefs, stats = np.polynomial.polynomial.polyfit(mid_bins, mean, 1, full=True)
+		#coefs, stats = np.polynomial.polynomial.polyfit(mid_bins, mean, 1, full=True)
+		coefs, pcov = curve_fit(linear, mid_bins, mean, sigma=stdev, p0=[0.0, 0.0])
 	print 'coefs = ', coefs
 
 	
 	m = coefs[0]
 	b = coefs[1]
+	m_err = pcov[0,0]
+	b_err = pcov[1,1]
+
 	if use_log:
 		x = np.logspace(np.log10(x_min), np.log10(x_max), 100)
 		y = m * np.log10(x) + b
@@ -228,7 +243,8 @@ def draw_bin_fit(ax, mid_bins, mean, stdev, x_min, x_max, use_log):
 		x = np.linspace(x_min, x_max, 100)
 		y = m * x + b
 	#y = x**m + b
-	line = ax.plot(x, y, color='green')
+	#line = ax.plot(x, y, color='white', linewidth=8)  # to avoid blending with colormap background
+	line = ax.plot(x, y, color='magenta', zorder=-10)
 
 	if print_fit_params:
 		if use_log:
@@ -240,10 +256,14 @@ def draw_bin_fit(ax, mid_bins, mean, stdev, x_min, x_max, use_log):
 				verticalalignment='top', bbox=props)
 
 	if save_fit_params:
-		with open("fits_to_bins.dat", "a") as fd:
-			fd.write("%g %g\n" % (m, b))
+		with open(stats_file, "a") as fd:
+			fd.write("%g  %g  %g  %g\n" % (m, m_err, b, b_err))
 
 	return ax
+
+
+def linear(x, slope, intercept):
+	return slope * x + intercept
 
 
 def draw_data_fit(ax, x, y, x_min, x_max, use_log):
@@ -303,10 +323,11 @@ save_fit_params = True
 
 use_klypin = True
 
-remove_zero_strip = True
+remove_zero_strip = False
 y_epsilon = 0.01
 
-y_lim = 0.5
+y_lim_m = 0.5
+y_lim_c = 1.0
 x_min_lim = 5.33e5 * 100
 
 #if use_log:
@@ -319,22 +340,30 @@ x_log_cols = [-1]
 #x_log_cols = [47, 48, -1]
 
 xlabels = []
-xlabels_log = [r"$\mathrm{M_{avg} (M_{\odot})}$"]
+xlabels_log = [r"$M_{\mathrm{vir,avg}} \, \mathrm{(M_{\odot})}$"]
 #xlabels_log = [r"$\mathrm{M_{2LPT} (M_{\odot})}$",
 #               r"$\mathrm{M_{ZA} (M_{\odot})}$",
 #			   r"$\mathrm{M_{avg} (M_{\odot})}$"]
 
-ylabel = r"$\mathrm{(M_{2LPT} - M_{ZA}) / M_{avg}}$"
+#ylabel = r"$\mathrm{(M_{2LPT} - M_{ZA}) / M_{avg}}$"
+ylabel_m = r"$(M_{\mathrm{vir,2LPT}} \, - \, M_{\mathrm{vir,ZA}}) \, / \, M_{\mathrm{vir,avg}}$"
+ylabel_c = r"$(c_{\mathrm{2LPT}} \, - \, c_{\mathrm{ZA}}) \, / \, c_{\mathrm{avg}}$"
 
 #c_source = 'density_profile'
 c_source = 'rockstar'
 
-plot_base = 'plots/diff_M_-_vs_-_'
+plot_base_m = 'plots/diff_M_-_vs_-_'
+plot_base_c = 'plots/diff_c_-_vs_-_'
 plot_ext  = '.eps'
+
+stats_file_m = 'fits_to_bins_m.dat'
+stats_file_c = 'fits_to_bins_c.dat'
 
 #plot_name = 'test.eps'
 #plot_name = 'c_v_M200c_2lpt.eps'
-fit_to_binned_data = False
+fit_to_binned_data = True
+fit_to_data = False
+draw_stdev_lines = True
 
 Rv1_col = 53
 Rv2_col = 54
@@ -345,7 +374,7 @@ c_2lpt_col = 17
 c_za_col   = 18
 
 nbins = 100
-nfit_bins = 20
+nfit_bins = 10
 
 ## c_2lpt, c_za, chi2_2lpt, chi2_za
 #lt_cols = [17, 18, 37, 38]
@@ -395,7 +424,9 @@ if plot_dest_type == 'paper':
 	mpl.rcParams['font.size'] = 16
 	mpl.rcParams['axes.linewidth'] = 3
 	mpl.rcParams['lines.linewidth'] = 4
+	#mpl.rcParams['lines.linewidth'] = 3
 	mpl.rcParams['patch.linewidth'] = 4
+	#mpl.rcParams['patch.linewidth'] = 3
 	mpl.rcParams['xtick.major.width'] = 3
 	mpl.rcParams['ytick.major.width'] = 3
 	mpl.rcParams['xtick.major.size'] = 8
@@ -404,6 +435,7 @@ if plot_dest_type == 'paper':
 	mpl.rcParams['ytick.minor.width'] = 2
 	mpl.rcParams['xtick.minor.size'] = 4
 	mpl.rcParams['ytick.minor.size'] = 4
+	#mpl.rcParams['lines.antialiased'] = True
 
 
 if __name__ == '__main__':

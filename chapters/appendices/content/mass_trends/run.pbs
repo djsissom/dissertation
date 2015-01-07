@@ -15,8 +15,12 @@ maxsnap=61
 echo $PBS_NODEFILE
 cd $PBS_O_WORKDIR
 
-rm -v fits_to_bins.dat
-rm -v fits_to_data.dat
+[ -e fits_to_bins_m.dat ] && rm -v fits_to_bins_m.dat
+[ -e fits_to_bins_c.dat ] && rm -v fits_to_bins_c.dat
+#rm -v fits_to_data.dat
+
+echo "#snap  slope  slope_err  intercept  intercept_err" > fits_to_bins_m.dat
+echo "#snap  slope  slope_err  intercept  intercept_err" > fits_to_bins_c.dat
 
 for ((snap=$minsnap; snap<=$maxsnap; snap++)); do
 
@@ -33,16 +37,15 @@ for ((snap=$minsnap; snap<=$maxsnap; snap++)); do
 	fi
 
 	{
-		echo "Starting box${i} snap${j}..."
-		./residual_hist.py ~/projects/simulations/rockstar/box{1,2,3}/crossmatch/snap${j}/halos.dat > plots/out.log 2>&1
+		echo "Starting snap${j}..."
+		echo -n "${j}    " >> fits_to_bins_m.dat
+		echo -n "${j}    " >> fits_to_bins_c.dat
+		./mass_plot.py ~/projects/simulations/rockstar/box{1,2,3}/crossmatch/snap${j}/halos.dat > plots/out.log 2>&1
 		mv plots/* plots_all_snaps/${new_plot_dir}/.
 		echo "Finished snap${j}"
 	}
-	#} &
 
 done
-
-wait
 
 # - end of script
 
