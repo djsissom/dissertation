@@ -197,7 +197,7 @@ In order to retain a centralized database of all available information for match
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+With a catalog of DM halos cross-matched between \lpt\ and \za\ simulations, we are able to directly compare properties on a halo-by-halo basis.  At this stage, we are mostly concerned with a qualitative comparison between individual halos in order to judge the overall success of halo matching and the broad differences in halo evolution arising from differences in simulation initialization.
 
 
 
@@ -207,13 +207,17 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+In order to compare halo evolution between \lpt\ and \za\ simulations, we first need to ensure that the halos being compared do actually represent the same halo in each simulation.  The \crossmatch\ code as well as its implementation in our analysis pipeline are discussed above, so here we instead focus on the plots used as a visual sanity check on the resulting matches.  The python code used to generate these plots is listed in Appendix~\ref{app:particle_comparison}.
+
+As we wish to compare halos that may have followed different evolutionary paths in their respective \lpt\ or \za\ simulations, we are unable to do a hard cut on a single parameter such as mass, radius, position or particle distribution.  However, large variances in any of these properties can hint at a problem in the matching algorithm.  We therefore perform a quick visual check on a number of halo pairs by plotting their relative positions, radii, and constituent particle distributions in order to verify that the \crossmatch\ code performed as expected.
+
+An example of this comparison is shown in Figure~\ref{fig:match_verification}, where we plot two large matching halos at $z = 6$.  Particles belonging to the halos are plotted as points, with \lpt\ halo particles in blue and \za\ halo particles in red.  The virial radii of the two halos are represented by the black circles.  The virial radii and particle distributions are very similar, and there is only a small offset in position.  We consider this a successful match.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\linewidth]{analysis/match_particles.eps}
 	\caption[Example of halo particle matching at $z = 6$.]{\footnotesize Example of halo particle matching at $z = 6$.  Blue dots are \lpt\ halo particles, and red dots are \za\ halo particles.  Black circles are the virial radii of the halos.  Good matches are achieved for halos, with only slight drift between simulations.}
-	\label{fig:mass_profile}
+	\label{fig:match_verification}
 \end{figure}
 
 
@@ -224,20 +228,24 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+The morphology of a dark matter halo can provide insight into its structural evolution and merger history.  Features such as tidal features, irregular shapes, and offset nuclei hint at recent merger activity, while more symmetrical distributions suggest a quieter recent history.  We compare DM particle distributions of matched halos by observing the projected density map along three axis vectors.  The python code for plotting these, as well as the density profiles discussed below, is listed in Appendix~\ref{app:density_comparison}.
+
+By comparing the projected density morphologies of companion \lpt\ and \za\ halos, we get a qualitative impression of the differences in their current evolutionary state.  We found the inner nuclear region to often display the most discernible difference in structure between the two halos.  For halo pairs where this difference is most apparent, such as one halo having a single central core with the other halo having two distinct density peaks, we believe the most likely cause to be an offset in merger epochs between the two simulations.  In this case, the snapshot from one simulation would catch the merger in progress, with multiple unsettled density peaks still visible, while the other simulation snapshot would catch the halo after it has settled into a more virialized state.
+
+As an example of this, we plot comparisons of two $z = 6$ halo pairs in Figures~\ref{fig:density_comparison_000} and~\ref{fig:density_comparison_070}.  The top two rows of panels of each show XY, XZ, and YZ projections of the dark matter density for the \lpt\ and \za\ halo on the first and second row, respectively.  The density map is shown with a logarithmic color scale, and equal density contours are marked with white curves.  Figure~\ref{fig:density_comparison_000} shows a pair of large halos that display similar central structure.  These halos are unlikely to have largely differed in their evolution shortly prior to the snapshot.  Figure~\ref{fig:density_comparison_070}, however, shows a halo pair with differing nuclear structure.  The \za\ halo displays two distinct central density peaks, while the \lpt\ halo shows only a single more relaxed core.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.75\linewidth]{analysis/halo-pair_000_snap061.eps}
-	\caption[Comparison of two large well-fit companion halos $z = 6$.]{\footnotesize Two large matched halos at $z = 6$.}
-	\label{fig:mass_profile}
+	\caption[Comparison of two large well-fit companion halos $z = 6$.]{\footnotesize Two large matched halos at $z = 6$ with similar nuclear structure.  \emph{Top two rows:}  Projected density maps, with XY, XZ, and YZ views of the central nuclear region of the halos.  Density is represented by a logarithmic color scale, and equal density contours are plotted as white curves.  The first and second rows depict the \lpt\ and \za\ halo, respectively.  \emph{Bottom two rows:}  Radially-binned halo density profiles fit with the NFW density profile model.  The blue stepped profiles are the binned data, red curves are the fit NFW models, black dashed lines are the resolution limit of the simulation, and purple dot-dash lines are the measured scale radius.}
+	\label{fig:density_comparison_000}
 \end{figure}
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.75\linewidth]{analysis/halo-pair_070_snap061.eps}
-	\caption[Comparison of two large companion halos $z = 6$ with differing nuclear structure.]{\footnotesize Two large matched halos at $z = 6$ with differing nuclear structure.}
-	\label{fig:mass_profile}
+	\caption[Comparison of two large companion halos $z = 6$ with differing nuclear structure.]{\footnotesize Like Figure~\ref{fig:density_comparison_000}, but for two large matched halos at $z = 6$ with differing nuclear structure.}
+	\label{fig:density_comparison_070}
 \end{figure}
 
 
@@ -248,7 +256,11 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+The code listed in Appendix~\ref{app:density_comparison}, which produces the density projections discussed above, also plots comparisons of the halos' density profiles.  We have addressed the creation of density profiles in Section~\ref{subsec:analysis--profile_fitting}, and here the same method is used for each profile.  In this case, we with to directly compare the profiles of the companion \lpt\ and \za\ halos, so they are plotted together, alongside the 2-D density projections discussed in the previous section.
+
+We again consider the halo pairs compared in Figures~\ref{fig:density_comparison_000} and~\ref{density_compairson_070}, where the bottom two panels of each display the density profiles of the \lpt\ and \za\ halos, respectively.  Halo particles are binned in logarithmically-spaced radial bins from the virial radius inward to the simulation resolution limit.  The profiles are fit with the NFW profile model with free parameters for scale radius and characteristic density.  The resulting fit is overplotted as red curves, and the scale radius is marked with the vertical purple dot-dash lines.
+
+The halos in Figure~\ref{fig:density_comparison_000} display very similar central morphology and are both well-fit by the NFW profile.  The more relaxed and spherically symmetrical halos such as these tend to be easier to fit well than more irregular halos.  The measured scale radii for these halos are also very similar, and combined with the similar virial radii, produce similar concentration values.  The halos in Figure~\ref{fig:density_comparison_070} display a more differing structure.  While the \lpt\ halo is relatively symmetrical, allowing it to be relatively well-fit by the NFW model, the \za\ halo has two distinct central density peaks, causing the NFW fit to be a bit less accurate.  Here, there is a marked difference in the resulting scale radii, with the \lpt\ halo displaying a larger concentration than its \za\ companion.
 
 
 
