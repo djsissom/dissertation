@@ -295,7 +295,7 @@ where $q_{\mathrm{avg}} = \frac{1}{2} (q_{\lpt} + q_{\za})$.  Defined in this wa
 
 
 In order to extract a number of statistical quantities and to get a better high-level feel for the leading behavior of the distributions, we wish to fit a statistical model to the data histograms.  While the data would seem to distributed according to a Gaussian distribution at first glance, we found the deviations from Gaussianity to be more significant than could be ignored.  After significant trial and error, we found the $\Delta q$ distributions to be best described by a generalized normal distribution \citep{doi:10.1080/02664760500079464} with the probability density function
-\begin{equation} \label{eq:generalized_normal}
+\begin{equation} \label{eq:analysis--methods--generalized_normal}
 	f(x) = \frac{ \beta }{2 \alpha \Gamma(1 / \beta)} e^{\left( \left| x - \mu \right| / \alpha \right)^{\beta}},
 \end{equation}
 where $\mu$ is the mean, $\alpha$ is the scale parameter, $\beta$ is the shape parameter, and $\Gamma$ is the gamma function
@@ -311,6 +311,42 @@ and excess kurtosis
 	\gamma_{2} = \frac{ \Gamma(5/\beta) \Gamma(1/\beta) }{ \Gamma(3/\beta)^{2} } - 3.
 \end{equation}
 The distribution is symmetric, and thus has no skewness by definition.  As such, the values obtained for the skew of the distribution are measured directly from the data.
+
+We use the CurveFit module from the SciPy library for all of our functional fitting.  CurveFit is a non-linear least squares fitting routine that can fit an arbitrary input function to data with optional uncertainties.  It can return estimates of the free parameters of the model, as well as a covariance matrix used to determine the uncertainties in the fit coefficients.
+
+We found our fitting routine to be fairly sensitive to differences in initial guess of fit coefficients.  CurveFit is not guaranteed to find global minima, and can become stuck in local extrema.  This ends up being most probable when trying to find multiple fit coefficients with large dynamic range.  We found the best way to address this was to scale the data to unity in each dimension whenever possible.  In the case of our difference histograms, the standard deviations of the distributions are typically around order unity, so it was only necessary to normalized the counts.  We also found that we achieved better results when fitting in logarithmic space.
+
+We explored a number of halo parameters, but found the most interesting distributions to be those for virial mass and concentration.  In Figure~\ref{fig:methods--analysis--diff-hist}, we plot histograms of $\Delta \Mvir$ and $\Delta c$ in the left and right columns, respectively, for three representative simulation snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$.  Data from the entire sample are plotted as blue histograms, data for the top 25\% of halo pairs, sorted by \lpt\ halo mass, are plotted as grey-filled green histograms, and the generalized normal distribution fits are overplotted as red dashed curves.
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_Mvir_snap040_(0.0-1.0).eps}
+	\end{subfigure}
+	~
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap040_(0.0-1.0).eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_Mvir_snap050_(0.0-1.0).eps}
+	\end{subfigure}
+	~
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap050_(0.0-1.0).eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_Mvir_snap061_(0.0-1.0).eps}
+	\end{subfigure}
+	~
+	\begin{subfigure}{}
+		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap061_(0.0-1.0).eps}
+	\end{subfigure}
+	\caption[Histograms of $\Delta M_{\mathrm{vir}}$ and $\Delta c$]{\footnotesize Histograms of $\Delta M_{\mathrm{vir}}$ (\textit{left column}) and $\Delta c$ (\textit{right column}) for snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$ (\textit{top, middle, and bottom panels, respectively}).  The small gray-filled histograms count only the top 25\% most massive halos.  The main histograms are fit with a generalized normal distribution with parameters for mean, scale, and shape, overplotted as the red dashed line (see Equation~\ref{eq:analysis--methods--generalized_normal}).}
+	\label{fig:methods--analysis--diff-hist}
+\end{figure*}
+
 % Model functions
 % Initial guesses
 % Fit coefficients
