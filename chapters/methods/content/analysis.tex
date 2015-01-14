@@ -271,7 +271,7 @@ The halos in Figure~\ref{fig:density_comparison_000} display very similar centra
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+We now turn our focus to the ensemble halo population as a whole.  Comparing individual companion halos can realistically only give a qualitative picture of differences arising between \lpt\ and \za\ simulations, as the large number of halos necessitates consideration of only a small percentage of the sample.  We therefore need a consistent way of measuring the behavior of the entire population.  In this section, we discuss how we measure these differences in halo populations using the codes listed in Appendix~\ref{app:diff_hist}.  In particular, the analysis code itself is listed in Appendix~\ref{app:hist}, the script to run the analysis on the combined halo population from all three simulation boxes is listed in Appendix~\ref{app:run_diff_hist}, the script to run the analysis on the simulation boxes independently is listed in Appendix~\ref{app:run_diff_hist_individual_boxes}, and the script to collect the resulting statistics from all the individual snapshots into one database is listed in Appendix~\ref{app:collect_stats}.
 
 
 
@@ -281,8 +281,11 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
-
+We wish to explore differences in a number of halo properties, so we construct a generic distribution so that any measured halo quantity $q$ can be considered.  The distribution should  highlight the differences between \lpt\ and \za\ halo populations while remaining unbiased to the choice of simulation initialization.  This leaves us with a distribution of the differences between \lpt\ and \za\ quantities, normalized by the average of the two:
+\begin{equation} \label{eq:delta_q}
+	\Delta q = \frac{q_{\lpt} - q_{\za}}{q_{\mathrm{avg}}},
+\end{equation}
+where $q_{\mathrm{avg}} = \frac{1}{2} (q_{\lpt} + q_{\za})$.  Defined in this way, difference distributions of, e.g.,  virial mass $\Delta \Mvir$, concentration $\Delta c$, or the offset distance between the central density peak and the center of mass $\Delta \Xoff$ can all be considered on equal footing.  We create distribution histograms of $\Delta q$ for various halo quantities both for the combined halo catalog from the stacked simulation boxes and for the individual simulation boxes separately.
 
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -291,7 +294,23 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+In order to extract a number of statistical quantities and to get a better high-level feel for the leading behavior of the distributions, we wish to fit a statistical model to the data histograms.  While the data would seem to distributed according to a Gaussian distribution at first glance, we found the deviations from Gaussianity to be more significant than could be ignored.  After significant trial and error, we found the $\Delta q$ distributions to be best described by a generalized normal distribution \citep{doi:10.1080/02664760500079464} with the probability density function
+\begin{equation} \label{eq:generalized_normal}
+	f(x) = \frac{ \beta }{2 \alpha \Gamma(1 / \beta)} e^{\left( \left| x - \mu \right| / \alpha \right)^{\beta}},
+\end{equation}
+where $\mu$ is the mean, $\alpha$ is the scale parameter, $\beta$ is the shape parameter, and $\Gamma$ is the gamma function
+\begin{equation} \label{eq:gamma_function}
+	\Gamma(t) = \int_{0}^{\infty} x^{t-1} e^{-x} \dd x.
+\end{equation}
+The shape parameter $\beta$ is restricted to $\beta \geq 1$.  This allows the distribution to potentially vary from a Laplace distribution ($\beta = 1$) to a uniform distribution ($\beta = \infty$) and includes the normal distribution ($\beta = 2$).  The distribution has variance
+\begin{equation} \label{eq:variance}
+	\sigma^{2} = \frac{ \alpha^{2} \Gamma(3/\beta) }{ \Gamma(1/\beta) }
+\end{equation}
+and excess kurtosis
+\begin{equation} \label{eq:kurtosis}
+	\gamma_{2} = \frac{ \Gamma(5/\beta) \Gamma(1/\beta) }{ \Gamma(3/\beta)^{2} } - 3.
+\end{equation}
+The distribution is symmetric, and thus has no skewness by definition.  As such, the values obtained for the skew of the distribution are measured directly from the data.
 % Model functions
 % Initial guesses
 % Fit coefficients
