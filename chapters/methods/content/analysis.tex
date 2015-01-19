@@ -347,10 +347,6 @@ We explored a number of halo parameters, but found the most interesting distribu
 	\label{fig:methods--analysis--diff-hist}
 \end{figure*}
 
-% Model functions
-% Initial guesses
-% Fit coefficients
-
 
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -370,7 +366,7 @@ Text goes here.
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+Up to this point, we have only considered one snapshot at a time.  While we have observed variations with redshift, this has not been explicitly quantified.  In this section, we consider the statistical quantities derived from the generalized normal distribution fits from the previous section as functions of redshift.  The code used for this analysis is listed in Appendix~\ref{app:redshift_trends}.
 
 
 
@@ -380,7 +376,24 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+Representing the mean and standard deviation of the distributions is relatively straightforward.  For the fit generalized normal distributions, we record values for the mean, uncertainty in the mean, standard deviation, and uncertainty in the standard deviation.  We also record the mean and standard deviation of the underlying distribution as directly measured from the data.
+
+In Figure~\ref{fig:methods--analysis--fit_trends_mean_stdev}, we plot the mean and standard deviation of the distributions for mass and concentration, as well as the rms value derived from the data, all as functions of redshift.  The mean is plotted as blue points with error bars, the standard deviation is plotted as two black dashed lines that represent $\mu \pm \sigma$, and the rms is plotted as a dotted green line.
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/mean_stdev_Mvir.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/mean_stdev_c_rockstar.eps}
+	\end{subfigure}
+	\caption[Mean, standard deviation, and rms as functions of redshift for generalized normal fits]{\footnotesize Mean, standard deviation, and rms as functions of redshift for $\Delta M_{\mathrm{vir}}$ (\textit{top}) and $\Delta c$ (\textit{bottom}).  The mean is plotted as blue points, $\mu \pm \sigma$ is plotted as the black dashed curves, and rms values are plotted as a green dotted curve.  The red dashed line is a linear fit to the mean.}
+	\label{fig:methods--analysis--fit_trends_mean_stdev}
+\end{figure*}
+
+In this case, we wish to be conservative with the error bars on the mean.  Since we have a measurement for the mean both from the fitting distribution and the underlying data, we can incorporate both of these into our result.  The points plotted in Figure~\ref{fig:methods--analysis--fit_trends_mean_stdev} are the mean measured from the fit distribution, and the error bars are the uncertainty in the mean estimated from the least squares routine.  However, if the mean measured directly from the data falls outside the error bars, the error bars are expanded to encompass that measurement.  This is most often not a concern, as the means for most snapshots are very close together.  However, when there is a slight discrepancy between the fit and data values, the error bars will reflect this.
 
 
 
@@ -390,7 +403,35 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+The generalized normal distributions we use to fit our $\Delta q$ histograms are symmetrical by definition and therefore have no inherent skew.  This was a simplifying assumption necessary to use a well-defined distribution as well as reduce the number of free parameters during fitting.  We do note, however, that the skew of our underlying data is often large enough to not be ignored.
+
+Therefore, we need an alternate way to measure skew and its uncertainty.  We use the skew routine from the SciPy statistics library, which defines skew as
+\begin{equation} \label{eq:skew_def}
+	\gamma_{1} = \frac{ \mu_{3} }{ \mu_{2}^{3/2} },
+\end{equation}
+where $\mu_{m}$ are central moments given by
+\begin{align} \label{eq:central_moments}
+	\mu_{m} = E[(X - \mu)^{m}] &= \sum_{k} (x_{k} - \mu)^{m} p(x_{k}) \\
+	                           &= \sum_{k=0}^{m} (-1)^{m - k} \binom{m}{k} \mu^{m - k} \mu_{k}',
+\end{align}
+with non-central moments $\mu_{m}'$ given by
+\begin{equation} \label{eq:non-central_moments}
+	\mu_{m}' = E[X^{m}] = \sum_{k} x_{k}^{m} p(x_{k}),
+\end{equation}
+where $p(x_{k})$ is the probability density function.  The skew is then measured from the entire halo sample for the three combined simulation boxes.  Uncertainty in skew is evaluated by taking the skew of the three boxes as independent measurements.  The results for skew as a function of redshift are plotted as blue curves for the $\Delta \Mvir$ and $\Delta c$ distributions in Figure~\ref{fig:methods--analysis--fit_trends_skew_kurtosis}.
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/skew_kurtosis_Mvir.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/skew_kurtosis_c_rockstar.eps}
+	\end{subfigure}
+	\caption[Skew and kurtosis as functions of redshift for generalized normal fits]{\footnotesize Skew (blue curve) and excess kurtosis (red curve) from generalized normal distribution fits as functions of redshift for $\Delta M_{\mathrm{vir}}$ (\textit{top}) and $\Delta c$ (\textit{bottom}).  For both plots, the left axis is the scale for kurtosis and the right axis is the scale for skew.}
+	\label{fig:methods--analysis--fit_trends_skew_kurtosis}
+\end{figure*}
 
 
 
@@ -400,7 +441,7 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+Variable kurtosis is a fundamental part of the generalized normal distribution, so we may therefore derive the kurtosis directly from the fit distribution parameters.  The generalized normal distribution is defined in terms of a shape parameter $\beta$, which does introduce some complexity in the conversion to kurtosis.  The shape parameter is converted to excess kurtosis by way of Equation~\ref{eq:kurtosis}.  As this definition includes the Gamma function, a number of steps are required to convert the uncertainty in shape parameter to the uncertainty in kurtosis, which we outline below.
 
 The standard deviation of a function $f(x_{1},x_{2},\dots,x_{n})$ is, in general, given by
 \begin{equation} \label{eq:general_stdev}
@@ -449,6 +490,8 @@ Substituting back in for $x$ and recognizing an occurance of $\gamma_{2}$, we ha
 	s_{\gamma_{2}} = s_{\beta} \frac{1}{\beta^{2}} \left( \gamma_{2} + 3 \right) \left[ 6 \digamma(3/\beta) - 5 \digamma(5/\beta) - \digamma(1/\beta) \right]
 \end{equation}
 with which we can find the uncertainty in the kurtosis given the value and uncertainty of the shape parameter $\beta$.
+
+With a method of determining the uncertainty in kurtosis established, we may now examine the results.  In Figure~\ref{fig:methods--analysis--fit_trends_skew_kurtosis}, we plot the kurtosis and associated uncertainties as a function of redshift as red curves for distributions of $\Delta \Mvir$ and $\Delta c$.
 
 
 
