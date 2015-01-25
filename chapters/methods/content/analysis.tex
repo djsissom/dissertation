@@ -502,27 +502,74 @@ With a method of determining the uncertainty in kurtosis established, we may now
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+So far, our analysis has mostly focused on the behavior of the entire halo sample as a single unit.  However, there is also a wealth of information available when the statistics for our sample are viewed as functions of halo mass.  In this section, we explore our halo ensemble more deeply by dividing into bins of mass and viewing the behavior of the resulting subsamples.  In this way, we are able to explore differences in low- and high-mass halos, as well as quantify the explicit mass dependencies.  The codes used for this analysis are listed in Appendix~\ref{app:mass_trends}.
 
 
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Binning and Plotting}
+\subsubsection{Binning and Fitting}
 \label{subsubsec:analysis--mass_trends--binning_plotting}
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+When representing the mass dependence of our various halo properties, we wished to do so in a way that was both straightforward to quantify and visually descriptive of the overall distribution of the data.  We found the best way to accomplish this was to provide a dual representation, with the data both binned in mass for least-squares fitting and binned two dimensionally in mass and $\Delta q$, with a color scale representing bin density, for a human reader to more easily see the relative population of the parameter space.
+
+First, the data is binned on a 2-D grid.  We found this to be the most natural way to visually represent the distribution of the data, as some features like population sparseness at high redshift, asymmetry, and large differences in number between low- and high-mass halos would be more difficult to convey with only average mass bin means and standard deviations.  The binned data are plotted with a logarithmic color scale and smoothed with a Gaussian kernel.
+
+As a technical aside, we note that plotting bins with zero members with a logarithmic color scale naturally leads to poor results.  We counter this by artificially counting one half halo for bins that are otherwise empty, and rescale the color representation to make anything less than one unit per bin display the minimum color value.
+
+As an alternate representation, and mainly for the benefit of a more quantitative analysis, we bin the data along the average halo mass axis.  For each bin, we measure the mean and standard deviation of the data.  The uncertainty in the mean is then calculated as the standard deviation divided by the square root of the number of particles in the bin.  We find a linear fit to the bin means using our standard least-squares approach, weighted by the mean uncertainties.
+
+Example plots are provided in Figures~\ref{fig:methods--analysis--dM-v-Mavg} and~\ref{fig:methods--analysis--dc-v-Mavg} to demonstrate this approach.  The 2-D binned data is plotted using a logarithmic color scale to represent the number density of halos in a given cell.  The bin means and associated uncertainties are plotted as the black points with error bars.  The standard deviation to either side of the mean is plotted as black dotted lines.  The least-squares fit to the bin means is plotted as a solid magenta line.
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/dM-v-Mavg_snap050.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/dM-v-Mavg_snap061.eps}
+	\end{subfigure}
+	\caption[$\Delta M_{\mathrm{vir}}$ as a function of $M_{\mathrm{vir,avg}}$]{\footnotesize $\Delta M_{\mathrm{vir}}$ as a function of $M_{\mathrm{vir,avg}}$.  For the 2-D color histogram, halos are counted in rectangular bins and smoothed with a Gaussian kernel with a logarithmic color scale.  The halos are also divided into logarithmically-spaced bins in average virial mass, and the mean for each bin is plotted as a black point.  The black dotted curves are the standard deviation around the mean.  The magenta line is the linear least-squares best fit to the bin means.  The light grey dashed line at $\Delta q = 0$ is provided to guide the eye.  The two panels correspond to snapshots at $z = 10.3$ and $z = 6.0$.  These plots are provided as examples of the output at this stage of the analysis and are further discussed in Chapter~\ref{chap:2lpt}.}
+	\label{fig:methods--analysis--dM-v-Mavg}
+\end{figure*}
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/dc-v-Mavg_snap050.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/dc-v-Mavg_snap061.eps}
+	\end{subfigure}
+	\caption[$\Delta c$ as a function of $M_{\mathrm{vir,avg}}$]{\footnotesize Like Figure~\ref{fig:methods--analysis--dM-v-Mavg}, but for $\Delta c$ instead of $\Delta \Mvir$ as a function of average halo mass.}
+	\label{fig:methods--analysis--dc-v-Mavg}
+\end{figure*}
 
 
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Fitting}
-\label{subsubsec:analysis--mass_trends--fitting}
+\subsubsection{Trends with Redshift}
+\label{subsubsec:analysis--mass_trends--redshift_trends}
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+To better analyze the time evolution of the mass dependence, we need a more compact representation than simply looking at successive individual redshift snapshots.  The most informative individual parameter from these plots is the slope of the linear fit line for $\Delta q$ as a function of average halo mass.  We therefore plot the slopes and associated uncertainties for each snapshot as a function of redshift, with the results for $\Delta \Mvir$ and $\Delta c$ displayed in Figure~\ref{fig:methods--analysis--slopes_delta-v-Mavg}.  The data are then fit with our linear least-squares routine, and the fit is overplotted as a red dashed line.
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/slopes_dM-v-Mavg.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/slopes_dc-v-Mavg.eps}
+	\end{subfigure}
+	\caption[Slopes of the $\Delta q$ vs.\ $M_{\mathrm{vir,avg}}$ fit functions.]{\footnotesize Slopes of the $\Delta q$ vs.\ $M_{\mathrm{vir,avg}}$ fit functions.  The top and bottom panels correspond to the $\Delta M_{\mathrm{vir}}$ and $\Delta c$ plots of Figures~\ref{fig:methods--analysis--dM-v-Mavg} and~\ref{fig:methods--analysis--dc-v-Mavg}.  Linear least-squares fits to the data are overplotted as red dashed lines.  These plots are provided as examples of the output at this stage of the analysis and are further discussed in Chapter~\ref{chap:2lpt}.}
+	\label{fig:methods--analysis--slopes_delta-v-Mavg}
+\end{figure*}
 
 
 
