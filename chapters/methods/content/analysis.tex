@@ -580,7 +580,11 @@ To better analyze the time evolution of the mass dependence, we need a more comp
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+The distributions of $\Delta q$ that have been discussed up to this point are an excellent measure of the overall behavior of the halo population differences between \lpt\ and \za\ simulations.  However, as these distributions rely on the average quantity $q_{\mathrm{avg}} = (q_{\lpt} + q_{\za}) / 2$ for normalization, quantities like the fraction of halo pairs differing by a given amount between simulations are more difficult to extract.  We therefore redefine out distribution quantity to instead use a normalization factor of $q_{\za}$:
+\begin{equation} \label{eq:methods--analysis--delta_prime_q}
+	\delta q = \frac{q_{\lpt} - q_{\za}}{q_{\za}},
+\end{equation}
+which allows for a more direct count of halo pairs.  Statistics for these distributions are saved alongside the output for $\Delta q$ distributions with the codes in Appendix~\ref{app:diff_hist}.
 
 
 
@@ -590,7 +594,21 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+The question may be asked why these distributions have not been used all along, as they more readily offer more quantitative values for our halo populations.  Our previous distributions of $\Delta q$ are symmetrical between \lpt\ and \za\ quantities, which allows us to be completely unbiased as to which simulation initialization is correct.  The distributions of $\delta q$ lose this symmetry, and are only defined for $\delta q \geq -1$ for positive quantities like mass and concentration.
+
+For this analysis, we therefore need a way to consider halo pairs that differ by a certain amount in either direction (e.g. pairs that differ in quantity $q$ by 10\%, whether $q$ is larger in \lpt\ or \za).  Rearranging Equation~\ref{eq:methods--analysis--delta_prime_q} yields
+\begin{equation}
+	q_{\lpt} = (\delta q + 1) q_{\za},
+\end{equation}
+and making the substitution $x = \delta q + 1$ gives us
+\begin{equation}
+	q_{\lpt} = x q_{\za}.
+\end{equation}
+For a given $x$, we want to find $x_{\mathrm{eq}}$ such that $x_{\mathrm{eq}} = 1 / x$.  Substituting now for $x$ and $x_{\mathrm{eq}}$ and rearranging gives us
+\begin{equation} \label{eq:methods--analysis--equivalent_q_prime}
+	\delta q_{\mathrm{eq}} = \frac{1}{\delta q + 1} - 1,
+\end{equation}
+the value for which a halo pair with a larger $q$ in \za\ would differ by the same factor as a halo pair with a larger $q$ in \lpt.
 
 
 
@@ -600,7 +618,33 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+In Figures~\ref{fig:methods--analysis--frac_err_trends_dq} and~\ref{fig:methods--analysis--frac_err_trends_f}, we plot statistics for our $\delta q$ distributions as functions of redshift.  In Figure~\ref{fig:methods--analysis--frac_err_trends_dq}, we plot the $\delta q$ of the peak of the distribution, as well as the $\delta q$ values where 50\%, 10\%, and 1\% of halo pairs fall at or above $\delta q$.  In Figure~\ref{fig:methods--analysis--frac_err_trends_f}, we plot the fraction of halo pairs $f_{h}$ that fall outside various $\delta q$ values.  The solid curves represent the fraction of halo pairs that have a \lpt\ mass or concentration at least 1.1, 1.5, 2.0, or 5.0 times that of the corresponding \za\ halo.  Dashed curves represent the same values, regardless of whether the \lpt\ or \za\ mass or concentration is higher.  This is the same as counting halos that fall above a given $\delta q$ as well as below the corresponding $\delta q_{\mathrm{eq}}$.  The code for creating these plots is listed in Appendix~\ref{app:alt_redshift_trends}.
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/percdiff_Mvir_xvals.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/percdiff_c_rockstar_xvals.eps}
+	\end{subfigure}
+	\caption[Statistics for distributions of $\delta q$ as functions of redshift]{\footnotesize Statistics for distributions of $\delta M_{\mathrm{vir}}$ (\textit{top}) and $\delta c$ (\textit{bottom}) as functions of redshift.  The $\delta q$ of the peak of the distribution (black curve), and the $\delta q$ where 50\% (red dashed curve), 10\% (green dashed curve), and 1\% (blue dashed curve) of the halos fall at or above $\delta q$.  These plots are provided as examples of the output at this stage of the analysis and are further discussed in Chapter~\ref{chap:2lpt}.}
+	\label{fig:methods--analysis--frac_err_trends_dq}
+\end{figure*}
+
+\begin{figure*}[t]
+	\centering
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/percdiff_Mvir_sumfrac.eps}
+	\end{subfigure}
+	\\
+	\begin{subfigure}{}
+		\includegraphics[width=0.75\linewidth]{analysis/percdiff_c_rockstar_sumfrac.eps}
+	\end{subfigure}
+	\caption[Statistics for distributions of $\delta q$ as functions of redshift]{\footnotesize Statistics for distributions of $\delta M_{\mathrm{vir}}$ (\textit{top}) and $\delta c$ (\textit{bottom}) as functions of redshift.  The fraction of halos with $\delta q$ greater than 0.10 (solid blue curve), 0.50 (solid green curve), 1.00 (solid red curve), and 4.00 (solid black curve).  The dashed curves additionally count halo pairs with $\delta q$ lower than the corresponding equivalent displacements of -0.09, -0.33, -0.50, and -0.80, respectively (see Equation~\ref{eq:methods--analysis--equivalent_q_prime}).  These plots are provided as examples of the output at this stage of the analysis and are further discussed in Chapter~\ref{chap:2lpt}.}
+	\label{fig:methods--analysis--frac_err_trends_f}
+\end{figure*}
 
 
 
