@@ -108,7 +108,7 @@ As we fit halos over a large range in redshift, we found low particle count halo
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/2lpt_061_density_profile_0.eps}
 	\end{subfigure}
-	\caption[Density profiles for two large halos at $z = 14$ and $z = 6$.]{\footnotesize Density profiles for two large halos at $z = 14$ and $z = 6$.  Both halos are from the Box 1 \lpt\ simulation, and are the largest halos at their respective redshifts.  \mrk{(Get rid of density projections.)}}
+	\caption[Density profiles for two large halos at $z = 14$ and $z = 6$.]{\footnotesize Spacial projections and density profiles for two large halos at $z = 14$ (\emph{top}) and $z = 6$ (\emph{bottom}).  Both halos are from the Box 1 \lpt\ simulation, and are the largest halos at their respective redshifts.  The density profiles are fit with an NFW profile, and the resulting scale radius is plotted as a vertical dot-dash purple line.}
 	\label{fig:fitting--density_profiles}
 \end{figure}
 
@@ -121,23 +121,6 @@ As we fit halos over a large range in redshift, we found low particle count halo
 
 
 An initial motivation for finding our own concentration parameters independent from \rockstar\ is that \rockstar\ does not provide information about the quality of its density profile fits.  We assign Poisson errors to the density in each bin such that $\sigma_{\rho} = \rho \sqrt{N} / N$, where $\rho$ is the density and $N$ is the number of particles in each bin.  These uncertainties are then provided as weights to the CurveFit routine.  Upon finding a best fit, the routine provides the fit parameters and an estimation of the uncertainty in those parameters via a covariance matrix, which we use to uncertainty in the concentration.  Additionally, we find the $\chi^{2}$ for the overall fit, which we use as an indicator of whether to accept or reject the fit for a given halo.
-
-
-
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Mass Profiles}
-\label{subsubsec:analysis--profile_fitting--mass_profiles}
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-Text goes here.  Mass profiles tested to avoid binning issues and the stats stuff Manodeep learned at the conference.  Bad fitting results, so abandoned.  Figure~\ref{fig:mass_profile}.
-
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\linewidth]{analysis/2lpt_061_mass_profile_0.eps}
-	\caption[Mass profiles a large halo at $z = 6$.]{\footnotesize Mass profiles for a large halo at $z = 6$.  \mrk{(Get rid of density projections.)}}
-	\label{fig:mass_profile}
-\end{figure}
 
 
 
@@ -346,16 +329,6 @@ We explored a number of halo parameters, but found the most interesting distribu
 	\caption[Histograms of $\Delta M_{\mathrm{vir}}$ and $\Delta c$]{\footnotesize Histograms of $\Delta M_{\mathrm{vir}}$ (\textit{left column}) and $\Delta c$ (\textit{right column}) for snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$ (\textit{top, middle, and bottom panels, respectively}).  The small gray-filled histograms count only the top 25\% most massive halos.  The main histograms are fit with a generalized normal distribution with parameters for mean, scale, and shape, overplotted as the red dashed line (see Equation~\ref{eq:analysis--methods--generalized_normal}).}
 	\label{fig:methods--analysis--diff-hist}
 \end{figure*}
-
-
-
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Mass Quartiles}
-\label{subsubsec:analysis--difference_histograms--mass_quartiles}
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-Text goes here.
 
 
 
