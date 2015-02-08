@@ -32,7 +32,7 @@ We use the massively parallel TreeSPH \citep{1989ApJS...70..419H} cosmological \
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Force computation suffers from a numerical singularity as the separation between two particles approaches zero, as discussed in \mrk{Section~\ref{sec:???}}.  A modification of the force law is therefore required at small separation scales.  Force softening is accomplished in \gadgettwo\ using a spline kernel \citep{1985A&A...149..135M} $W(|x|, h = 2.8 \epsilon)$, where
+Force computation suffers from a numerical singularity as the separation between two particles approaches zero, as discussed in Section~\ref{subsec:computational_theory--nbody_simulations}.  A modification of the force law is therefore required at small separation scales.  Force softening is accomplished in \gadgettwo\ using a spline kernel \citep{1985A&A...149..135M} $W(|x|, h = 2.8 \epsilon)$, where
 \begin{equation} \label{eq:gadget--gadget--spline_kernel}
 	W(r,h) = \frac{8}{\pi h^{3}}
 	\begin{cases}
@@ -56,7 +56,7 @@ An example of this softening is shown in Figure~\ref{fig:gadget--gadget--softeni
 	\label{fig:gadget--gadget--softening}
 \end{figure}
 
-As discussed in \mrk{Section~\ref{sec:???}}, direct summation \nbody\ techniques are prohibitively slow for modern simulations.  \gadgettwo\ therefore makes use of a hierarchical multipole expansion technique, often called a ``tree'' algorithm, using the Barnes-Hut octal tree \citep{1986Natur.324..446B} algorithm.  This method recursively divides the simulation volume into eight cells at each level of refinement, continuing the division until each cell contains only one particle.  A visual description of this process in two dimensions is given in Figure~\ref{fig:gadget--gadget--tree}.  Distant particles can then be grouped together for the force calculation, reducing the algorithm complexity to $\mathcal{O} (N \log N)$.
+As discussed in Section~\ref{subsec:computational_theory--nbody_simulations}, direct summation \nbody\ techniques are prohibitively slow for modern simulations.  \gadgettwo\ therefore makes use of a hierarchical multipole expansion technique, often called a ``tree'' algorithm, using the Barnes-Hut octal tree \citep{1986Natur.324..446B} algorithm.  This method recursively divides the simulation volume into eight cells at each level of refinement, continuing the division until each cell contains only one particle.  A visual description of this process in two dimensions is given in Figure~\ref{fig:gadget--gadget--tree}.  Distant particles can then be grouped together for the force calculation, reducing the algorithm complexity to $\mathcal{O} (N \log N)$.
 
 \begin{figure}[t]
 	\centering
