@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We use the massively parallel TreeSPH cosmological \nbody\ simulation code \gadgettwo\ for the dark matter simulations presented in this work.  In this section, we give an overview of the fundamentals of the \gadgettwo\ code, followed by details of our particular simulations.
+We use the massively parallel TreeSPH \citep{1989ApJS...70..419H} cosmological \nbody\ simulation code \gadgettwo\ \citep{2001NewA....6...79S, 2005MNRAS.364.1105S} for the dark matter simulations presented in this work.  In this section, we give an overview of the fundamentals of the \gadgettwo\ code, followed by details of our particular simulations.
 
 
 
@@ -22,7 +22,7 @@ We use the massively parallel TreeSPH cosmological \nbody\ simulation code \gadg
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-\gadgettwo \cn\ is a massively parallel cosmological \nbody\ simulation code which calculates gravitational forces via a hierarchical multipole expansion and ideal gas parameters via smoothed particle hydrodynamics (SPH)\cn.  This section will discuss the gravitational algorithms used to compute forces and the time integration method used to advance the simulation.  As our simulations are collisionless only, we do not discuss the details of the implementation of gas dynamics in \gadgettwo.
+\gadgettwo\ is a massively parallel cosmological \nbody\ simulation code which calculates gravitational forces via a hierarchical multipole expansion and ideal gas parameters via smoothed particle hydrodynamics \citep[SPH; ][]{1977MNRAS.181..375G}.  This section will discuss the gravitational algorithms used to compute forces and the time integration method used to advance the simulation.  As our simulations are collisionless only, we do not discuss the details of the implementation of gas dynamics in \gadgettwo.
 
 
 
@@ -32,8 +32,8 @@ We use the massively parallel TreeSPH cosmological \nbody\ simulation code \gadg
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Force computation suffers from a numerical singularity as the separation between two particles approaches zero, as discussed in \mrk{Section~\ref{sec:???}}.  A modification of the force law is therefore required at small separation scales.  Force softening is accomplished in \gadgettwo\ using a spline kernel\cn\ $W(|x|, h = 2.8 \epsilon)$, where
-\begin{equation}
+Force computation suffers from a numerical singularity as the separation between two particles approaches zero, as discussed in \mrk{Section~\ref{sec:???}}.  A modification of the force law is therefore required at small separation scales.  Force softening is accomplished in \gadgettwo\ using a spline kernel \citep{1985A&A...149..135M} $W(|x|, h = 2.8 \epsilon)$, where
+\begin{equation} \label{eq:gadget--gadget--spline_kernel}
 	W(r,h) = \frac{8}{\pi h^{3}}
 	\begin{cases}
 		1 - 6 \left( \frac{r}{h} \right)^{2} + 6 \left( \frac{r}{h} \right)^{3}, & 0 \leq \frac{r}{h} \leq \frac{1}{2} \\
@@ -52,16 +52,16 @@ An example of this softening is shown in Figure~\ref{fig:gadget--gadget--softeni
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{gadget/softened_force.eps}
 	\end{subfigure}
-	\caption[Potential and force softening.]{Potential (\emph{left}) and force (\emph{right}) softening.}
+	\caption[Potential and force softening.]{Potential (\emph{left}) and force (\emph{right}) softening.  The solid curves are the spline softening of Equation~\ref{eq:gadget--gadget--spline_kernel}.  Curves for Plummer softening (dotted) and Newton's law (dashed) are provided for comparison.  Here, $h = 1.0$ and $\epsilon = h/2.8$.  Figure from \citet{2001NewA....6...79S}.}
 	\label{fig:gadget--gadget--softening}
 \end{figure}
 
-As discussed in \mrk{Section~\ref{sec:???}}, direct summation \nbody\ techniques are prohibitively slow for modern simulations.  \gadgettwo\ therefore makes use of a hierarchical multipole expansion technique, often called a ``tree'' algorithm, using the Barnes-Hut octal tree\cn\ algorithm.  This method recursively divides the simulation volume into eight cells at each level of refinement, continuing the division until each cell contains only one particle.  A visual description of this process in two dimensions is given in Figure~\ref{fig:gadget--gadget--tree}.  Distant particles can then be grouped together for the force calculation, reducing the algorithm complexity to $\mathcal{O} (N \log N)$.
+As discussed in \mrk{Section~\ref{sec:???}}, direct summation \nbody\ techniques are prohibitively slow for modern simulations.  \gadgettwo\ therefore makes use of a hierarchical multipole expansion technique, often called a ``tree'' algorithm, using the Barnes-Hut octal tree \citep{1986Natur.324..446B} algorithm.  This method recursively divides the simulation volume into eight cells at each level of refinement, continuing the division until each cell contains only one particle.  A visual description of this process in two dimensions is given in Figure~\ref{fig:gadget--gadget--tree}.  Distant particles can then be grouped together for the force calculation, reducing the algorithm complexity to $\mathcal{O} (N \log N)$.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\linewidth]{gadget/tree.eps}
-	\caption[Barns-Hut oct-tree in two dimensions.]{Barns-Hut oct-tree in two dimensions.}
+	\caption[Barns-Hut oct-tree in two dimensions.]{Barns-Hut oct-tree in two dimensions.  The simulation volume is recursively partitioned into cells until each contains only one particle each.  Empty cells may be ignored.  Figure from \citet{2001NewA....6...79S}.}
 	\label{fig:gadget--gadget--tree}
 \end{figure}
 
@@ -73,7 +73,7 @@ The accuracy of the force computation can be set by choosing how far to ``walk''
 \end{equation}
 where $r$ is the distance from the particle to the node and $|a|$ is the total acceleration from the previous time-step.  Nodes that are massive, large, and near enough to fall outside this criterion are opened so that the daughter cells are recursively considered.
 
-\gadgettwo\ can optionally make use of a hybrid approach for calculating forces, called the TreePM method\cn, where long range forces are computed using a particle-mesh algorithm instead of the Barnes-Hut octal tree.  The \gadgettwo\ implementation of TreePM follows that of \cn.
+\gadgettwo\ can optionally make use of a hybrid approach for calculating forces, called the TreePM method \citep{1995ApJS...98..355X, 2000ApJS..128..561B, 2002JApA...23..185B}, where long range forces are computed using a particle-mesh algorithm instead of the Barnes-Hut octal tree.  The \gadgettwo\ implementation of TreePM follows that of \citet{2003NewA....8..665B}.
 
 
 
@@ -83,7 +83,7 @@ where $r$ is the distance from the particle to the node and $|a|$ is the total a
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-The \nbody\ Hamiltonian is separable such that $H = H_{\mathrm{kin}} + H_{\mathrm{pot}}$.  Time evolution operators for each of $H_{\mathrm{kin}}$ and $H_{\mathrm{pot}}$ may be computed exactly, leading to ``drift'' and ``kick'' operators\cn:
+The \nbody\ Hamiltonian is separable such that $H = H_{\mathrm{kin}} + H_{\mathrm{pot}}$.  Time evolution operators for each of $H_{\mathrm{kin}}$ and $H_{\mathrm{pot}}$ may be computed exactly, leading to ``drift'' and ``kick'' operators \citep{1997astro.ph.10043Q}:
 \begin{equation}
 	D_{t}(\Delta t):
 	\begin{cases}
