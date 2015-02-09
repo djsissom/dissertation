@@ -11,18 +11,84 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Text goes here.
+\rockstar\ \citep[Robust Overdensity Calculation using K-Space Topoloogically Adaptive Refinement; ][]{}\cn\ is a halo finder based on the hierarchical refinement of friends-of-friends (FOF) groups in six phase space dimensions and, optionally, one time dimensions.  It has been shown \cn\ to be robust in recovering halo properties, determining substructure, and providing accurate particle member lists, even for notoriously difficult scenarios such as for low particle count halos and halos undergoing major merger events.
 
 
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Halo Identification}
-\label{subsec:rockstar--halo_identification}
+\subsection{Halo Finding}
+\label{subsec:rockstar--halo_finding}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+Halo finding in \rockstar\ is broken down into a number of steps, leading from the particle distribution of a simulation snapshot to the recovery of individual halo properties.  FOF overdensity groups are distributed among the analysis processors which build hierarchies of FOF subgroups in phase space, determine particle membership for halos, compute host halo/subhalo relationships, remove unbounded particles, and compute halo properties.  A summary of each of these steps is provided below.
+
+
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\subsubsection{FOF Groups}
+\label{subsubsec:rockstar--halo_finding--fof_groups}
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+The 3D friends-of-friends algorithm groups particles together if they fall within a set linking length of each other.  The linking length is often chosen as a fraction $b$ of the mean interparticle distance, with typical values ranging from $b = 0.15$ to $b = 0.2$ \cn.  As \rockstar\ only uses FOF groups for breaking up the simulation volume to be distributed to individual processors, it is able use a modified algorithm for calculating FOF groups that is an order of magnitude faster than the typical procedure of finding all particles within the linking length for every particle.  For particles with more than 16 neighbor particles, the neighbor finding process is skipped for the neighboring particles.  Instead, particles are linked to the same group if they are within two linking lengths of the original particle.  This method runs much faster than the standard FOF algorithm, and links together at minimum the same particles.  With this approach, run time decreases instead of increases with increasing linking length.  \rockstar\ therefore uses a large linking length of $b = 0.28$.  The FOF groups are distributed among the available processors according to individual processor load.
+
+
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\subsubsection{Phase-Space FOF Hierarchy}
+\label{subsubsec:rockstar--halo_finding--phase_space}
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Within each FOF group, FOF subgroups are found hierarchically in phase-space.  A phase-space linking length is adaptively chosen so that a constant fraction $f$ of particles are linked together with at least one other particle.  For two particles $p_{1}$ and $p_{2}$, the phase-space distance metric is defined as
+\begin{equation}
+	d(p_{1}, p_{2}) = \left( \frac{\left| \vec{x_{1}} - \vec{x_{2}} \right|^{2}}{\sigma_{x}^{2}} + \frac{\left| \vec{v_{1}} - \vec{v_{2}} \right|^{2}}{\sigma_{v}^{2}} \right)^{1/2},
+\end{equation}
+where $\sigma_{x}$ and $\sigma_{v}$ are the particle position and velocity dispersions for the FOF group \cn.  The phase-space distance to the nearest neighbor is computed for each particle, the linking length is chosen such that $f = 0.7$, and a new FOF subgroup is determined.  This process is repeated recursively on the new FOF subgroups until a minimum threshold of 10 particles is reached at the deepest level of the hierarchy.
+
+
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\subsubsection{Converting FOF Subgroups to Halos}
+\label{subsubsec:rockstar--halo_finding--fof_to_halos}
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Seed halos are created for each of the deepest level subgroups in the FOF hierarchy.  Particles from successively higher levels of the hierarchy are then assigned to the seed halos until all particles in the original FOF group are accounted for.  To suppress extraneous seed halo generation due to noise, seed halos are merged if their positions and velocities are within $10 \sigma$ of Poisson uncertainties of each.  Specifically, the halos are merged if
+\begin{equation}
+	\sqrt{(x_{1} - x_{2})^{2} \mu_{x}^{-2} + (v_{1} - v_{2})^{2} \mu_{v}^{-2}} < 10 \sqrt{2},
+\end{equation}
+with
+\begin{equation}
+	\mu_{x} = \sigma_{x} / \sqrt{n},
+\end{equation}
+\begin{equation}
+	\mu_{v} = \sigma_{v} / \sqrt{n},
+\end{equation}
+where $\sigma_{x}$ and $\sigma_{v}$ are the position and velocity dispersions of the smaller seed halo, and $n$ is the number of particles of the smaller seed halo.
+
+If a parent FOF group contains multiple seed halos, particles are assigned to the closest seed halo in phase space.  The distance between a halo $h$ and a particle $p$ is given by
+\begin{equation} \label{eq:rockstar--halo_phase_space_distance}
+	d(h,p) = \left( \frac{\left| \vec{x_{h}} - \vec{x_{p}} \right|^{2}}{r_{\mathrm{dyn, vir}}^{2}} + \frac{\left| \vec{v_{h}} - \vec{v_{p}} \right|^{2}}{\sigma_{v}^{2}} \right)^{1/2},
+\end{equation}
+\begin{equation}
+	r_{\mathrm{dyn, vir}} = v_{\max} t_{\mathrm{dyn, vir}} = \frac{v_{\max}}{\sqrt{\frac{4}{3} \pi G \rho_{\mathrm{vir}}}},
+\end{equation}
+where the seed halo currently has velocity dispersion $\sigma_{v}$ and maximum circular velocity $v_{\max}$.  Here, "vir" refers to the virial overdensity as in the definition of $\rho_{\mathrm{vir}}$ in \cn, which is 360 times the background density at $z = 0$.  \rockstar\ does, however, allow other choices for density definitions.
+
+
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\subsubsection{Substructure}
+\label{subsubsec:rockstar--halo_finding--substructure}
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Satellite membership is assigned based on phase-space distances before calculating halo masses.  Equation~\ref{eq:rockstar--halo_phase_space_distance} is used to find the distance to all other halos with a greater number of particles, treating each halo center as a particle.  The halo is then assigned to be a subhalo of the closest larger halo within the same FOF group, if one exists.  If data from an earlier time-step is available, then halo cores at the current time-step are linked to halos from the previous time-step based on the largest contribution to the current halo core's particle membership.
+
+Halo masses are then determined so that particles assigned to the host are not counted in the mass of the subhalo, but particles in the subhalo are included in the mass of the host.  Subhalo membership is then recalculated such that subhalos are those that fall within $r_{\Delta}$ of more massive host halos.
 
 
 
@@ -33,48 +99,15 @@ Text goes here.
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+Halo positions based on maximum density peaks are more accurate than those found by averaging all FOF halo particles \cn.  As \rockstar\ has already determined the halo density distribution when calculating the FOF subgroup hierarchy, halo positions are readily calculated by taking the average position of the particles in the inner subgroup which best minimizes the Poisson error.
 
+The velocity of the halo core can be substantial offset from that of the halo bulk \cn.  The velocity for the halo is calculated as the average velocity of the particles within the innermost 10\% of the halo radius, as the galaxy hosted by the halo should be most associated with the halo core.
 
+Halo masses are calculated using the spherical overdensity (SO) out to various density thresholds, including the virial threshold of \cn and density thresholds relative to the background density and the critical density.  Mass calculations include all particles from the substructure contained in the halo, and can optionally remove unbound particles.  As subhalo particles can be isolated from those of the host halo, mass calculations for substructure can also be obtained with spherical overdensities using only the particles belonging to the subhalo.
 
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Mass}
-\label{subsubsec:rockstar--halo_properties--mass}
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+The scale radius $R_{s}$ is determined by dividing halo particles up into up to 50 radial equal-mass bins, with a minimum of 15 particles per bin, and fitting an NFW profile to the bins to find the maximum-likelihood fit.  The Klypin scale radius \cn, which uses $v_{\max}$ and $\Mvir$ to calculate $R_{s}$, is also determined.
 
-
-Text goes here.
-
-
-
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Concentration}
-\label{subsubsec:rockstar--halo_properties--concentration}
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-Text goes here.
-
-
-
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Relaxation Parameters}
-\label{subsubsec:rockstar--halo_properties--relaxation}
-%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-Text goes here.
-
-
-
-
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Halo Catalogs}
-\label{subsec:rockstar--halo_catalogs}
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Text goes here.
+A number of other parameters are calculated, including the angular momentum, Bullock spin parameter \cn, central position offset (defined as the distance between the halo density peak and the halo center of mass), central velocity offset (defined as the difference between the halo core velocity and the bulk velocity), ratio of kinetic to potential energy, and ellipsoidal shape parameters.
 
 
 
