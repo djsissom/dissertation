@@ -131,7 +131,9 @@ where $\eta$ is an accuracy parameter, $\epsilon$ is the gravitational softening
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
+We use \gadgettwo\ to evolve six dark matter--only cosmological volumes from $z_{start} = 300$ to $z = 6$ in a $\rm \Lambda CDM$ universe.  Each simulation is initialized using WMAP-5 \citep{2009ApJS..180..330K} parameters.  For each of the three simulation pairs, we directly compare \lpt\ and \za\ by identically sampling the CMB transfer function and displacing the initial particle positions to the same starting redshift using \lpt\ and \za.  The three sets of simulations differ only by the initial phase sampling random seed.  Each volume contains $512^{3}$ particles in a 10 $h^{-1}$ Mpc box.
+
+Following \citet{2010ApJ...715..104H}, we choose conservative simulation parameters in order to ensure high accuracy in integrating the particle positions and velocities.  We have force accuracy of 0.002, integration accuracy of 0.00125, and softening of $0.5\ h^{-1}\ \mathrm{kpc}$, or $1 / 40$ of the initial mean particle separation.  We use a uniform particle mass of $5.3 \times 10^{5} h^{-1} \Msun$.  We select PMGRID, which defines the Fourier grid, to be 1024, SMTH, which defines the split between short- and long-range forces, to be 1.5 times the mesh cell size, and RCUT, which controls the maximum radius for short-range forces, to be 6.0 times the mesh cell size.
 
 
 
