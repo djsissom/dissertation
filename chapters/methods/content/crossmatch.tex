@@ -11,7 +11,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Text goes here.
+Having pairs of corresponding \lpt\ and \za\ simulations necessitates a method for reliably matching halos between the two if we wish to compare properties of companion halos.  To accomplish this, we use the \crossmatch\ code initially developed by Manodeep Sinha.  \crossmatch\ uses particle IDs to find matching halos based on the percentage of common constituent particles.  The code was modified for this study to import and process the BGC2 files output by the \rockstar\ halo finder.
+
+As dynamical variations between \lpt\ and \za\ simulations can cause companion halos to diverge in their evolutionary history, we cannot rely on bulk halo properties such as mass or central position as a primary means of matching.  \crossmatch\ therefore relies on ID-based particle matching to pair halos.  Companion simulations are initialized with identical particle ID schemes, and \crossmatch\ can then use these particle IDs to find pairs that are most likely to be the ``same'' halo for a given simulation snapshot.  At the most basic level, \crossmatch\ reads in halo and particle lists from a halo finder such as \rockstar, iterates through the lists from one simulation, and finds the halo with the largest number of shared particles from the other simulation.
+
+As \crossmatch\ needs to run on data from simulations with large numbers of particles, total runtime becomes a concern.  A naive approach would be to iterate through the first particle list, and for every particle, linearly search through the entire second particle list to find which halo a particle belongs to.  This would result in an $\mathcal{O}(N^{2})$ runtime complexity.  To decrease runtime to an acceptable level, the second particle list is first sorted by particle ID using a standard QuickSort algorithm, which then enables the use of a more efficient binary search.  This reduces runtime complexity to an $\mathcal{O}(N \log N)$ algorithm.  Halos from the second simulation are then ranked by the percentage of particles in common with the halo from the first simulation, and the best match is selected.
 
 
 
