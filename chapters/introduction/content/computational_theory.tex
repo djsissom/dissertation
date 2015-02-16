@@ -11,7 +11,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this section, we present a broad overview of the fundamental theory and driving equations of computational astrophysics that are relevant to this work.  Specific code implementations, such as the \nbody\ simulation code \gadgettwo\ and the halo finder \rockstar, are discussed in Chapter~\ref{chap:methods}, so here we instead focus on the mathematical concepts that form the basis these codes rely on and have in common with varied other implementations.  Specifically, in this section, we discuss simulation initialization with the Zel'dovich approximation (\za) and second-order Lagrangian perturbation theory (\lpt), collisionless dynamics in \nbody\ simulations, and numerical definitions of dark matter halos.
+In this section, we present a broad overview of the fundamental theory and driving equations of computational astrophysics that are relevant to this work.  Specific code implementations, such as the \nbody\ simulation code \gadgettwo\ and the halo finder \rockstar, are discussed in Chapter~\ref{chap:methods}, so here we instead focus on the mathematical concepts that form the basis these codes rely on and have in common with varied other implementations.  Specifically, in this section, we discuss collisionless dynamics in \nbody\ simulations, simulation initialization with the Zel'dovich approximation (\za) and second-order Lagrangian perturbation theory (\lpt), and numerical definitions of dark matter halos.
+
+
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Collisionless Dynamics and \nbody\ Simulations}
+\label{subsec:computational_theory--nbody_simulations}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Text goes here.
+
+\begin{equation}
+	\frac{\dd f(\mathbf{x}, \mathbf{v}, t)}{\dd t}
+	\equiv \frac{\partial f}{\partial t} + \mathbf{v} \frac{\partial f}{\partial \mathbf{x}} - \nabla \Phi \frac{\partial f}{\partial \mathbf{v}}
+	= 0
+\end{equation}
+
+\begin{equation}
+	\nabla^{2} \Phi(\mathbf{r}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \diff \mathbf{v}
+\end{equation}
+
+\begin{equation}
+	H = \sum_{i} \frac{p_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(x_{i} - x_{j})}{a(t)}
+\end{equation}
+
+\begin{equation}
+	\nabla^{2} \varphi(x) = 4 \pi G \left[ -\frac{1}{L^{3}} + \sum_{\mathbf{n}} \tilde{\delta}(\mathbf{x} - \mathbf{n}L) \right]
+\end{equation}
+
+\begin{equation}
+	\phi(x) = \sum_{i} m_{i} \varphi(\mathbf{x} - \mathbf{x}_{i})
+\end{equation}
+
+\begin{equation}
+	\mathbf{a}_{i} = -\sum_{j \ne i} \frac{G m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{| \mathbf{x}_{i} - \mathbf{x}_{j} |^{3}}
+\end{equation}
+
+\begin{equation}
+	\mathbf{F}_{i} = -\sum_{j \ne i} \frac{G m_{i} m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{(| \mathbf{x}_{i} - \mathbf{x}_{j} |^{2} + \epsilon^{2})^{3/2}}
+\end{equation}
 
 
 
@@ -54,46 +95,6 @@ Text goes here.
 
 Text goes here.
 
-
-
-
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{Collisionless Dynamics and \nbody\ Simulations}
-\label{subsec:computational_theory--nbody_simulations}
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Text goes here.
-
-\begin{equation}
-	\frac{\dd f(\mathbf{x}, \mathbf{v}, t)}{\dd t}
-	\equiv \frac{\partial f}{\partial t} + \mathbf{v} \frac{\partial f}{\partial \mathbf{x}} - \nabla \Phi \frac{\partial f}{\partial \mathbf{v}}
-	= 0
-\end{equation}
-
-\begin{equation}
-	\nabla^{2} \Phi(\mathbf{r}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \diff \mathbf{v}
-\end{equation}
-
-\begin{equation}
-	H = \sum_{i} \frac{p_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(x_{i} - x_{j})}{a(t)}
-\end{equation}
-
-\begin{equation}
-	\nabla^{2} \varphi(x) = 4 \pi G \left[ -\frac{1}{L^{3}} + \sum_{\mathbf{n}} \tilde{\delta}(\mathbf{x} - \mathbf{n}L) \right]
-\end{equation}
-
-\begin{equation}
-	\phi(x) = \sum_{i} m_{i} \varphi(\mathbf{x} - \mathbf{x}_{i})
-\end{equation}
-
-\begin{equation}
-	\mathbf{a}_{i} = -\sum_{j \ne i} \frac{G m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{| \mathbf{x}_{i} - \mathbf{x}_{j} |^{3}}
-\end{equation}
-
-\begin{equation}
-	\mathbf{F}_{i} = -\sum_{j \ne i} \frac{G m_{i} m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{(| \mathbf{x}_{i} - \mathbf{x}_{j} |^{2} + \epsilon^{2})^{3/2}}
-\end{equation}
 
 
 
