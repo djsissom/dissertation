@@ -58,12 +58,22 @@ Text goes here.
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\subsection{\nbody\ Simulations}
+\subsection{Collisionless Dynamics and \nbody\ Simulations}
 \label{subsec:computational_theory--nbody_simulations}
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Text goes here.
+
+\begin{equation}
+	\frac{\dd f(\mathbf{x}, \mathbf{v}, t)}{\dd t}
+	\equiv \frac{\partial f}{\partial t} + \mathbf{v} \frac{\partial f}{\partial \mathbf{x}} - \nabla \Phi \frac{\partial f}{\partial \mathbf{v}}
+	= 0
+\end{equation}
+
+\begin{equation}
+	\nabla^{2} \Phi(\mathbf{r}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \diff \mathbf{v}
+\end{equation}
 
 \begin{equation}
 	H = \sum_{i} \frac{p_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(x_{i} - x_{j})}{a(t)}
@@ -75,6 +85,14 @@ Text goes here.
 
 \begin{equation}
 	\phi(x) = \sum_{i} m_{i} \varphi(\mathbf{x} - \mathbf{x}_{i})
+\end{equation}
+
+\begin{equation}
+	\mathbf{a}_{i} = -\sum_{j \ne i} \frac{G m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{| \mathbf{x}_{i} - \mathbf{x}_{j} |^{3}}
+\end{equation}
+
+\begin{equation}
+	\mathbf{F}_{i} = -\sum_{j \ne i} \frac{G m_{i} m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{(| \mathbf{x}_{i} - \mathbf{x}_{j} |^{2} + \epsilon^{2})^{3/2}}
 \end{equation}
 
 
