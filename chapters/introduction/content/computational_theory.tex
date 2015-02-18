@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In this section, we present a broad overview of the fundamental theory and driving equations of computational astrophysics that are relevant to this work.  Specific code implementations, such as the \nbody\ simulation code \gadgettwo\ and the halo finder \rockstar, are discussed in Chapter~\ref{chap:methods}, so here we instead focus on the mathematical concepts that form the basis these codes rely on and have in common with varied other implementations.  Specifically, in this section, we discuss collisionless dynamics in \nbody\ simulations, simulation initialization with the Zel'dovich approximation (\za) and second-order Lagrangian perturbation theory (\lpt), and numerical definitions of dark matter halos.
+In this section, we present a broad overview of the fundamental theory and driving equations of computational astrophysics that are relevant to this work.  Specific code implementations, such as the \nbody\ simulation code \gadgettwo\ and the halo finder \rockstar, are discussed in Chapter~\ref{chap:methods}, so here we instead focus on the mathematical concepts that form the basis these codes rely on and have in common with varied other implementations.  Specifically, in this section, we discuss collisionless dynamics in \nbody\ simulations, simulation initialization with the Zel'dovich approximation (\za) and second-order Lagrangian perturbation theory (\lpt), and numerical definitions of dark matter halos.  As the simulations used in our study are of collisionless dark matter only, we forgo a discussion of collisional hydrodynamics.
 
 
 
@@ -22,17 +22,18 @@ In this section, we present a broad overview of the fundamental theory and drivi
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-Text goes here.
-
+Astrophysical simulations of stars or dark matter, in essence, track a collisionless fluid, which is described in the continuum limit by the collisionless Boltzmann equation (CBE)
 \begin{equation}
-	\frac{\dd f(\mathbf{x}, \mathbf{v}, t)}{\dd t}
-	\equiv \frac{\partial f}{\partial t} + \mathbf{v} \frac{\partial f}{\partial \mathbf{x}} - \nabla \Phi \frac{\partial f}{\partial \mathbf{v}}
+	\frac{\diff f(\mathbf{x}, \mathbf{v}, t)}{\diff t}
+	\equiv \frac{\partial f}{\partial t} + \mathbf{v} \cdot \frac{\partial f}{\partial \mathbf{x}}
+	- \frac{\partial \Phi}{\partial \mathbf{x}} \cdot \frac{\partial f}{\partial \mathbf{v}}
 	= 0
 \end{equation}
-
+coupled to the Poisson equation
 \begin{equation}
-	\nabla^{2} \Phi(\mathbf{r}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \diff \mathbf{v}
+	\nabla^{2} \Phi(\mathbf{x}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \dd \mathbf{v}
 \end{equation}
+in an expanding background Universe, typically according to the Friedmann-Lema\^{i}tre-Robertson-Walker metric.  Here, $\Phi$ is the self consistent potential, and the distribution function $f(\mathbf{x}, \mathbf{v}, t)$ gives the mass density in phase space.  The high-dimensionality of the problem, however, makes directly solving the coupled system of equations intractable.  Instead, the \nbody\ method, in which the phase-space density is sampled with a finite number $N$ of tracer particles, is used to evolve the system in time.  
 
 \begin{equation}
 	H = \sum_{i} \frac{p_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(x_{i} - x_{j})}{a(t)}
