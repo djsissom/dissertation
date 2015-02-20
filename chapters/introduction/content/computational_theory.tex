@@ -33,27 +33,42 @@ coupled to the Poisson equation
 \begin{equation}
 	\nabla^{2} \Phi(\mathbf{x}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \dd \mathbf{v}
 \end{equation}
-in an expanding background Universe, typically according to the Friedmann-Lema\^{i}tre-Robertson-Walker metric.  Here, $\Phi$ is the self consistent potential, and the distribution function $f(\mathbf{x}, \mathbf{v}, t)$ gives the mass density in phase space.  The high-dimensionality of the problem, however, makes directly solving the coupled system of equations intractable.  Instead, the \nbody\ method, in which the phase-space density is sampled with a finite number $N$ of tracer particles, is used to evolve the system in time.  
+in an expanding background Universe, typically according to the Friedmann-Lema\^{i}tre-Robertson-Walker metric.  Here, $\Phi$ is the self consistent potential, and the distribution function $f(\mathbf{x}, \mathbf{v}, t)$ gives the mass density in phase space.  The high-dimensionality of the problem, however, makes directly solving the coupled system of equations intractable.  Instead, the \nbody\ method, in which the phase-space density is sampled with a finite number $N$ of tracer particles, is used to evolve the system in time.  For the following discussion, we primarily follow the notation in \citet{2005MNRAS.364.1105S}.
 
+The system of particles is described by the Hamiltonian
 \begin{equation}
-	H = \sum_{i} \frac{p_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(x_{i} - x_{j})}{a(t)}
+	H(\mathbf{x}_{1}, \ldots, \mathbf{x}_{N}, \mathbf{p}_{1}, \ldots, \mathbf{p}_{N}, t)
+	= \sum_{i} \frac{\mathbf{p}_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(\mathbf{x}_{i} - \mathbf{x}_{j})}{a(t)},
 \end{equation}
-
+where $\mathbf{x}_{i}$ are comoving coordinate vectors with corresponding canonical momenta $p_{i} = a^{2} m_{i} \mathbf{\dot{x}}_{i}$ and $a(t)$ is the time evolution of the scale factor that introduces explicit time dependence to the Hamiltonian.  For simulations with periodic boundary conditions, the interaction potential $\varphi(\mathbf{x})$ for a cube of size $L^{3}$ is the solution of
+\begin{equation} \label{eq:computational_theory--nbody_simulations--discrete_poisson}
+	\nabla^{2} \varphi(x) = 4 \pi G \left[ -\frac{1}{L^{3}} + \sum_{\mathbf{n}} \tilde{\delta}(\mathbf{x} - \mathbf{n}L) \right],
+\end{equation}
+where the sum over $\mathbf{n} = (n_{1}, n_{2}, n_{3})$ iterates over all integer triplets.  Here, the mean density is subtracted, and the dynamics of the system follow
 \begin{equation}
-	\nabla^{2} \varphi(x) = 4 \pi G \left[ -\frac{1}{L^{3}} + \sum_{\mathbf{n}} \tilde{\delta}(\mathbf{x} - \mathbf{n}L) \right]
+	\nabla^{2} \phi(\mathbf{x}) = 4 \pi G [\rho(\mathbf{x}) - \bar{\rho}]
 \end{equation}
-
+with peculiar potential
 \begin{equation}
-	\phi(x) = \sum_{i} m_{i} \varphi(\mathbf{x} - \mathbf{x}_{i})
+	\phi(x) = \sum_{i} m_{i} \varphi(\mathbf{x} - \mathbf{x}_{i}).
 \end{equation}
+For non-periodic (vacuum) boundary conditions, the interaction potential for point masses simplifies to 
+\begin{equation}
+	\varphi(\mathbf{x}) = -\frac{G}{|\mathbf{x}|}
+\end{equation}
+for large separations.
 
+At small particle separations as $|\mathbf{x}_{i} - \mathbf{x}_{j}| \rightarrow 0$, particle accelerations computed via the standard force law
 \begin{equation}
 	\mathbf{a}_{i} = -\sum_{j \ne i} \frac{G m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{| \mathbf{x}_{i} - \mathbf{x}_{j} |^{3}}
 \end{equation}
-
+approach a numerical singularity that can introduce unphysical results for finite time-steps.  To avoid this scenario, numerical simulations employ a softening parameter $\epsilon > 0$ in the force law so that it does not diverge for small particle separations.  As a simple example, the softening parameter may be added to the particle displacement in the denominator of the Newtonian force law:
 \begin{equation}
-	\mathbf{F}_{i} = -\sum_{j \ne i} \frac{G m_{i} m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{(| \mathbf{x}_{i} - \mathbf{x}_{j} |^{2} + \epsilon^{2})^{3/2}}
+	\mathbf{F}_{i} = -\sum_{j \ne i} \frac{G m_{i} m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{(| \mathbf{x}_{i} - \mathbf{x}_{j} |^{2} + \epsilon^{2})^{3/2}}.
 \end{equation}
+More generally, the single particle density distribution function $\tilde{\delta}(\mathrm{x})$ of Equation~\ref{eq:computational_theory--nbody_simulations--discrete_poisson} is the Dirac $\delta$-function convolved with a gravitational softening kernel of comoving scale $\epsilon$.  The specific choice of softening is dependent on the type of simulation and the system of study.  The softening parameter is typically on the order of the mean inter-particle separation.
+
+Directly calculating forces for every particle from every other particle inherently requires a double sum, implying a computational cost of $\mathcal{O}(N^{2})$ algorithm complexity scaling.  For large $N$, this quickly becomes computationally expensive.  While the accuracy afforded by direct summation is sometimes necessary, such as for collisional systems like high-density star clusters, most studies can tolerate random force errors up to $\sim 1\%$ \citep{1993ApJ...402L..85H}, introducing the possibility of approximation methods.  There are a number of implementations for force approximations, but a typical result is a reduction of algorithmic complexity from $\mathcal{O}(N^{2})$ to $\mathcal{O}(N \log N)$.  The specific implementation employed by \gadgettwo\ is discussed in Section~\ref{subsec:gadget--gadget}.
 
 
 
