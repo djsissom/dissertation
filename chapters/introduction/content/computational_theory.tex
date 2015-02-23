@@ -109,29 +109,51 @@ Text goes here.
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+In this section, we give an overview of the equations necessary to generate initial conditions for \nbody\ simulations using \za\ and \lpt.  These results are fully described in Appendix~D1 of \citet{1998MNRAS.299.1097S}, and are largely reproduced here following that notation.
+
+As mentioned above, our goal is to displace particles from their initial positions $\mathbf{q}$ to final Eulerian particle positions $\mathbf{x}$ via a displacement field $\boldsymbol{\Psi}(\mathbf{q})$:
 \begin{equation}
-	\mathbf{x} = \mathbf{q} + \boldsymbol{\Psi}(\mathbf{q})
+	\mathbf{x} = \mathbf{q} + \boldsymbol{\Psi}(\mathbf{q}).
+\end{equation}
+If we define the conformal time $\tau = \int \diff t / a$, where $a(\tau)$ is the scale factor, and the conformal expansion rate $\mathcal{H} \equiv \diff \ln a/\diff \tau = H a$, where $H$ is the Hubble constant, then the equation of motion for particle trajectories $\mathbf{x}(\tau)$ is given by
+\begin{equation} \label{eq:particle_displacment--eq_of_motion}
+	\frac{\diff^{2} \mathbf{x}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff \mathbf{x}}{\diff \tau} = -\del \Phi,
+\end{equation}
+where $\Phi$ is the gravitational potential and $\del$ is the gradient operator in Eulerian coordinates $\mathbf{x}$.  Using the Poisson equation together with $1 + \delta(\mathbf{x}) = \mathbf{J}^{-1}$, where the Jacobian $\mathbf{J}(\mathbf{q}, \tau)$ is the determinant $\mathbf{J}(\mathbf{q}, \tau) \equiv \det(\delta_{ij} + \boldsymbol{\Psi}_{i,j})$, where $\boldsymbol{\Psi}_{i,j} \equiv \partial \boldsymbol{\Psi}_{i} / \partial \mathbf{q}_{j}$, we may take the divergence of \ref{eq:particle_displacment--eq_of_motion} to obtain
+\begin{equation} \label{eq:particle_displacement--div_eq_of_motion}
+	\mathbf{J}(\mathbf{q}, \tau) \del \cdot \left[ \frac{\diff^{2} \mathbf{x}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff \mathbf{x}}{\diff \tau} \right]
+	= \frac{3}{2} \Omega \mathcal{H}^{2}(J - 1).
+\end{equation}
+Using $\del_{i} = (\delta_{ij} + \boldsymbol{\Psi}_{i,j})^{-1} \del_{\mathbf{q}_{j}}$, where the gradient operator in Lagrangian coordinates $\del_{\mathbf{q}} \equiv \partial / \partial \mathbf{q}$, this equation may be rewritten in terms of Lagrangian coordinates.
+
+The solution to this transformed equation is given to first order by the Zel'dovich approximation:
+\begin{equation} \label{eq:particle_displacement--zeldovich_approximation}
+	\nabla_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(1)} = -D_{1}(\tau) \delta(\mathbf{q}),
+\end{equation}
+where $\delta(\mathbf{q})$ is the Gaussian density field determined by the initial conditions and $D_{1}(\tau)$ is the linear growth factor, which obeys
+\begin{equation}
+	\frac{\diff^{2} D_{1}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff D_{1}}{\diff \tau} = \frac{3}{2} \Omega \mathcal{H}^{2}(\tau) D_{1}.
+\end{equation}
+The Zel'dovich approximation solution for the particle displacement field is then given by
+\begin{equation}
+	\mathbf{x}(\mathbf{q}, \tau) = \mathbf{q} + \boldsymbol{\Psi}(\mathbf{q}, \tau) \approx \mathbf{q} - D_{1}(\tau) \del \phi^{(1)}(\mathbf{q}),
+\end{equation}
+where $\phi^{(1)}(\mathbf{q})$ is a Lagrangian potential given by the initial conditions.  The velocities of particles initially at $\mathbf{q}$ are given by
+\begin{equation}
+	\mathbf{v} \approx -D_{1}(\tau) \mathcal{H}(\tau) f \del \phi^{(1)}(\mathbf{q}),
+\end{equation}
+where $f(\Omega, \Lambda)$ is defined as
+\begin{equation}
+	f(\Omega, \Lambda) \equiv \frac{\diff \ln D}{\diff \ln a} = \frac{1}{\mathcal{H}} \frac{\diff \ln D}{\diff \tau}.
 \end{equation}
 
-\begin{equation}
-	\frac{\diff^{x}}{\diff r^{2}} + \mathcal{H}(r) \frac{\diff x}{\diff r} = -\mathbf{\nabla} \Phi
-\end{equation}
-
-\begin{equation}
-	\mathbf{J}(\mathbf{q}, \tau) \nabla \cdot \left[ \frac{\diff^{2} \mathbf{x}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff \mathbf{x}}{\diff \tau} \right]
-	= \frac{3}{2} \Omega \mathcal{H}^{2}(J - 1)
-\end{equation}
-
-\begin{equation}
-	\nabla_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(1)} = -D_{1}(\tau) \delta(\mathbf{q})
-\end{equation}
-
+The second-order (\lpt) correction is found by a perturbative solution to the non-linear equation for $\boldsymbol{\Psi}(\mathbf{q})$ (Equation~\ref{eq:particle_displacement--div_eq_of_motion} transformed to Lagrangian coordinates), expanding about the linear (\za) solution (Equation~\ref{eq:particle_displacement--zeldovich_approximation}) to yield \citep[e.g. ][]{1995A&A...296..575B}
 \begin{equation}
 	\nabla_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(2)}
 	= \frac{1}{2} D_{2}(\tau) \sum_{i \ne j} \left[ \boldsymbol{\Psi}_{i,i}^{(1)} \boldsymbol{\Psi}_{j,j}^{(1)}
-	- \boldsymbol{\Psi}_{i,j}^{(1)} \boldsymbol{\Psi}_{j,i}^{(1)} \right]
+	- \boldsymbol{\Psi}_{i,j}^{(1)} \boldsymbol{\Psi}_{j,i}^{(1)} \right],
 \end{equation}
+where $D_{2}(\tau)$ is the second-order growth factor.
 
 \begin{equation}
 	D_{2}(\tau) \approx -\frac{3}{7} D_{1}^{2}(\tau) \Omega^{-2/63} \approx -\frac{3}{7} D_{1}^{2}(\tau)
