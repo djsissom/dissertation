@@ -119,16 +119,16 @@ If we define the conformal time $\tau = \int \diff t / a$, where $a(\tau)$ is th
 \begin{equation} \label{eq:particle_displacment--eq_of_motion}
 	\frac{\diff^{2} \mathbf{x}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff \mathbf{x}}{\diff \tau} = -\del \Phi,
 \end{equation}
-where $\Phi$ is the gravitational potential and $\del$ is the gradient operator in Eulerian coordinates $\mathbf{x}$.  Using the Poisson equation together with $1 + \delta(\mathbf{x}) = \mathbf{J}^{-1}$, where the Jacobian $\mathbf{J}(\mathbf{q}, \tau)$ is the determinant $\mathbf{J}(\mathbf{q}, \tau) \equiv \det(\delta_{ij} + \boldsymbol{\Psi}_{i,j})$, where $\boldsymbol{\Psi}_{i,j} \equiv \partial \boldsymbol{\Psi}_{i} / \partial \mathbf{q}_{j}$, we may take the divergence of \ref{eq:particle_displacment--eq_of_motion} to obtain
+where $\Phi$ is the gravitational potential and $\del$ is the gradient operator in Eulerian coordinates $\mathbf{x}$.  Using $1 + \delta(\mathbf{x}) = J^{-1}$, where $\delta(\mathbf{x}) \equiv [\rho(\mathbf{x},t) - \bar{\rho}] / \bar{\rho}$ is the density contrast and the Jacobian determinant is $J(\mathbf{q}, \tau) \equiv \det(\delta_{ij} + \boldsymbol{\Psi}_{i,j})$, where $\boldsymbol{\Psi}_{i,j} \equiv \partial \boldsymbol{\Psi}_{i} / \partial \mathbf{q}_{j}$, we may take the divergence of \ref{eq:particle_displacment--eq_of_motion} to obtain
 \begin{equation} \label{eq:particle_displacement--div_eq_of_motion}
-	\mathbf{J}(\mathbf{q}, \tau) \del \cdot \left[ \frac{\diff^{2} \mathbf{x}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff \mathbf{x}}{\diff \tau} \right]
+	J(\mathbf{q}, \tau) \del \cdot \left[ \frac{\diff^{2} \mathbf{x}}{\diff \tau^{2}} + \mathcal{H}(\tau) \frac{\diff \mathbf{x}}{\diff \tau} \right]
 	= \frac{3}{2} \Omega \mathcal{H}^{2}(J - 1).
 \end{equation}
 Using $\del_{i} = (\delta_{ij} + \boldsymbol{\Psi}_{i,j})^{-1} \del_{\mathbf{q}_{j}}$, where the gradient operator in Lagrangian coordinates $\del_{\mathbf{q}} \equiv \partial / \partial \mathbf{q}$, this equation may be rewritten in terms of Lagrangian coordinates.
 
 The solution to this transformed equation is given to first order by the Zel'dovich approximation:
 \begin{equation} \label{eq:particle_displacement--zeldovich_approximation}
-	\nabla_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(1)} = -D_{1}(\tau) \delta(\mathbf{q}),
+	\del_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(1)} = -D_{1}(\tau) \delta(\mathbf{q}),
 \end{equation}
 where $\delta(\mathbf{q})$ is the Gaussian density field determined by the initial conditions and $D_{1}(\tau)$ is the linear growth factor, which obeys
 \begin{equation}
@@ -144,49 +144,36 @@ where $\phi^{(1)}(\mathbf{q})$ is a Lagrangian potential given by the initial co
 \end{equation}
 where $f(\Omega, \Lambda)$ is defined as
 \begin{equation}
-	f(\Omega, \Lambda) \equiv \frac{\diff \ln D}{\diff \ln a} = \frac{1}{\mathcal{H}} \frac{\diff \ln D}{\diff \tau}.
+	f_{i}(\Omega, \Lambda) \equiv \frac{\diff \ln D_{i}}{\diff \ln a} = \frac{1}{\mathcal{H}} \frac{\diff \ln D_{i}}{\diff \tau}.
 \end{equation}
 
 The second-order (\lpt) correction is found by a perturbative solution to the non-linear equation for $\boldsymbol{\Psi}(\mathbf{q})$ (Equation~\ref{eq:particle_displacement--div_eq_of_motion} transformed to Lagrangian coordinates), expanding about the linear (\za) solution (Equation~\ref{eq:particle_displacement--zeldovich_approximation}) to yield \citep[e.g. ][]{1995A&A...296..575B}
 \begin{equation}
-	\nabla_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(2)}
+	\del_{\mathbf{q}} \cdot \boldsymbol{\Psi}^{(2)}
 	= \frac{1}{2} D_{2}(\tau) \sum_{i \ne j} \left[ \boldsymbol{\Psi}_{i,i}^{(1)} \boldsymbol{\Psi}_{j,j}^{(1)}
 	- \boldsymbol{\Psi}_{i,j}^{(1)} \boldsymbol{\Psi}_{j,i}^{(1)} \right],
 \end{equation}
-where $D_{2}(\tau)$ is the second-order growth factor.
-
+where $D_{2}(\tau)$ is the second-order growth factor, which may be approximated as $D_{2}(\tau) \approx -3 D_{1}^{2}(\tau) / 7$ \citep{1995A&A...296..575B}.  The displacement field may then be written in terms of two Lagrangian potentials $\phi^{(1)}$ and $\phi^{(2)}$:
 \begin{equation}
-	D_{2}(\tau) \approx -\frac{3}{7} D_{1}^{2}(\tau) \Omega^{-2/63} \approx -\frac{3}{7} D_{1}^{2}(\tau)
+	\mathbf{x}(\mathbf{q}) = \mathbf{q} - D_{1} \del_{q} \phi^{(1)} + D_{2} \del_{q} \phi^{(2)}.
 \end{equation}
-
+Likewise, the comoving velocities are then given to second order by
 \begin{equation}
-	D_{2}(\tau) \approx -\frac{3}{7} D_{1}^{2}(\tau) \Omega^{-1/143} \approx -\frac{3}{7} D_{1}^{2}(\tau)
+	\mathbf{v} \equiv \frac{\diff \mathbf{x}}{\diff t} = - D_{1} f_{1} H \del_{q} \phi^{(1)} + D_{2} f_{2} H \del_{q} \phi^{(2)}.
 \end{equation}
-
+The logarithmic derivatives of the growth factors $f_{i}$ may be approximated as $f_{1} \approx \Omega^{5/9}$ and $f_{2} \approx 2 \Omega^{6/11}$ \citep{1995A&A...296..575B}.  The potentials $\phi^{(1)}$ and $\phi^{(2)}$ are derived by solving a pair of Poisson equations \citep{1994A&A...288..349B}:
 \begin{equation}
-	\mathbf{x}(\mathbf{q}) = \mathbf{q} - D_{1} \nabla_{q} \phi^{(1)} + D_{2} \nabla_{q} \phi^{(2)}
+	\nabla_{q}^{2} \phi^{(1)}(\mathbf{q}) = \delta^{(1)}(\mathbf{q}),
 \end{equation}
-
 \begin{equation}
-	\mathbf{v} \equiv \frac{\diff \mathbf{x}}{\diff t} = - D_{1} f_{1} H \nabla_{q} \phi^{(1)} + D_{2} f_{2} H \nabla_{q} \phi^{(2)}
+	\nabla_{q}^{2} \phi^{(2)}(\mathbf{q}) = \delta^{(2)}(\mathbf{q}),
 \end{equation}
-
+where $\delta^{(1)}(\mathbf{q})$ is the linear overdensity, and $\delta^{(2)}(\mathbf{q})$ is the second-order overdensity given by
 \begin{equation}
-	f_{1} \approx \Omega^{3/5}, \;\;\;\; f_{2} \approx 2 \Omega^{4/7}
+	\delta^{(2)}(\mathbf{q})
+	= \sum_{i > j} \left\{ \phi_{,ii}^{(1)}(\mathbf{q}) \phi_{,jj}^{(1)}(\mathbf{q}) - \left[ \phi_{,ij}^{(1)}(\mathbf{q}) \right]^{2} \right\},
 \end{equation}
-
-\begin{equation}
-	f_{1} \approx \Omega^{5/9}, \;\;\;\; f_{2} \approx 2 \Omega^{6/11}
-\end{equation}
-
-\begin{equation}
-	\nabla_{q}^{2} \phi^{(1)}(\mathbf{q}) = \delta(\mathbf{q})
-\end{equation}
-
-\begin{equation}
-	\nabla_{q}^{2} \phi^{(2)}(\mathbf{q})
-	= \sum_{i > j} \left\{ \phi_{,ii}^{(1)}(\mathbf{q}) \phi_{,jj}^{(1)}(\mathbf{q}) - \left[ \phi_{,ij}^{(1)}(\mathbf{q}) \right]^{2} \right\}
-\end{equation}
+where $\phi_{,ij}^{(n)} \equiv \partial^{2} \phi^{(n)} / \partial \mathbf{q}_{i} \partial \mathbf{q}_{j}$ \citep{2010MNRAS.403.1859J}.
 
 
 
