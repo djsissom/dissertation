@@ -164,12 +164,30 @@ where $\phi_{,ij}^{(n)} \equiv \partial^{2} \phi^{(n)} / \partial \mathbf{q}_{i}
 
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-\subsubsection{Advantages of Second-order Lagrangian Perturbation Theory}
-\label{subsubsec:computational_theory--perturbation_theory--2lpt}
+\subsubsection{Transients and the Advantages of \lpt}
+\label{subsubsec:computational_theory--perturbation_theory--transients}
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Text goes here.
+A primary concern when generating cosmological initial conditions is the effects of non-linear decaying modes, or transients, which introduce deviations from the growing modes of the exact dynamics.  Linear growing modes of density and velocity perturbations are correctly reproduced by \za.  However, \za\ has shown to be inaccurate in regards to higher-order growing modes and non-linear correlations \citep{1987ApJ...320..448G, 1993ApJ...412L...9J, 1994ApJ...433....1B, 1994ApJ...426...14C, 1995ApJ...442...39J}, and fails to accurately represent statistical quantities that probe phase correlations of density and velocity fields \citep{1998MNRAS.299.1097S}.
+
+We cannot expect accurate simulation results until enough time has passed for transients to have sufficiently decayed away.  Transients are damped proportional to $1 / a$ in \za.  In \lpt, however, transients are damped more quickly as $1 / a^{2}$.  Therefore, structure in \lpt\ should be accurate after fewer $e$-folding times than in \za\ \citep{1998MNRAS.299.1097S, 2006MNRAS.373..369C, 2010MNRAS.403.1859J}.  \citet{2013MNRAS.431.1866R} suggest that for \lpt-initialized simulations, between 10 and 50 expansion factors are needed before the relevant epoch of halo formation if percent level accuracy is to be achieved.
+
+The practical result is that high-$\sigma$ DM density peaks at high redshift are suppressed in \za\ compared with \lpt\ for a given starting redshift \citep{2006MNRAS.373..369C}.  While differences in ensemble halo properties, such as the halo mass function, between simulation initialization methods are mostly washed away by $z=0$ \citep{1998MNRAS.299.1097S}, discrepancies between \za\ and \lpt\ remain at earlier redshifts \citep{2013MNRAS.431.1866R}, though these trends are relatively less studied \citep{2007ApJ...671.1160L}.
+
+
+
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+\subsubsection{Initial Redshift}
+\label{subsubsec:computational_theory--perturbation_theory--initial_redshift}
+%:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+When setting up an \nbody\ simulation, it is critical to choose an appropriate starting redshift, determined by box size and resolution \citep{2007ApJ...671.1160L}.  As \lpt\ more accurately displaces initial particle positions and velocities, initialization with \lpt\ allows for a later starting redshift compared with an equivalent \za-initialized simulation.  However, many \za\ simulations do not take this into account, starting from too late an initial redshift and not allowing enough $e$-foldings to adequately dampen away numerical transients \citep{2006MNRAS.373..369C, 2010MNRAS.403.1859J}.  In order to characterize an appropriate starting redshift, the relation between the initial rms particle displacement and mean particle separation must be considered.  The initial rms displacement $\Delta_{\mathrm{rms}}$ is given by
+\begin{equation}
+	\Delta_{\mathrm{rms}}^{2} = \frac{4 \pi}{3} \int_{k_{f}}^{k_{\mathrm{Ny}}} P(k, z_{\mathrm{start}}) \dd k,
+\end{equation}
+where $k_{f} = 2 \pi / L_{\mathrm{box}}$ is the fundamental mode, $L_{\mathrm{box}}$ is the simulation box size, $k_{\mathrm{Ny}} = \frac{1}{2} N k_{f}$ is the Nyquist frequency of an $N^{3}$ simulation, and $P(k, z_{\mathrm{start}})$ is the power spectrum at starting redshift $z_{\mathrm{start}}$.  In order to avoid the ``orbit crossings'' that reduce the accuracy of the initial conditions, $\Delta_{\mathrm{rms}}$ must be some factor smaller than the mean particle separation $\Delta_{p} = L_{\mathrm{box}} / N$ \citep{2012ApJ...761L...8H}.  For example, making orbit crossing a $\sim 10 \sigma$ event imposes $\Delta_{\mathrm{rms}} / \Delta_{p} = 0.1$.  However, for small-volume, high-resolution simulations, this quickly leads to impractical starting redshifts, placing such a simulation well into the regime of introducing errors from numerical noise caused by roundoff errors dominating the smooth potential.  A more relaxed requirement of $\Delta_{\mathrm{rms}} / \Delta_{p} = 0.25$, which makes orbit crossing a $\sim 4\sigma$ event, often proves a more practical choice.
 
 
 
