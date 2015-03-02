@@ -1,0 +1,25 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Conclusion
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chapter Introduction
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In this work, we have explored the properties and evolution of dark matter halos in the early Universe and the numerical effects of simulation initialization technique on their mass and concentration.  Using six cosmological dark matter only \nbody\ simulations evolved with the TreeSPH code \gadgettwo, with three initialized according to the Zel'dovich approximation and three initialized according to second-order Lagrangian perturbation theory, we have compared distributions of halo properties as found by the six-dimensional phase space halo finder \rockstar.  Our study has focused on the early Universe in the pre-reionization epoch $z \ge 6$, as it is at these early times that the subtle differences in numerical technique become most pertinent.
+
+We have found marked differences in the halo populations between simulation initialization type.  The linear nature of \za\ underestimates the growth of early halos, resulting in a suppressed halo mass distribution and large concentration fluctuations.  \lpt\ halos get a head start in the formation process and tend to grow faster than \za\ halos, with potentially earlier merger epochs and differing nuclear morphologies.
+
+Halos in \lpt\ simulations are, on average, more massive than \za\ halos.  This effect is dependent on redshift and most pronounced at high $z$.  We find 50\% of \lpt\ halos are at least 10\% more massive than their \za\ companions at $z = 15$, and 10\% are at least 10\% more massive by $z = 6$.  Additionally, the earlier collapse of the largest density peaks in \lpt\ causes the mass difference to be largest for the most massive halos.  This is again more prominent at high redshift, until $z \sim 14$, where the trend seems to begin to reverse.
+
+While halo concentration is similar for \za\ and \lpt\ simulations on average, individual halo pairs can retain large discrepancies.  We find 25\% of halo pairs to have concentrations differing by at least a factor of 2 at $z = 15$ and 15\% at least a factor of 2 different by $z = 6$.  Additionally, viewing concentration difference as a function of mass displays a trend for \za halos to be more concentrated than their \lpt\ counterparts at high mass, while low mass halos tend to be more concentrated in \lpt.  This tendency increases with redshift until $z \sim 12$, where, as in the case of mass difference, the trend appears to reverse.
+
+There remains the opportunity for further research into the effects of \za\ and \lpt\ initialization on high-$z$ dark matter halos.  Our simulations consist of $512^{3}$ particles in volumes of $(10 \mathrm{Mpc})^{3}$.  This box size is too small to effectively capture very large outlier density peaks that correspond to the largest early halos.  These large uncaptured density peaks should be expected to be most sensitive to initialization technique.  The results in this work, therefore, may even be dramatically underestimated.  Additionally, as computer cluster hardware continues to improve, larger $N$ simulations become more feasible.  A larger particle number would allow the increase in resolution needed to consider smaller mass halos and better resolve existing substructure.  This is most critical for high redshift, as early-forming halos at large $z$ are inherently represented with fewer particles, making accurate measurement of internal structure such as the density profile more difficult.  We primarily explored virial mass and concentration in this study, but other halo statistics may prove interesting probes of simulation differences.  \rockstar\ provides measurements for a number of additional halo properties, including angular momentum, spin, nuclear position offset, nuclear velocity offset, ellipsoidal shape parameters, and energy statistics.  It would be relatively straightforward to incorporate analysis of these parameters into our pipeline, and the analysis processes utilized in this study are readily adaptable to the output of larger and higher resolution numerical simulations.
+
+
+
+
