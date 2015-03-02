@@ -28,7 +28,7 @@ The non-linear evolution of the collapse of density fluctuations may be approxim
 
 The definition of a halo arises from the contrast in density between a virialized over-dense region and the density of the rest of the universe.  For example, halos defined according to the spherical overdensity (SO) method are regions above a certain density threshold \citep{1998ApJ...495...80B}, either with respect to the critical density $\rho_{c} = 3 H^{2} / 8 \pi G$ or the background matter density $\rho_{b} = \Omega_{m} \rho_{c}$, where $\Omega_{m}$ is the matter density of the Universe.  The halo is then the region enclosed within a sphere with mean density $\Delta \rho_{c}$ or $\Delta \rho_{b}$, where $\Delta$ commonly ranges from $\sim 100$ to $\sim 500$ and is typically taken to be $\sim 200$.  The radius of the sphere is typically called the virial radius $\Rvir$, but may alternatively be denoted $R_{\Delta}$, where the specific choice of $\Delta$ is listed (e.g. $R_{200}$).
 
-Dark matter halos form hierarchically \citep[e.g.,][and references therein]{2000MNRAS.319..168C, 2003AJ....126.1183C}.  Small halos form first from gravitational collapse and successively merge to form larger structures over time, which is often referred to as the ``bottom-up'' paradigm.  This leads to a characteristic mass of assembling halos at each redshift, which, at $z = 0$, are clusters with mass $\gtrsim 10^{14} \Msun$.  A typical halo undergoes a number of mergers throughout its evolution \citep[e.g.][]{2003AJ....126.1183C, 2009ApJ...701.2002G, 2010MNRAS.406.2267F}.  Defining a major merger to have a mass ratio of $3:1$ or less and a minor merger to have a mass ratio of $10:1$ or less, a massive halo typically undergoes $\sim 4-5$ major mergers after $z \sim 3$, with minor mergers occurring even more frequently.  These mergers play a critical role in the mass assembly of a halo, and greatly influence the evolution of the hosted baryonic galaxy.
+Dark matter halos form hierarchically \citep[e.g.,][and references therein]{2000MNRAS.319..168C, 2003AJ....126.1183C}.  Small halos form first from gravitational collapse and successively merge to form larger structures over time, which is often referred to as the ``bottom-up'' paradigm.  This leads to a characteristic mass of assembling halos at each redshift, which, at $z = 0$, are clusters with mass $\gtrsim 10^{14} \Msun$.  A typical halo undergoes a number of mergers throughout its evolution \citep[e.g.,][]{2003AJ....126.1183C, 2009ApJ...701.2002G, 2010MNRAS.406.2267F}.  Defining a major merger to have a mass ratio of $3:1$ or less and a minor merger to have a mass ratio of $10:1$ or less, a massive halo typically undergoes $\sim 4-5$ major mergers after $z \sim 3$, with minor mergers occurring even more frequently.  These mergers play a critical role in the mass assembly of a halo, and greatly influence the evolution of the hosted baryonic galaxy.
 
 
 
@@ -39,38 +39,42 @@ Dark matter halos form hierarchically \citep[e.g.,][and references therein]{2000
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-The number density of dark matter halos as a function of halo mass and redshift, often referred to simply as the mass function, is a key probe of cosmology.  The original formulation of \citet{1974ApJ...187..425P} is explored in more detail by \citet{2002MNRAS.336..112M} and \citet{2006ApJ...646..881W}, and here we follow the notation of \citet{2002MNRAS.336..112M}.
-
+The number density of dark matter halos as a function of halo mass and redshift, often referred to simply as the mass function, is a key probe of cosmology.  The original formulation of \citet{1974ApJ...187..425P} is explored in more detail by a number of studies \citep[e.g.,][]{2002MNRAS.336..112M, 2006ApJ...646..881W}.  Here we follow the notation of \citet{2002MNRAS.336..112M}, where the number density of halos per unit comoving volume with mass in the interval $(M, M + \diff M)$ at redshift $z$ is given as
 \begin{equation}
-	\sigma^{2}(R) = \frac{1}{2 \pi^{2}} \int_{0}^{\infty} k^{3} P(k) \tilde{W}^{2}(k R) \frac{\diff k}{k}
+	n(M, z) \dd M = \sqrt{\frac{2}{\pi}} \frac{\bar{\rho_{0}}}{M} \frac{\diff \nu}{\diff M} \exp\left( -\frac{\nu^{2}}{2}\right) \dd M,
 \end{equation}
-
-$\tilde{W}(x) = 3 [ \sin( k R ) - k R \cos( k R ) ] / ( k R )^{3}$
-
+where $\bar{\rho}_{0}$ is the current mean density of the universe, $\nu \equiv \delta_{c} / [D(z) \sigma(M)]$, $\delta_{c} \approx 1.69$, and the linear growth factor can be taken as $D(z) = g(z) / [g(0) (1 + z)]$ \citep{1992ARA&A..30..499C}, where
 \begin{equation}
-	n(M, z) \dd M = \sqrt{\frac{2}{\pi}} \frac{\bar{\rho_{0}}}{M} \frac{\diff \nu}{\diff M} \exp\left( -\frac{\nu^{2}}{2}\right) \dd M
+	g(z) \approx \frac{5}{2} \Omega_{m} \left[ \Omega_{m}^{4/7} - \Omega_{\Lambda} + (1 + \Omega_{m} / 2) (1 + \Omega_{\Lambda} / 70) \right]^{-1}.
 \end{equation}
-
-$\nu \equiv \delta_{c} / [D(z) \sigma(M)]$
-
-$\delta_{c} \approx 1.69$
-
-$D(z) = g(z) / [g(0) (1 + z)]$
-
+The density fractions are, as usual, functions of redshift:
 \begin{equation}
-	g(z) \approx \frac{5}{2} \Omega_{m} \left[ \Omega_{m}^{4/7} - \Omega_{\Lambda} + (1 + \Omega_{m} / 2) (1 + \Omega_{\Lambda} / 70) \right]^{-1}
+	\Omega_{m} \equiv \Omega_{m}(z) = \frac{\Omega_{m,0} ( 1 + z )^{3}}{E^{2}(z)},
+	\; \; \; \;
+	\Omega_{\Lambda} \equiv \Omega_{\Lambda}(z) = \frac{\Omega_{\Lambda,0}}{E^{2}(z)},
 \end{equation}
-
-There are a number of ways to define a halo's mass.  This becomes significant for mass-sensitive studies, such as the halo mass function \citep{1974ApJ...187..425P, 2007MNRAS.374....2R, 2006ApJ...642L..85H, 2007ApJ...671.1160L}, the number density of halos as a function of mass and a key probe of cosmology.  For a review, see, e.g., \citet{2001A&A...367...27W} and references therein.  Additionally, see \citet{2005RvMP...77..207V} and references therein for a more observation-focused discussion.
-
+where
 \begin{equation}
-	\Mvir \equiv \frac{4 \pi}{3} \Delta_{\vir} \rho_{m} R^{3}_{\vir},
+	E(z) = \left[ \Omega_{\Lambda,0} + ( 1 - \Omega_{0} ) ( 1 + z )^{2} + \Omega_{m,0} ( 1 + z )^{3} \right]^{1/2},
 \end{equation}
-where $\rho_{m} = \Omega_{\mathrm{M}} \rho_{c}$.
-
+and $\Omega_{0}$, $\Omega_{m,0}$, and $\Omega_{\Lambda,0}$ are the present day values at $z = 0$.  The rms density fluctuations $\sigma(M)$ may be expressed in terms of radius
 \begin{equation}
-	\Vcirc = \left. \sqrt{\frac{GM(<r)}{r}} \right|_{\mathrm{\max}}
+	R(M) \equiv \left( \frac{3 M}{4 \pi \bar{\rho}_{0}} \right)^{1/3}
 \end{equation}
+by
+\begin{equation}
+	\sigma^{2}(R) = \frac{1}{2 \pi^{2}} \int_{0}^{\infty} k^{3} P(k) \tilde{W}^{2}(k R) \frac{\diff k}{k},
+\end{equation}
+where $P(k)$ is the power spectrum of density fluctuations extrapolated to $z = 0$ and $\tilde{W}( k R ) = 3 [ \sin( k R ) - k R \cos( k R ) ] / ( k R )^{3}$ is the Fourier transform of a spherical top-hat filter with radius $R$.
+
+The Press-Schechter model above does not account for halo mergers.  The extended Press-Schechter model \citep{1991ApJ...379..440B, 1991MNRAS.248..332B, 1993MNRAS.262..627L, 2008MNRAS.383..557P} expands on the original formulation and includes the results of binary merger trees to provide more realistic halo mass assembly histories.  Additionally, mass functions are often measured from the results of numerical simulations \citep[e.g.,][]{2006ApJ...646..881W, 2008ApJ...688..709T, 2006ApJ...642L..85H, 2007MNRAS.374....2R, 2007ApJ...671.1160L}, avoiding the limitations of the analytical models.  In Figure~\ref{fig:mass_function--warren_mass_function}, we provide an example mass function from numerical simulation.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{early_universe/warren_2006_mass_function.eps}
+	\caption[Concentration upturn for high mass halos at high $z$]{\footnotesize The dark matter halo mass function, as measured from sixteen $1024^{3}$ particle simulations of the $\Lambda$CDM Universe.  \citep{2006ApJ...646..881W}}
+	\label{fig:mass_function--warren_mass_function}
+\end{figure}
 
 
 
@@ -89,15 +93,13 @@ DM halos almost universally display a characteristic shape in their density prof
 \end{equation}
 where $\rho_{0}$ is the characteristic density and $R_{s}$ is the scale radius where the inner $\sim r^{-1}$ profile transitions to the outer $\sim r^{-3}$ profile.
 
-%\mrk{(Add Einasto profile paragraph.)}
-%Alternatively, the density profile may be modeled with the Einasto \citep{1989A&A...223...89E} profile:
-%\begin{equation} \label{eq:einasto_profile}
-%	\rho(r) \propto \exp \left( -Ar^{\alpha} \right).
-%\end{equation}
-
 Halo concentration $c$ provides a single-parameter quantization of the density profile.  For the NFW profile, concentration is defined as $c \equiv R_{\mathrm{vir}} / R_{s}$, where $R_{\mathrm{vir}}$ is the halo virial radius.  Generally, at low redshift, low mass halos are more dense than high mass halos \citep{1997ApJ...490..493N}, and concentration decreases with redshift and increases in dense environments \citep{2001MNRAS.321..559B}.  \citet{2007MNRAS.381.1450N} additionally find that concentration decreases with halo mass.  Various additional studies have explored concentration's dependence on characteristics of the power spectrum \citep{2001ApJ...554..114E}, cosmological model \citep{2008MNRAS.391.1940M}, redshift \citep{2008MNRAS.387..536G, 2011MNRAS.411..584M}, and halo merger and mass accretion histories \citep{2002ApJ...568...52W, 2003MNRAS.339...12Z, 2009ApJ...707..354Z}.  For halos at high redshift, \citet{2011ApJ...740..102K} find that concentration reverses and increases with mass for high mass halos, while \citet{2012MNRAS.423.3018P} find that concentration's dependence on mass and redshift is more complicated and is better described through $\sigma(M,z)$, the rms fluctuation amplitude of the linear density field.
 
-Concentration may be estimated from a halo's virial mass $\Mvir$ and maximum circular velocity $\Vcirc$.  Following \citet{2011ApJ...740..102K}, we outline this relationship for $z = 0$ and as a function of redshift.  The relation between the virial mass and maximum circular velocity may be given as \citep{2001ApJ...554..903K}:
+Concentration may be estimated from a halo's virial mass $\Mvir$ and maximum circular velocity
+\begin{equation}
+	\Vcirc = \left. \sqrt{\frac{GM(<r)}{r}} \right|_{\mathrm{\max}}.
+\end{equation}
+Following \citet{2011ApJ...740..102K}, we outline this relationship for $z = 0$ and as a function of redshift.  The relation between the virial mass and maximum circular velocity may be given as \citep{2001ApJ...554..903K}:
 \begin{equation}
 	\Vcirc = \left[ G \frac{f(x_{\max})}{f(c)} \frac{c}{x_{\max}} \hat{\rho}^{1/3} \right]^{1/2} \Mvir^{1/3},
 \end{equation}
@@ -219,11 +221,6 @@ The resulting curve closely follows the data at all redshifts from $z = 0$ to $z
 
 
 Early-forming dark matter halos provide an incubator for the baryonic processes that transform the surrounding space and allow galaxies to form.  Initial gas accretion can lead to the formation of the first Pop-III stars \citep{1986MNRAS.221...53C, 1997ApJ...474....1T, 2000ApJ...540...39A, 2002Sci...295...93A}, which, upon their death, can collapse into the seeds for supermassive black holes (SMBHs) \citep{2001ApJ...551L..27M, 2003MNRAS.340..647I, 2009ApJ...701L.133A, 2012ApJ...754...34J} or enrich the surrounding medium with metals through supernovae \citep{2002ApJ...567..532H, 2003ApJ...591..288H}.  The radiation from these early quasars \citep{1987ApJ...321L.107S, 1999ApJ...514..648M, 2001AJ....122.2833F}, Pop-III stars \citep{1997ApJ...486..581G, 2003ApJ...584..621V, 2006ApJ...639..621A}, and proto-galaxy stellar populations \citep{2012ApJ...752L...5B, 2012MNRAS.423..862K} all play a key role in contributing to the re-ionizing the universe by around $z = 6$ \citep{2001PhR...349..125B}.  Additionally, halo mergers can drastically increase the temperature of halo gas through shock heating, increasing X-ray luminosity \citep{2009MNRAS.397..190S}, and contribute to the unbinding of gas to form the warm-hot intergalactic medium \citep{2008SSRv..134..141B, 2010MNRAS.405L..31S, 2012MNRAS.425.2974T}.
-
-% the first stars
-% supermassive black holes
-% enrichment and the intergalactic medium
-% reionization
 
 
 
