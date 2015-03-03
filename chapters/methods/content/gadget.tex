@@ -51,7 +51,7 @@ An example of this softening is shown in Figure~\ref{fig:gadget--gadget--softeni
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{gadget/softened_force.eps}
 	\end{subfigure}
-	\caption[Potential and force softening.]{\footnotesize Potential (\emph{left}) and force (\emph{right}) softening.  The solid curves are the spline softening of Equation~\ref{eq:gadget--gadget--spline_kernel}.  Curves for Plummer softening (dotted) and Newton's law (dashed) are provided for comparison.  Here, $h = 1.0$ and $\epsilon = h/2.8$.  Figure from \citet{2001NewA....6...79S}.}
+	\caption[Potential and force softening.]{\footnotesize Potential (\emph{left}) and force (\emph{right}) softening.  The solid curves are the spline softening of Equation~\ref{eq:gadget--gadget--spline_kernel}.  Curves for Plummer softening (dotted) and Newton's law (dashed) are provided for comparison.  Here, $h = 1.0$ and $\epsilon = h/2.8$.  \citep{2001NewA....6...79S}}
 	\label{fig:gadget--gadget--softening}
 \end{figure}
 
@@ -60,7 +60,7 @@ As discussed in Section~\ref{subsec:computational_theory--nbody_simulations}, di
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\linewidth]{gadget/tree.eps}
-	\caption[Barns-Hut oct-tree in two dimensions.]{\footnotesize Barns-Hut oct-tree in two dimensions.  The simulation volume is recursively partitioned into cells until each contains only one particle each.  Empty cells may be ignored.  Figure from \citet{2001NewA....6...79S}.}
+	\caption[Barns-Hut oct-tree in two dimensions.]{\footnotesize Barns-Hut oct-tree in two dimensions.  The simulation volume is recursively partitioned into cells until each contains only one particle each.  Empty cells may be ignored.  \citep{2001NewA....6...79S}}
 	\label{fig:gadget--gadget--tree}
 \end{figure}
 
@@ -117,7 +117,7 @@ Cosmological simulations inherently contain a large dynamic range in time scales
 \begin{equation}
 	\Delta t_{\mathrm{grav}} = \min \left[ \Delta t_{\max}, \left( \frac{2 \eta \epsilon}{|a|} \right)^{1/2} \right],
 \end{equation}
-where $\eta$ is an accuracy parameter, $\epsilon$ is the gravitational softening, and $a$ is the particle's acceleration.  The maximum allowed timestep is $\Delta t_{\max}$, which is usually chosen to be a small fraction of the dynamical time of the system.
+where $\eta$ is an accuracy parameter, $\epsilon$ is the gravitational softening, and $a$ is the particle's acceleration.  The maximum allowed time-step is $\Delta t_{\max}$, which is usually chosen to be a small fraction of the dynamical time of the system.
 
 \gadgettwo\ allows particles to take on time-steps as a power of two subdivision of a global time-step.  A particle is allowed to move to a smaller time-step at any time.  However, moving to a larger time-step is only allowed on every second iteration and when this would lead to synchronization with the higher time-step hierarchy.
 

@@ -46,7 +46,7 @@ where the comoving coordinate vectors $\mathbf{x}_{i}$ correspond to canonical m
 \end{equation}
 where $\mathbf{n} = (n_{1}, n_{2}, n_{3})$ iterates through all integer permutations, sampling the single particle density distribution function $\tilde{\delta}$.  Here, the mean density is subtracted, and the dynamics of the system follow
 \begin{equation}
-	\nabla^{2} \phi(\mathbf{x}) = 4 \pi G [\rho(\mathbf{x}) - \bar{\rho}]
+	\nabla^{2} \phi(\mathbf{x}) = 4 \pi G [\rho(\mathbf{x}) - \bar{\rho}],
 \end{equation}
 with peculiar potential
 \begin{equation}
@@ -62,7 +62,7 @@ At small particle separations as $|\mathbf{x}_{i} - \mathbf{x}_{j}| \rightarrow 
 \begin{equation}
 	\mathbf{a}_{i} = -\sum_{j \ne i} \frac{G m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{| \mathbf{x}_{i} - \mathbf{x}_{j} |^{3}}
 \end{equation}
-approach a numerical singularity that can introduce unphysical results for finite time-steps.  To avoid this scenario, numerical simulations employ a softening parameter $\epsilon > 0$ in the force law so that it does not diverge for small particle separations.  As a simple example, the softening parameter may be added to the particle displacement in the denominator of the Newtonian force law:
+approach a numerical singularity that can introduce unphysical results for finite time-steps.  To avoid this scenario, numerical simulations employ a softening parameter $\epsilon > 0$ in the force law so that it does not diverge for small particle separations.  As a simple example, the softening parameter may be added to the denominator of the Newtonian force law:
 \begin{equation}
 	\mathbf{F}_{i} = -\sum_{j \ne i} \frac{G m_{i} m_{j} | \mathbf{x}_{i} - \mathbf{x}_{j} |}{(| \mathbf{x}_{i} - \mathbf{x}_{j} |^{2} + \epsilon^{2})^{3/2}}.
 \end{equation}
@@ -85,7 +85,7 @@ The subtle $\mathcal{O}(10^{-5})$ density perturbations in place at the CMB epoc
 
 For this discussion, we will assume a $\Lambda$CDM Universe, where the initial density distribution is described by a Gaussian random field defined by the power spectrum.  We wish to transform the information encoded in the power spectrum into a distribution of discrete particles at $z_{\mathrm{start}}$ that may then be evolved numerically.  The first step is to create a representation of the density field in Fourier space.  As the choice of power spectrum constrains the statistics of the density field and not its specific distribution, the specific realization of the field is generated from a random seed.  The typical procedure is to create a set of uniform random phases and assign amplitudes drawn from the Rayleigh distribution \citep{1985ApJS...57..241E}.  The density field may then be used as a basis for creating a particle distribution.
 
-Beginning from a uniform lattice of Lagrangian positions, particles are displaced to new Eulerian positions and assigned velocities according to a displacement field $\boldsymbol{\Psi}$ that is derived from the density field.  The two most common methods for obtaining this displacement field are the Zel'dovich approximation \citep[\za,][]{1970A&A.....5...84Z} and second-order Lagrangian perturbation theory \citep[\lpt,][]{1994MNRAS.267..811B, 1994A&A...288..349B, 1995A&A...296..575B, 1998MNRAS.299.1097S}.  Initial conditions created with \za\ displace initial particle positions and velocities via a linear field \citep{1983MNRAS.204..891K, 1985ApJS...57..241E}, while \lpt\ initial conditions add a second-order correction term to the expansion of the displacement field \citep{1998MNRAS.299.1097S, 2005ApJ...634..728S, 2010MNRAS.403.1859J}.
+Beginning from a uniform lattice of Lagrangian positions, particles are displaced to new Eulerian positions and assigned velocities according to a displacement field $\boldsymbol{\Psi}$ that is derived from the density field.  The two most common methods for obtaining this displacement field are the Zel'dovich approximation \citep[\za,][]{1970A&A.....5...84Z} and second-order Lagrangian perturbation theory \citep[\lpt,][]{1994MNRAS.267..811B, 1994A&A...288..349B, 1995A&A...296..575B, 1998MNRAS.299.1097S}.  Initial conditions created with \za\ displace initial particle positions and assign velocities via a linear field \citep{1983MNRAS.204..891K, 1985ApJS...57..241E}, while \lpt\ initial conditions add a second-order correction term to the expansion of the displacement field \citep{1998MNRAS.299.1097S, 2005ApJ...634..728S, 2010MNRAS.403.1859J}.
 
 
 
