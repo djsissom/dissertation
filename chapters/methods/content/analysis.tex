@@ -30,7 +30,7 @@ Halos are identified and measured with the \rockstar\ halo finder, which is disc
 
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 \subsubsection{Simulation Snapshots and \rockstar\ Setup}
-\label{subsubsec:analysis--halo_properties--output}
+\label{subsubsec:analysis--halo_properties--setup}
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -89,7 +89,7 @@ Density profiles are then constructed by binning the particle positions in logar
 
 Halos are fit using the CurveFit routine from the SciPy Optimize library.  It uses the Levenberg-Marquardt algorithm \citep{1963SIAM...11...431} for non-linear least squares fitting.
 
-CurveFit is called by providing a model function, independent variable, measured dependent variable, and optionally weights for the dependent variable and initial guesses for fit coefficients.  Here, our fit function is the NFW dark matter density profile (see Equation~\ref{eq:nfw_profile}).  The free parameters to be fit are the scale radius $R_{s}$ and the characteristic density $\rho_{0}$.
+CurveFit is called by providing a model function, independent variable, measured dependent variable, and optionally weights for the dependent variable and initial guesses for fit coefficients.  Here, our fit function is the NFW dark matter density profile (see Equation~\ref{eq:early_universe--nfw_profile}).  The free parameters to be fit are the scale radius $R_{s}$ and the characteristic density $\rho_{0}$.
 
 As the least squares algorithm is sensitive to local minima, care must be taken in choosing initial guesses for the fit coefficients.  Additionally, large dynamic range in the fit parameters tended to produce poor results.  We explored a number of solutions to improve solution stability, including fitting in logarithmic space and randomizing the initial guesses and picking the best solution.  We found the best results were achieved by normalizing the data to unity for both radius and density, and choosing initial guesses within an order of magnitude for a typical halo, namely, normalized $R_{s} = 0.1$ and normalized $\rho_{0} = 1.0$.
 
@@ -151,7 +151,7 @@ We need to be able to directly compare corresponding halos from the two suites o
 
 Our simulations are initialized with identical particle ID schemes, and we are thus able to uniquely identify and track matching particles between simulations and match halos based on the largest number of shared particles.  As the full implementation of the \crossmatch\ code is previously discussed in Section~\ref{sec:crossmatch}, we only briefly summarize its place in our analysis pipeline here.  The script in Appendix~\ref{app:crossmatch_setup} sets up the directory structure for the \crossmatch\ analysis and copies the \crossmatch\ parameter files (Appendices~\ref{app:crossmatch_2lpt_config} and \ref{app:crossmatch_za_config}) to the appropriate run directories.  \crossmatch\ is then run for each snapshot via the submission script in Appendix~\ref{app:run_crossmatch}, which is run for each simulation box.
 
-Once caveat of the \crossmatch\ code is that matches are not necessarily unique.  For each halo in the first simulation, only one best match halo will be selected from the second simulation.  However, there may be other halos from the first simulation that also have the same halo from the second simulation selected as a best match.  For example, such a situation may arise in the case of offset merging epochs.  To counter this, we run \crossmatch\ in both directions---once matching \za\ halos to \lpt\ halos and once matching \lpt\ halos to \za\ halos---and choose best match halos as those that are matched in both directions.  This assures a unique one-to-one matching between \lpt\ and \za\ halos.  The code and submission script that select the best matches from the \lpt-first and \za-first cross-matched halo lists are presented in Appendix~\ref{app:best_match}.
+Once caveat of the \crossmatch\ code is that matches are not necessarily unique.  For each halo in the first simulation, only one best match halo will be selected from the second simulation.  However, there may be other halos from the first simulation that also have the same halo from the second simulation selected as a best match.  For example, such a situation may arise in the case of offset merging epochs.  To counter this, we run \crossmatch\ in both directions---once matching \za\ halos to \lpt\ halos and once matching \lpt\ halos to \za\ halos---and choose best match halos as those that are matched in both directions.  This assures a unique one-to-one matching between \lpt\ and \za\ halos.  The code and submission script that select the best matches from the \lpt-first and \za-first cross-matched halo lists are presented in Appendix~\ref{app:crossmatch_best_match}.
 
 
 
@@ -263,7 +263,7 @@ We now turn our focus to the ensemble halo population as a whole.  Comparing ind
 
 
 We wish to explore differences in a number of halo properties, so we construct a generic distribution so that any measured halo quantity $q$ can be considered.  The distribution should  highlight the differences between \lpt\ and \za\ halo populations while remaining unbiased to the choice of simulation initialization.  This leaves us with a distribution of the differences between \lpt\ and \za\ quantities, normalized by the average of the two:
-\begin{equation} \label{eq:delta_q}
+\begin{equation} \label{eq:analysis--delta_q}
 	\Delta q = \frac{q_{\lpt} - q_{\za}}{q_{\mathrm{avg}}},
 \end{equation}
 where $q_{\mathrm{avg}} = \frac{1}{2} (q_{\lpt} + q_{\za})$.  Defined in this way, difference distributions of, e.g.,  virial mass $\Delta \Mvir$, concentration $\Delta c$, or the offset distance between the central density peak and the center of mass $\Delta \Xoff$ can all be considered on equal footing.  We create distribution histograms of $\Delta q$ for various halo quantities both for the combined halo catalog from the stacked simulation boxes and for the individual simulation boxes separately.
@@ -276,19 +276,19 @@ where $q_{\mathrm{avg}} = \frac{1}{2} (q_{\lpt} + q_{\za})$.  Defined in this wa
 
 
 In order to extract a number of statistical quantities and to get a better high-level feel for the leading behavior of the distributions, we wish to fit a statistical model to the data histograms.  While the data would seem to distributed according to a Gaussian distribution at first glance, we found the deviations from Gaussianity to be more significant than could be ignored.  After significant trial and error, we found the $\Delta q$ distributions to be best described by a generalized normal distribution \citep{doi:10.1080/02664760500079464} with the probability density function
-\begin{equation} \label{eq:analysis--methods--generalized_normal}
+\begin{equation} \label{eq:analysis--generalized_normal}
 	f(x) = \frac{ \beta }{2 \alpha \Gamma(1 / \beta)} e^{\left( \left| x - \mu \right| / \alpha \right)^{\beta}},
 \end{equation}
 where $\mu$ is the mean, $\alpha$ is the scale parameter, $\beta$ is the shape parameter, and $\Gamma$ is the gamma function
-\begin{equation} \label{eq:gamma_function}
+\begin{equation} \label{eq:analysis--gamma_function}
 	\Gamma(t) = \int_{0}^{\infty} x^{t-1} e^{-x} \dd x.
 \end{equation}
 The shape parameter $\beta$ is restricted to $\beta \geq 1$.  This allows the distribution to potentially vary from a Laplace distribution ($\beta = 1$) to a uniform distribution ($\beta = \infty$) and includes the normal distribution ($\beta = 2$).  The distribution has variance
-\begin{equation} \label{eq:variance}
+\begin{equation} \label{eq:analysis--variance}
 	\sigma^{2} = \frac{ \alpha^{2} \Gamma(3/\beta) }{ \Gamma(1/\beta) }
 \end{equation}
 and excess kurtosis
-\begin{equation} \label{eq:kurtosis}
+\begin{equation} \label{eq:analysis--kurtosis}
 	\gamma_{2} = \frac{ \Gamma(5/\beta) \Gamma(1/\beta) }{ \Gamma(3/\beta)^{2} } - 3.
 \end{equation}
 The distribution is symmetric, and thus has no skewness by definition.  As such, the values obtained for the skew of the distribution are measured directly from the data.
@@ -321,7 +321,7 @@ We explored a number of halo parameters, but found the most interesting distribu
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap061_(0.0-1.0).eps}
 	\end{subfigure}
-	\caption[Histograms of $\Delta M_{\mathrm{vir}}$ and $\Delta c$]{\footnotesize Histograms of $\Delta M_{\mathrm{vir}}$ (\textit{left column}) and $\Delta c$ (\textit{right column}) for snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$ (\textit{top, middle, and bottom panels, respectively}).  The small gray-filled histograms count only the top 25\% most massive halos.  The main histograms are fit with a generalized normal distribution with parameters for mean, scale, and shape, overplotted as the red dashed line (see Equation~\ref{eq:analysis--methods--generalized_normal}).}
+	\caption[Histograms of $\Delta M_{\mathrm{vir}}$ and $\Delta c$]{\footnotesize Histograms of $\Delta M_{\mathrm{vir}}$ (\textit{left column}) and $\Delta c$ (\textit{right column}) for snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$ (\textit{top, middle, and bottom panels, respectively}).  The small gray-filled histograms count only the top 25\% most massive halos.  The main histograms are fit with a generalized normal distribution with parameters for mean, scale, and shape, overplotted as the red dashed line (see Equation~\ref{eq:analysis--generalized_normal}).}
 	\label{fig:methods--analysis--diff-hist}
 \end{figure*}
 
@@ -374,16 +374,16 @@ In this case, we wish to be conservative with the error bars on the mean.  Since
 The generalized normal distributions we use to fit our $\Delta q$ histograms are symmetrical by definition and therefore have no inherent skew.  This was a simplifying assumption necessary to use a well-defined distribution as well as reduce the number of free parameters during fitting.  We do note, however, that the skew of our underlying data is often large enough to not be ignored.
 
 Therefore, we need an alternate way to measure skew and its uncertainty.  We use the skew routine from the SciPy statistics library, which defines skew as
-\begin{equation} \label{eq:skew_def}
+\begin{equation} \label{eq:analysis--skew_def}
 	\gamma_{1} = \frac{ \mu_{3} }{ \mu_{2}^{3/2} },
 \end{equation}
 where $\mu_{m}$ are central moments given by
-\begin{align} \label{eq:central_moments}
+\begin{align} \label{eq:analysis--central_moments}
 	\mu_{m} = E[(X - \mu)^{m}] &= \sum_{k} (x_{k} - \mu)^{m} p(x_{k}) \\
 	                           &= \sum_{k=0}^{m} (-1)^{m - k} \binom{m}{k} \mu^{m - k} \mu_{k}',
 \end{align}
 with non-central moments $\mu_{m}'$ given by
-\begin{equation} \label{eq:non-central_moments}
+\begin{equation} \label{eq:analysis--non-central_moments}
 	\mu_{m}' = E[X^{m}] = \sum_{k} x_{k}^{m} p(x_{k}),
 \end{equation}
 where $p(x_{k})$ is the probability density function.  The skew is then measured from the entire halo sample for the three combined simulation boxes.  Uncertainty in skew is evaluated by taking the skew of the three boxes as independent measurements.  The results for skew as a function of redshift are plotted as blue curves for the $\Delta \Mvir$ and $\Delta c$ distributions in Figure~\ref{fig:methods--analysis--fit_trends_skew_kurtosis}.
@@ -409,42 +409,42 @@ where $p(x_{k})$ is the probability density function.  The skew is then measured
 %:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Variable kurtosis is a fundamental part of the generalized normal distribution, so we may therefore derive the kurtosis directly from the fit distribution parameters.  The generalized normal distribution is defined in terms of a shape parameter $\beta$, which does introduce some complexity in the conversion to kurtosis.  The shape parameter is converted to excess kurtosis by way of Equation~\ref{eq:kurtosis}.  As this definition includes the Gamma function, a number of steps are required to convert the uncertainty in shape parameter to the uncertainty in kurtosis, which we outline below.
+Variable kurtosis is a fundamental part of the generalized normal distribution, so we may therefore derive the kurtosis directly from the fit distribution parameters.  The generalized normal distribution is defined in terms of a shape parameter $\beta$, which does introduce some complexity in the conversion to kurtosis.  The shape parameter is converted to excess kurtosis by way of Equation~\ref{eq:analysis--kurtosis}.  As this definition includes the Gamma function, a number of steps are required to convert the uncertainty in shape parameter to the uncertainty in kurtosis, which we outline below.
 
 The standard deviation of a function $f(x_{1},x_{2},\dots,x_{n})$ is, in general, given by
-\begin{equation} \label{eq:general_stdev}
+\begin{equation} \label{eq:analysis--general_stdev}
 	s_{f} = \sqrt{\sum_{x} \left( \frac{\partial f}{\partial x} \right)^{2} s_{x}^{2}}
 \end{equation}
 with summation over all independent variables $x$.  The generalized normal distribution
-\begin{equation} \label{eq:generalized_normal}
+\begin{equation} \label{eq:analysis--generalized_normal_reprint}
 	f(x) = \frac{\beta}{2 \alpha \Gamma(1/\beta)} e^{-(|x - \mu| / \alpha)^{\beta}}
 \end{equation}
 with mean $\mu$, scale parameter $\alpha$, and shape parameter $\beta$, has excess kurtosis
-\begin{equation} \label{eq:kurtosis}
+\begin{equation} \label{eq:analysis--kurtosis_reprint}
 	\gamma_{2} = \frac{\Gamma(5/\beta) \Gamma(1/\beta)}{\Gamma(3/\beta)^{2}} - 3.
 \end{equation}
 The gamma function
-\begin{equation} \label{eq:gamma_function}
+\begin{equation} \label{eq:analysis--gamma_function_reprint}
 	\Gamma(x) = \int_{0}^{\infty} t^{x-1} e^{-t} \dd t
 \end{equation}
 has the first derivative
-\begin{equation} \label{eq:gamma_prime}
+\begin{equation} \label{eq:analysis--gamma_prime}
 	\Gamma'(x) = \Gamma(x) \psi_{0}(x)
 \end{equation}
 where the digamma function $\digamma$ is the derivative of the logarithm of the gamma function and is given by
-\begin{equation} \label{eq:digamma}
+\begin{equation} \label{eq:analysis--digamma}
 	\digamma(x) = \int_{0}^{\infty} \left( \frac{e^{-t}}{t} - \frac{e^{-xt}}{1 - e^{-t}} \right) \dd t
 \end{equation}
 if the real part of $x$ is positive.
 
-We now apply \eqref{eq:general_stdev} to \eqref{eq:kurtosis} to find the standard deviation of the excess kurtosis:
-\begin{align} \label{eq:kurt_err_partial1}
+We now apply \eqref{eq:analysis--general_stdev} to \eqref{eq:analysis--kurtosis_reprint} to find the standard deviation of the excess kurtosis:
+\begin{align} \label{eq:analysis--kurt_err_partial1}
 	s_{\gamma_{2}} &= \sqrt{ \left( \frac{\diff \gamma_{2}}{\diff \beta} \right)^{2} s_{\beta}^{2} } \\
 		&= s_{\beta} \frac{\diff \gamma_{2}}{\diff \beta} \\
 		&= s_{\beta} \frac{\diff}{\diff \beta} \left[ \frac{\Gamma(5/\beta) \Gamma(1/\beta)}{\Gamma(3/\beta)^{2}} - 3 \right].
 \end{align}
 Making the substitution $x = 1 / \beta$ and $\diff x = - 1 / \beta^{2} \dd \beta$, taking the derivative, and doing a bit of algebra, we have:
-\begin{align} \label{eq:kurt_err_partial2}
+\begin{align} \label{eq:analysis--kurt_err_partial2}
 	s_{\gamma_{2}} &= s_{\beta} \frac{\diff \gamma_{2}}{\diff x} \frac{\diff x}{\diff \beta} \\
 		&= s_{\beta} \left( -\frac{1}{\beta^{2}} \right) \frac{\diff}{\diff x} \left[ \frac{\Gamma(5x) \Gamma(x)}{\Gamma(3x)} - 3 \right] \\
 		&= -s_{\beta} x^{2} \left\{ \frac{\Gamma(3x)^{2} \frac{\diff}{\diff x} [\Gamma(5x) \Gamma(x)] - \Gamma(5x) \Gamma(x) \frac{\diff}{\diff x} [\Gamma(3x)^{2}]}{\Gamma(3x)^{4}} \right\} \\
@@ -454,7 +454,7 @@ Making the substitution $x = 1 / \beta$ and $\diff x = - 1 / \beta^{2} \dd \beta
 		&= s_{\beta} x^{2} \frac{\Gamma(5x) \Gamma(x)}{\Gamma(3x)^{2}} [6\digamma(3x) - 5\digamma(5x) - \digamma(x)].
 \end{align}
 Substituting back in for $x$ and recognizing an occurrence of $\gamma_{2}$, we have the result
-\begin{equation} \label{eq:kurt_err}
+\begin{equation} \label{eq:analysis--kurt_err}
 	s_{\gamma_{2}} = s_{\beta} \frac{1}{\beta^{2}} \left( \gamma_{2} + 3 \right) \left[ 6 \digamma(3/\beta) - 5 \digamma(5/\beta) - \digamma(1/\beta) \right]
 \end{equation}
 with which we can find the uncertainty in the kurtosis given the value and uncertainty of the shape parameter $\beta$.
@@ -549,7 +549,7 @@ To better analyze the time evolution of the mass dependence, we need a more comp
 
 
 The distributions of $\Delta q$ that have been discussed up to this point are an excellent measure of the overall behavior of the halo population differences between \lpt\ and \za\ simulations.  However, as these distributions rely on the average quantity $q_{\mathrm{avg}} = (q_{\lpt} + q_{\za}) / 2$ for normalization, quantities like the fraction of halo pairs differing by a given amount between simulations are more difficult to extract.  We therefore redefine our distribution quantity to instead use a normalization factor of $q_{\za}$:
-\begin{equation} \label{eq:methods--analysis--delta_prime_q}
+\begin{equation} \label{eq:analysis--delta_prime_q}
 	\delta q = \frac{q_{\lpt} - q_{\za}}{q_{\za}},
 \end{equation}
 which allows for a more direct comparison between halo pairs.  Statistics for these distributions are saved alongside the output for $\Delta q$ distributions with the codes in Appendix~\ref{app:diff_hist}.
@@ -564,7 +564,7 @@ which allows for a more direct comparison between halo pairs.  Statistics for th
 
 The question may be asked why these distributions have not been used all along, as they more readily offer more quantitative values for our halo populations.  Our previous distributions of $\Delta q$ are symmetrical between \lpt\ and \za\ quantities, which allows us to be completely unbiased as to which simulation initialization is correct.  The distributions of $\delta q$ lose this symmetry, and are only defined for $\delta q \geq -1$ for positive quantities like mass and concentration.
 
-For this analysis, we therefore need a way to consider halo pairs that differ by a certain amount in either direction (e.g. pairs that differ in quantity $q$ by 10\%, whether $q$ is larger in \lpt\ or \za).  Rearranging Equation~\ref{eq:methods--analysis--delta_prime_q} yields
+For this analysis, we therefore need a way to consider halo pairs that differ by a certain amount in either direction (e.g. pairs that differ in quantity $q$ by 10\%, whether $q$ is larger in \lpt\ or \za).  Rearranging Equation~\ref{eq:analysis--delta_prime_q} yields
 \begin{equation}
 	q_{\lpt} = (\delta q + 1) q_{\za},
 \end{equation}
@@ -573,7 +573,7 @@ and making the substitution $x = \delta q + 1$ gives us
 	q_{\lpt} = x q_{\za}.
 \end{equation}
 For a given $x$, we want to find $x_{\mathrm{eq}}$ such that $x_{\mathrm{eq}} = 1 / x$.  Substituting now for $x$ and $x_{\mathrm{eq}}$ and rearranging gives us
-\begin{equation} \label{eq:methods--analysis--equivalent_q_prime}
+\begin{equation} \label{eq:analysis--equivalent_q_prime}
 	\delta q_{\mathrm{eq}} = \frac{1}{\delta q + 1} - 1,
 \end{equation}
 the value for which a halo pair with a larger $q$ in \za\ would differ by the same factor as a halo pair with a larger $q$ in \lpt.
@@ -610,7 +610,7 @@ In Figures~\ref{fig:methods--analysis--frac_err_trends_dq} and~\ref{fig:methods-
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/percdiff_c_rockstar_sumfrac.eps}
 	\end{subfigure}
-	\caption[Statistics for distributions of $\delta q$ as functions of redshift]{\footnotesize Statistics for distributions of $\delta M_{\mathrm{vir}}$ (\textit{top}) and $\delta c$ (\textit{bottom}) as functions of redshift.  The fraction of halos with $\delta q$ greater than 0.10 (solid blue curve), 0.50 (solid green curve), 1.00 (solid red curve), and 4.00 (solid black curve).  The dashed curves additionally count halo pairs with $\delta q$ lower than the corresponding equivalent displacements of -0.09, -0.33, -0.50, and -0.80, respectively (see Equation~\ref{eq:methods--analysis--equivalent_q_prime}).  These plots are provided as examples of the output at this stage of the analysis and are further discussed in Chapter~\ref{chap:2lpt}.}
+	\caption[Statistics for distributions of $\delta q$ as functions of redshift]{\footnotesize Statistics for distributions of $\delta M_{\mathrm{vir}}$ (\textit{top}) and $\delta c$ (\textit{bottom}) as functions of redshift.  The fraction of halos with $\delta q$ greater than 0.10 (solid blue curve), 0.50 (solid green curve), 1.00 (solid red curve), and 4.00 (solid black curve).  The dashed curves additionally count halo pairs with $\delta q$ lower than the corresponding equivalent displacements of -0.09, -0.33, -0.50, and -0.80, respectively (see Equation~\ref{eq:analysis--equivalent_q_prime}).  These plots are provided as examples of the output at this stage of the analysis and are further discussed in Chapter~\ref{chap:2lpt}.}
 	\label{fig:methods--analysis--frac_err_trends_f}
 \end{figure*}
 
