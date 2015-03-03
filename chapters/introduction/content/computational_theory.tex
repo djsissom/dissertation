@@ -33,18 +33,18 @@ coupled to the Poisson equation
 \begin{equation}
 	\nabla^{2} \Phi(\mathbf{x}, t) = 4 \pi G \int f(\mathbf{x}, \mathbf{v}, t) \dd \mathbf{v}
 \end{equation}
-in an expanding background Universe, typically according to the Friedmann-Lema\^{i}tre-Robertson-Walker metric.  Here, $\Phi$ is the self consistent potential, and the distribution function $f(\mathbf{x}, \mathbf{v}, t)$ gives the mass density in phase space.  The high-dimensionality of the problem, however, makes directly solving the coupled system of equations intractable.  Instead, the \nbody\ method, in which the phase-space density is sampled with a finite number $N$ of tracer particles, is used to evolve the system in time.  For the following discussion, we primarily follow the notation in \citet{2005MNRAS.364.1105S}.
+in an expanding background Universe, typically according to the Friedmann-Lema\^{i}tre-Robertson-Walker metric.  Here, $\Phi$ is the gravitational potential, and the distribution function $f(\mathbf{x}, \mathbf{v}, t)$ gives the mass density in phase space.  The high-dimensionality of the problem, however, makes directly solving the coupled system of equations intractable.  Instead, the \nbody\ method, in which the phase-space density is sampled with a finite number $N$ of tracer particles, is used to evolve the system in time.  For the following discussion, we primarily follow the notation in \citet{2005MNRAS.364.1105S}.
 
-The system of particles is described by the Hamiltonian
+For such a system of particles in an \nbody\ simulation, the Hamiltonian is given by
 \begin{equation}
 	H(\mathbf{x}_{1}, \ldots, \mathbf{x}_{N}, \mathbf{p}_{1}, \ldots, \mathbf{p}_{N}, t)
 	= \sum_{i} \frac{\mathbf{p}_{i}^{2}}{2 m_{i} a(t)^{2}} + \frac{1}{2} \sum_{ij} \frac{m_{i} m_{j} \varphi(\mathbf{x}_{i} - \mathbf{x}_{j})}{a(t)},
 \end{equation}
-where $\mathbf{x}_{i}$ are comoving coordinate vectors with corresponding canonical momenta $p_{i} = a^{2} m_{i} \mathbf{\dot{x}}_{i}$ and $a(t)$ is the time evolution of the scale factor that introduces explicit time dependence to the Hamiltonian.  For simulations with periodic boundary conditions, the interaction potential $\varphi(\mathbf{x})$ for a cube of size $L^{3}$ is the solution of
+where the comoving coordinate vectors $\mathbf{x}_{i}$ correspond to canonical momenta $\mathbf{p}_{i} = a^{2} m_{i} \mathbf{\dot{x}}_{i}$, and $a(t)$ is the time evolution of the scale factor that introduces explicit time dependence to the Hamiltonian.  For simulations with periodic boundary conditions, the interaction potential $\varphi(\mathbf{x})$ for a cube of size $L^{3}$ is the solution of
 \begin{equation} \label{eq:computational_theory--nbody_simulations--discrete_poisson}
 	\nabla^{2} \varphi(x) = 4 \pi G \left[ -\frac{1}{L^{3}} + \sum_{\mathbf{n}} \tilde{\delta}(\mathbf{x} - \mathbf{n}L) \right],
 \end{equation}
-where the sum over $\mathbf{n} = (n_{1}, n_{2}, n_{3})$ iterates over all integer triplets.  Here, the mean density is subtracted, and the dynamics of the system follow
+where $\mathbf{n} = (n_{1}, n_{2}, n_{3})$ iterates through all integer permutations, sampling the single particle density distribution function $\tilde{\delta}$.  Here, the mean density is subtracted, and the dynamics of the system follow
 \begin{equation}
 	\nabla^{2} \phi(\mathbf{x}) = 4 \pi G [\rho(\mathbf{x}) - \bar{\rho}]
 \end{equation}
