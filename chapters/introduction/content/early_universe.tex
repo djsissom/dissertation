@@ -73,7 +73,7 @@ where $P(k)$ is the power spectrum of density fluctuations extrapolated to $z = 
 
 The Press-Schechter model above does not account for halo mergers.  The extended Press-Schechter model \citep{1991ApJ...379..440B, 1991MNRAS.248..332B, 1993MNRAS.262..627L, 2008MNRAS.383..557P} expands on the original formulation and includes the results of binary merger trees to provide more realistic halo mass assembly histories.  Additionally, mass functions are often measured from the results of numerical simulations \citep[e.g.,][]{2006ApJ...646..881W, 2008ApJ...688..709T, 2006ApJ...642L..85H, 2007MNRAS.374....2R, 2007ApJ...671.1160L}, avoiding the limitations of the analytical models.  In Figure~\ref{fig:mass_function--warren_mass_function}, we provide an example mass function from numerical simulation.
 
-\begin{figure}[ht]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/warren_2006_mass_function.eps}
 	\caption[Concentration upturn for high mass halos at high $z$]{\footnotesize The dark matter halo mass function, as measured from sixteen $1024^{3}$ particle simulations of the $\Lambda$CDM Universe.  \citep{2006ApJ...646..881W}}
@@ -131,7 +131,7 @@ for subhalos.  Figure~\ref{fig:concentration--klypin_concentration_upturn} plots
 \end{equation}
 where $c_{0}(z)$ and $M_{0}(z)$ are free parameters for each $z$.  Concentration displays a decreasing trend with mass at low redshift.  At higher redshift, however, concentration flattens out and reverses its trend, increasing with mass for the most massive halos.
 
-\begin{figure}[ht]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/klypin_2011_concentration_upturn.eps}
 	\caption[Concentration upturn for high mass halos at high $z$]{\footnotesize Concentration as a function of virial mass for distinct halos from $z = 0$ to $z = 5$.  Symbols and solid curves are numerical results, while the dashed curves are analytical fits (Equation~\ref{eq:concentration_mass_upturn}).  Concentration decreases with increasing mass except for high-mass halos at high redshift, for which the concentration flattens and increases with mass.  \citep{2011ApJ...740..102K}}
@@ -144,7 +144,7 @@ Figure~\ref{fig:concentration--klypin_concentration_z_dependence} plots concentr
 \end{equation}
 where $\delta(z)$ is the linear growth factor of fluctuations normalized to $\delta(0) = 1$ and $\kappa$ is a free parameter.  For the masses shown in the figure, $\kappa = 0.084$ for $M = 3 \times 10^{11} h^{-1} \Msun$ and $\kappa = 0.135$ for $M = 3 \times 10^{12} h^{-1} \Msun$.
 
-\begin{figure}[ht]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/klypin_2011_concentration_z_dependence.eps}
 	\caption[Evolution of concentration with redshift for two halo masses]{\footnotesize Concentration as a function of redshift for two representative halo masses.  Black dots are simulation results.  The dashed blue curves show the power law $c \propto (1 + z)^{-1}$ and the dot-dashed red curves are $c \propto \delta$.  The solid black curves are given by Equation~\ref{eq:concentration_redshift_upturn}.  Concentration initially decreases with redshift, but reverses and increases with redshift for high redshift.  Concentration for both masses reaches a minimum of $c_{\min} \approx 4-4.5$. \citep{2011ApJ...740..102K}}
@@ -201,14 +201,14 @@ where
 \end{equation}
 The resulting curve closely follows the data at all redshifts from $z = 0$ to $z = 6$, with a minimum concentration of $\sim 5$ at a well-defined scale of $\sigma \sim 0.71$.  The relation may also be seen as a function of mass without rescaling to $z = 0$ by plotting Equations~\ref{eq:prada_universal_sigma}-\ref{eq:prada_universal_sigma_scaled}, as shown in Figure~\ref{fig:concentration--prada_c_M}.
 
-\begin{figure}[ht]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/prada_2012-c-sigma.eps}
 	\caption[Halo concentration $c$ as a function of $\log \sigma^{-1}$]{\footnotesize Halo concentration $c$ as a function of $\log \sigma^{-1}$ for halos in the Bolshoi and MultiDark simulations.  The results are rescaled to $z = 0$.  The solid curve $C(\sigma')$ is given by Equation~\ref{eq:prada_universal_sigma_scaled}.  A universal minimum concentration of $\sim 5$ is seen at $\sigma \sim 0.71$.  \citep{2012MNRAS.423.3018P}}
 	\label{fig:concentration--prada_c_sigma}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=\linewidth]{early_universe/prada_2012-c-M.eps}
 	\caption[Halo concentration $c$ as a function of halo mass]{\footnotesize Halo concentration $c$ as a function of halo mass at various redshifts for halos in the Bolshoi (open circles) and MultiDark (filled circles) simulations.  The overplotted curves are given by Equations~\ref{eq:prada_universal_sigma}-\ref{eq:prada_universal_sigma_scaled}.  The analytical approximations fit the data within a few percent.  \citep{2012MNRAS.423.3018P}}

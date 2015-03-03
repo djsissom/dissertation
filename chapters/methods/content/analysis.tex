@@ -99,7 +99,7 @@ Some halos with irregular profiles presented the problem of the fitting algorith
 
 As we fit halos over a large range in redshift, we found low particle count halos to have noisy density profiles that were inherently more difficult to properly fit.  Throughout our analysis, we use a lower bound of 100 particles to define a halo.  At high redshift, even the largest halos are just beginning to cross this threshold.  With such few particles spread across the number of bins necessary to properly define a density profile, we are left with only a handful of particles per bin.  In Figure~\ref{fig:fitting--density_profiles}, we compare one of the largest halos at $z = 14$ with one of the largest halos at the end of the simulation at $z = 6$.
 
-\begin{figure}[t]
+\begin{figure}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/2lpt_040_density_profile_0.eps}
@@ -217,14 +217,14 @@ By comparing the projected density morphologies of companion \lpt\ and \za\ halo
 
 As an example of this, we plot comparisons of two $z = 6$ halo pairs in Figures~\ref{fig:density_comparison_000} and~\ref{fig:density_comparison_070}.  The top two rows of panels of each show XY, XZ, and YZ projections of the dark matter density for the \lpt\ and \za\ halo on the first and second row, respectively.  The density map is shown with a logarithmic color scale, and equal density contours are marked with white curves.  Figure~\ref{fig:density_comparison_000} shows a pair of large halos that display similar central structure.  These halos are unlikely to have largely differed in their evolution shortly prior to the snapshot.  Figure~\ref{fig:density_comparison_070}, however, shows a halo pair with differing nuclear structure.  The \za\ halo displays two distinct central density peaks, while the \lpt\ halo shows only a single more relaxed core.
 
-\begin{figure}[t]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=0.75\linewidth]{analysis/halo-pair_000_snap061.eps}
 	\caption[Comparison of two large well-fit companion halos $z = 6$.]{\footnotesize Two large matched halos at $z = 6$ with similar nuclear structure.  \emph{Top two rows:}  Projected density maps, with XY, XZ, and YZ views of the central nuclear region of the halos.  Density is represented by a logarithmic color scale, and equal density contours are plotted as white curves.  The first and second rows depict the \lpt\ and \za\ halo, respectively.  \emph{Bottom two rows:}  Radially-binned halo density profiles fit with the NFW density profile model.  The blue stepped profiles are the binned data, red curves are the fit NFW models, black dashed lines are the resolution limit of the simulation, and purple dot-dash lines are the measured scale radius.}
 	\label{fig:density_comparison_000}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=0.75\linewidth]{analysis/halo-pair_070_snap061.eps}
 	\caption[Comparison of two large companion halos $z = 6$ with differing nuclear structure.]{\footnotesize Like Figure~\ref{fig:density_comparison_000}, but for two large matched halos at $z = 6$ with differing nuclear structure.}
@@ -301,12 +301,11 @@ We found our fitting routine to be fairly sensitive to differences in initial gu
 
 We explored a number of halo parameters, but found the most interesting distributions to be those for virial mass and concentration.  In Figure~\ref{fig:methods--analysis--diff-hist}, we plot histograms of $\Delta \Mvir$ and $\Delta c$ in the left and right columns, respectively, for three representative simulation snapshots at $z = 14.7$, $z = 10.3$, and $z = 6.0$.  Data from the entire sample are plotted as blue histograms, data for the top 25\% of halo pairs, sorted by \lpt\ halo mass, are plotted as grey-filled green histograms, and the generalized normal distribution fits are overplotted as red dashed curves.
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_Mvir_snap040_(0.0-1.0).eps}
 	\end{subfigure}
-	~
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap040_(0.0-1.0).eps}
 	\end{subfigure}
@@ -314,7 +313,6 @@ We explored a number of halo parameters, but found the most interesting distribu
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_Mvir_snap050_(0.0-1.0).eps}
 	\end{subfigure}
-	~
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap050_(0.0-1.0).eps}
 	\end{subfigure}
@@ -322,7 +320,6 @@ We explored a number of halo parameters, but found the most interesting distribu
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_Mvir_snap061_(0.0-1.0).eps}
 	\end{subfigure}
-	~
 	\begin{subfigure}{}
 		\includegraphics[width=0.48\linewidth]{analysis/diff-hist_c_snap061_(0.0-1.0).eps}
 	\end{subfigure}
@@ -353,7 +350,7 @@ Representing the mean and standard deviation of the distributions is relatively 
 
 In Figure~\ref{fig:methods--analysis--fit_trends_mean_stdev}, we plot the mean and standard deviation of the distributions for mass and concentration, as well as the rms value derived from the data, all as functions of redshift.  The mean is plotted as blue points with error bars, the standard deviation is plotted as two black dashed lines that represent $\mu \pm \sigma$, and the rms is plotted as a dotted green line.
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/mean_stdev_Mvir.eps}
@@ -393,7 +390,7 @@ with non-central moments $\mu_{m}'$ given by
 \end{equation}
 where $p(x_{k})$ is the probability density function.  The skew is then measured from the entire halo sample for the three combined simulation boxes.  Uncertainty in skew is evaluated by taking the skew of the three boxes as independent measurements.  The results for skew as a function of redshift are plotted as blue curves for the $\Delta \Mvir$ and $\Delta c$ distributions in Figure~\ref{fig:methods--analysis--fit_trends_skew_kurtosis}.
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/skew_kurtosis_Mvir.eps}
@@ -495,7 +492,7 @@ As an alternate representation, and mainly for the benefit of a more quantitativ
 
 Example plots are provided in Figures~\ref{fig:methods--analysis--dM-v-Mavg} and~\ref{fig:methods--analysis--dc-v-Mavg} to demonstrate this approach.  The 2-D binned data is plotted using a logarithmic color scale to represent the number density of halos in a given cell.  The bin means and associated uncertainties are plotted as the black points with error bars.  The standard deviation to either side of the mean is plotted as black dotted lines.  The least-squares fit to the bin means is plotted as a solid magenta line.
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/dM-v-Mavg_snap050.eps}
@@ -508,7 +505,7 @@ Example plots are provided in Figures~\ref{fig:methods--analysis--dM-v-Mavg} and
 	\label{fig:methods--analysis--dM-v-Mavg}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/dc-v-Mavg_snap050.eps}
@@ -531,7 +528,7 @@ Example plots are provided in Figures~\ref{fig:methods--analysis--dM-v-Mavg} and
 
 To better analyze the time evolution of the mass dependence, we need a more compact representation than simply looking at successive individual redshift snapshots.  The most informative individual parameter from these plots is the slope of the linear fit line for $\Delta q$ as a function of average halo mass.  We therefore plot the slopes and associated uncertainties for each snapshot as a function of redshift, with the results for $\Delta \Mvir$ and $\Delta c$ displayed in Figure~\ref{fig:methods--analysis--slopes_delta-v-Mavg}.  The data are then fit with our linear least-squares routine, and the fit is overplotted as a red dashed line.
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/slopes_dM-v-Mavg.eps}
@@ -593,7 +590,7 @@ the value for which a halo pair with a larger $q$ in \za\ would differ by the sa
 
 In Figures~\ref{fig:methods--analysis--frac_err_trends_dq} and~\ref{fig:methods--analysis--frac_err_trends_f}, we plot statistics for our $\delta q$ distributions as functions of redshift.  In Figure~\ref{fig:methods--analysis--frac_err_trends_dq}, we plot the $\delta q$ of the peak of the distribution, as well as the $\delta q$ values where 50\%, 10\%, and 1\% of halo pairs fall at or above $\delta q$.  In Figure~\ref{fig:methods--analysis--frac_err_trends_f}, we plot the fraction of halo pairs $f_{h}$ that fall outside various $\delta q$ values.  The solid curves represent the fraction of halo pairs that have a \lpt\ mass or concentration at least 1.1, 1.5, 2.0, or 5.0 times that of the corresponding \za\ halo.  Dashed curves represent the same values, regardless of whether the \lpt\ or \za\ mass or concentration is higher.  This is the same as counting halos that fall above a given $\delta q$ as well as below the corresponding $\delta q_{\mathrm{eq}}$.  The code for creating these plots is listed in Appendix~\ref{app:alt_redshift_trends}.
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/percdiff_Mvir_xvals.eps}
@@ -606,7 +603,7 @@ In Figures~\ref{fig:methods--analysis--frac_err_trends_dq} and~\ref{fig:methods-
 	\label{fig:methods--analysis--frac_err_trends_dq}
 \end{figure*}
 
-\begin{figure*}[t]
+\begin{figure*}[tp]
 	\centering
 	\begin{subfigure}{}
 		\includegraphics[width=0.75\linewidth]{analysis/percdiff_Mvir_sumfrac.eps}
